@@ -1,4 +1,4 @@
 p4p_backend
 ===========
 
-The backend of recipts++ written in Rails
+The backend of recipts++ written in Flask
