@@ -12,17 +12,12 @@ db = scoped_session(sessionmaker(autocommit=False,
 Base = declarative_base()
 Base.query = db.query_property()
 
-# from models.associations import patient_department_table
-# from models.patient import Patient
-# from models.vitalinfo import VitalInfo
-# from models.department import Department
+from models.user import User
 
 
-def init_db(num_patients=100, min_vital_infos=2, max_vital_infos=10):
-    from models.sampledata import populate_database
+def init_db():
 
     Base.metadata.create_all(bind=engine)
-    populate_database(num_patients, min_vital_infos, max_vital_infos)
 
 
 def drop_db():
