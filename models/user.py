@@ -8,14 +8,14 @@ class User(Base):
   
   __tablename__ = 'users'
   uid = Column(Integer, primary_key=True)
-  username = Column(String(60))
+  username = Column(String(60), unique=True)
   pwdhash = Column(String())
-  email = Column(String(60))
+  #email = Column(String(60))
 
-  def __init__(self, username, password, email):
+  def __init__(self, username, password):
     self.username = username
     self.pwdhash = generate_password_hash(password)
-    self.email = email
+    #self.email = email
 
 
   def check_password(self, password):
@@ -25,6 +25,6 @@ class User(Base):
     return {
       "user_id" : self.uid,
       "username" : self.username,
-      "email" : self.email,
+      #"email" : self.email,
       "pwdhash" : self.pwdhash
     }
