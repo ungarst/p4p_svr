@@ -57,3 +57,12 @@ def login():
     #check the password
     #if good then set the cookie
     #redirect
+
+@app.route('/users')
+def users():
+    return json.dumps([user.serialize() for user in User.query.all()])
+
+
+@app.route('/jsonmirror', methods=['GET', 'POST'])
+def mirror():
+    return json.dumps(request.form)
