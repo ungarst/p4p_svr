@@ -39,20 +39,21 @@ def signup():
 @app.route('/logout')
 def logout():
     session.pop('username', None)
-    return redirect(url_for('root'))   
+    return json.dumps({})   
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == "POST" and "username" in request.form and "password" in request.form:
-        query = User.query.filter_by(username=request.form["username"]).all()
+    if request.method == "POST" and "email_address" in request.form and "password" in request.form:
+        print "Here"
+        query = User.query.filter_by(email_address=request.form["email_address"]).all()
 
         if not query:
             return "no users with that name"
 
         user = query[0]
         if user.check_password(request.form['password']):
-            session['user_id'] = user.id
-            return redirect(url_for('root'))
+            session['user_id'] = user.uid
+            return json.dumps(user.serialize())
         else:
             return "wrong pw"
         
