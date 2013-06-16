@@ -1,1 +1,23 @@
-<h1>Flask works</h1>
+<!doctype html>
+<html ng-app="rppApp" id="ng-app">
+<head>
+
+  <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
+
+  <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/toastr.min.js') }}"></script>
+    
+  <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/angular.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/angular-cookies.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/angular-resource.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/angular-ui-utils.js') }}"></script>
+
+  <title>Receipts++</title>
+
+</head>
+<body>
+  <div ng-view ></div>
+
+  <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/controllers/home_controller.js') }}"></script>
+</body>
+</html>

@@ -11,9 +11,7 @@ app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 @app.route('/')
 def root():
     # serve up the angular
-    if 'username' in session:
-        return "Signed in as " + session['username']
-    return "not signed in"
+    return render_template('index.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
