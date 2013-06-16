@@ -8,14 +8,16 @@ class User(Base):
   
   __tablename__ = 'users'
   uid = Column(Integer, primary_key=True)
-  username = Column(String(60), unique=True)
+  email_address = Column(String(10), unique=True)
   pwdhash = Column(String())
-  #email = Column(String(60))
+  first_name = Column(String(50))
+  last_name = Column(String(50))
 
-  def __init__(self, username, password):
-    self.username = username
+  def __init__(self, email_address, password, first_name, last_name):
+    self.email_address = email_address
     self.pwdhash = generate_password_hash(password)
-    #self.email = email
+    self.first_name = first_name
+    self.last_name = last_name
 
 
   def check_password(self, password):
@@ -24,7 +26,7 @@ class User(Base):
   def serialize(self):
     return {
       "user_id" : self.uid,
-      "username" : self.username,
-      #"email" : self.email,
-      "pwdhash" : self.pwdhash
+      "email_address" : self.email_address,
+      "first_name" : self.first_name,
+      "last_name" : last_name
     }
