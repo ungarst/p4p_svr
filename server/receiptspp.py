@@ -16,15 +16,22 @@ def root():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == "POST":
-        user = User(request.form['username'],
-                request.form['password'])
+        user = User(request.form['email_address'],
+                request.form['password'],
+                request.form['first_name'],
+                request.form['last_name'])
 
-        session['username'] = request.form['username']
+
+        session['user_id'] = user.uid
 
         db.add(user)
         db.commit()
-        
-        return redirect(url_for('root'))
+
+        print "Here"
+
+        return json.dumps(user.serialize())
+
+        # return redirect(url_for()) USER WITH THE USER ID IN THE SESSION 
 
     else:
         return render_template('signup.html')
@@ -44,7 +51,7 @@ def login():
 
         user = query[0]
         if user.check_password(request.form['password']):
-            session['username'] = request.form['username']
+            session['user_id'] = user.id
             return redirect(url_for('root'))
         else:
             return "wrong pw"
