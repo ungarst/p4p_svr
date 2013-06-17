@@ -1,6 +1,15 @@
-function HomeCtrl ($scope, $location) {
+// This will just be the basic screen where users come when
+// they aren't logged in.
+function HomeCtrl ($scope, $location, $http) {
+
+  // if logged in then redirect them to the home page
+
 
 
   $scope.fullname = "Dave Carpenter";
-  console.log("home controller");
+
+  $http.get('/login').success(function(data, status, headers, config) {
+    console.log(data);
+  });
+
 }
