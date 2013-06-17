@@ -15,9 +15,18 @@
 
 </head>
 <body>
+
+  <p><a href="#/">Home</a></p>
+  <p><a href="#/signup">Sign Up</a></p>
+  <p><a href="#/login">Login</a></p>
+  <p><a href="#/signout">Signout</a></p>
+
   <div ng-view ></div>
 
   <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/controllers/home_controller.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/controllers/signup_controller.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/controllers/login_controller.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/controllers/logout_controller.js') }}"></script>
 </body>
 </html>

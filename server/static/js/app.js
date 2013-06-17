@@ -15,6 +15,21 @@ rppApp.config(function($routeProvider) {
         templateUrl: 'static/partials/home.html',
         controller: 'HomeCtrl'
       })
+      .when ('/signup',
+      {
+        templateUrl: 'static/partials/signup.html',
+        controller: 'SignUpCtrl'
+      })
+      .when('/login',
+      {
+        templateUrl: 'static/partials/login.html',
+        controller: 'LogInCtrl'
+      })
+      .when('/logout',
+      {
+        templateUrl: 'static/partials/logout.html',
+        controller: 'LogOutCtrl'
+      })
       .otherwise(
       {
         redirectTo: "/"
