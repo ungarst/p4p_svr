@@ -2,10 +2,18 @@
 <html ng-app="rppApp" id="ng-app">
 <head>
 
-  <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
+  <!-- CSS from vendors -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/vendor/toastr.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/vendor/bootstrap.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/vendor/bootstrap-responsive.min.css') }}">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
 
+  <!-- CSS we wrote -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/site.css') }}">
+
+  <!-- vendor JS -->
+  <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/toastr.min.js') }}"></script>
-    
   <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/angular.min.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/angular-cookies.min.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/angular-resource.min.js') }}"></script>
@@ -23,6 +31,7 @@
 
   <div ng-view ></div>
 
+  <!-- angular JS that we wrote -->
   <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/controllers/home_controller.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/controllers/signup_controller.js') }}"></script>
