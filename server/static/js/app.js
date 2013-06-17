@@ -30,11 +30,6 @@ rppApp.config(function($routeProvider) {
         templateUrl: 'static/partials/login.html',
         controller: 'LogInCtrl'
       })
-      .when('/logout',
-      {
-        templateUrl: 'static/partials/logout.html',
-        controller: 'LogOutCtrl'
-      })
       .otherwise(
       {
         redirectTo: "/"
