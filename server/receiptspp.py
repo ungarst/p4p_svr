@@ -69,7 +69,8 @@ def users():
 
 @app.route('/jsonmirror', methods=['GET', 'POST'])
 def mirror():
-    return json.dumps(request.form)
+    print json.data
+    return json.dumps(request.data)
 
 def dump(obj):
     for attr in dir(obj):
