@@ -1,3 +1,4 @@
 <div ng-controller="HomeCtrl">
-<[ fullname ]>
+  <h1><[ user["first_name"] + " " + user["last_name"] ]></h1>
+  <img ng-src="<[ user.gravatar_url ]>" />
 </div>
