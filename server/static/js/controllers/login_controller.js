@@ -4,7 +4,7 @@ function LogInCtrl ($scope, $location, $http, $location) {
 
   $scope.login = function() {
     $http.post('/login', $scope.params).success(function(data, status, headers, config) {
-      $location.path('/');
+      $location.path('/home');
     });
   }
 

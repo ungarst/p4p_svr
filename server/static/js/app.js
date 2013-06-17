@@ -12,6 +12,11 @@ rppApp.config(function($routeProvider) {
   $routeProvider
       .when('/',
       {
+        templateUrl: 'static/partials/root.html',
+        controller: 'RootCtrl'
+      })
+      .when('/home',
+      {
         templateUrl: 'static/partials/home.html',
         controller: 'HomeCtrl'
       })

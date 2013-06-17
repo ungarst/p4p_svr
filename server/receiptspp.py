@@ -27,7 +27,7 @@ def signup():
 
         session['user_id'] = user.uid
 
-        return json.dumps(user.serialize())
+        return json.dumps({"user": user.serialize()})
 
 @app.route('/logout')
 def logout():
@@ -49,14 +49,15 @@ def login():
         
         if user.check_password(request.json['password']):
             session['user_id'] = user.uid
-            return json.dumps(user.serialize())
+            return json.dumps({"user": user.serialize()})
         else:
             return json.dumps({})
         
     else:
         # used to check if the user is logged in or not
         if "user_id" in session and User.query.filter_by(uid=session["user_id"]).all():
-            return json.dumps(User.query.filter_by(uid=session["user_id"]).first().serialize())
+            user = User.query.filter_by(uid=session["user_id"]).first()
+            return json.dumps({"user": user.serialize()})
         else:
             return json.dumps({})
 

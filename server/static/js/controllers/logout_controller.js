@@ -1,5 +1,6 @@
-function LogOutCtrl ($scope, $location) {
+function LogOutCtrl ($scope, $location, $http) {
 
-
-  console.log("In the logout controller");
+  $http.get('/logout').success(function(data, status, headers, config) {
+    $location.path('/');
+  });
 }

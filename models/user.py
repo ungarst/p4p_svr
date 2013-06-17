@@ -26,7 +26,7 @@ class User(Base):
   def generate_gravatar_url(self):
     email = self.email_address
     default = "mm"
-    size=500
+    size=300
     base_gravatar_url = "http://www.gravatar.com/avatar/"
 
     self.gravatar_url = base_gravatar_url + \

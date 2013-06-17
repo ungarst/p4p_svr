@@ -9,7 +9,7 @@ function SignUpCtrl ($scope, $location, $http) {
 
   $scope.signup = function() {
     $http.post('/signup', $scope.params).success(function(data, status, headers, config) {
-      $location.path('/');
+      $location.path('/home');
     });
   }
 
