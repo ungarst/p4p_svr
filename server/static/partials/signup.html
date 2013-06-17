@@ -1,3 +1,11 @@
 <div ng-controller="SignUpCtrl">
-  <h1>Sign up here</h1>
+  <label>First name: <input type="text" ng-model="params.first_name"></label><br />
+  <label>Last name: <input type="text" ng-model="params.last_name"></label><br />
+  <label>Email Address: <input type="text" ng-model="params.email_address"></label><br />
+  <label>Password: <input type="password" ng-model="params.password"></label><br />
+  <button ng-click="signup()">Sign up</button>
+
+
+  <hr />
+  <[ params ]>
 </div>

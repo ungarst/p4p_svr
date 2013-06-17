@@ -9,7 +9,7 @@ function HomeCtrl ($scope, $location, $http) {
   $scope.fullname = "Dave Carpenter";
 
   $http.get('/login').success(function(data, status, headers, config) {
-    console.log(data);
+    $scope.user = data
   });
 
 }

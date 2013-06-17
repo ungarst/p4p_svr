@@ -13,13 +13,14 @@ def root():
     # serve up the angular
     return render_template('index.html')
 
-@app.route('/signup', methods=['GET', 'POST'])
+@app.route('/signup', methods=['POST'])
 def signup():
+    print json.dumps(request.json)
     if request.method == "POST":
-        user = User(request.form['email_address'],
-                request.form['password'],
-                request.form['first_name'],
-                request.form['last_name'])
+        user = User(request.json['email_address'],
+                request.json['password'],
+                request.json['first_name'],
+                request.json['last_name'])
 
         db.add(user)
         db.commit()
@@ -27,9 +28,6 @@ def signup():
         session['user_id'] = user.uid
 
         return json.dumps(user.serialize())
-
-    else:
-        return render_template('signup.html')
 
 @app.route('/logout')
 def logout():
