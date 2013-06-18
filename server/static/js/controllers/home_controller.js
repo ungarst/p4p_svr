@@ -6,6 +6,8 @@ function HomeCtrl ($scope, $location, $http) {
       $location.path('/');
     }
     $scope.user = $scope.data["user"];
+
+    $scope.$parent.logged_in = true;
   });
 
 
