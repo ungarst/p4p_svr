@@ -51,7 +51,7 @@ def login():
         
         if user.check_password(request.json['password']):
             session['user_id'] = user.uid
-            print found the user
+            print "found the user"
             return json.dumps({"user": user.serialize()})
         else:
             return json.dumps({})
