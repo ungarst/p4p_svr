@@ -1,9 +1,10 @@
 <div ng-controller="SignUpCtrl">
-  <label>First name: <input type="text" ng-model="params.first_name"></label><br />
-  <label>Last name: <input type="text" ng-model="params.last_name"></label><br />
-  <label>Email Address: <input type="text" ng-model="params.email_address"></label><br />
-  <label>Password: <input type="password" ng-model="params.password"></label><br />
-  <button ng-click="signup()">Sign up</button>
+  <input type="text" placeholder="First Name" ng-model="params.first_name"><br />
+  <input type="text" placeholder="Last Name" ng-model="params.last_name"><br />
+  <input type="text" placeholder="Email" ng-model="params.email_address"><br />
+  <input type="password" placeholder="Password" ng-model="params.password"><br />
+  <input type="password" placeholder="Confirm" ng-model="params.confirm"><br />
+  <button ng-click="signup()" class="btn">Sign up</button>
 
 
   <hr />

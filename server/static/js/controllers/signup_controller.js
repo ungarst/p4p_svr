@@ -4,7 +4,8 @@ function SignUpCtrl ($scope, $location, $http) {
     "first_name": "",
     "last_name": "",
     "email_address": "",
-    "password": ""
+    "password": "",
+	"confirm": ""
   };
 
   $scope.signup = function() {
