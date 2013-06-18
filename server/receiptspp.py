@@ -15,7 +15,6 @@ def root():
 
 @app.route('/signup', methods=['POST'])
 def signup():
-    print json.dumps(request.json)
     if request.method == "POST":
         user = User(request.json['email_address'],
                 request.json['password'],
@@ -36,12 +35,8 @@ def logout():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    
-    print request.data
-    print request.json
 
     if request.method == "POST" and "email_address" in request.json and "password" in request.json:
-        print "request to log in"
         
         query = User.query.filter_by(email_address=request.json["email_address"]).all()
 
@@ -52,7 +47,6 @@ def login():
         
         if user.check_password(request.json['password']):
             session['user_id'] = user.uid
-            print "found the user"
             return json.dumps({"user": user.serialize()})
         else:
             return json.dumps({})
@@ -73,9 +67,5 @@ def users():
 
 @app.route('/jsonmirror', methods=['GET', 'POST'])
 def mirror():
-    print request.json
     return json.dumps(request.json)
 
-def dump(obj):
-    for attr in dir(obj):
-        print "obj.%s = %s" % (attr, getattr(obj, attr))
