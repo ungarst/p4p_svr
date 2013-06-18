@@ -37,6 +37,9 @@ def logout():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     
+    print request.data
+    print request.json
+
     if request.method == "POST" and "email_address" in request.json and "password" in request.json:
         print "request to log in"
         
