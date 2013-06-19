@@ -4,7 +4,7 @@ from flask import request, redirect, url_for, jsonify, render_template, make_res
 from sqlalchemy import desc
 
 from server import app
-from models import db, User, Receipt
+from models import db, User, Receipt, PurchasedItem
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
@@ -92,6 +92,4 @@ def receipts():
 
         else:
             return "Bad request"
-
-
 
