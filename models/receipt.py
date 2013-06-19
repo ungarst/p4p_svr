@@ -30,3 +30,12 @@ class Receipt(Base):
       "total_transaction" : self.total_transaction
       #"purchased_items" : [pi.serialize() for pi in self.purchased_items]
     }
+
+  def serialize_with_items(self):
+    return {
+      "receipt_id" : self.id,
+      "store_name" : self.store_name,
+      "tax_rate" : self.tax_rate,
+      "total_transaction" : self.total_transaction,
+      "purchased_items" : [pi.serialize() for pi in self.purchased_items]
+    }

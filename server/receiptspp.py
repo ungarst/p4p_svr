@@ -69,21 +69,49 @@ def users():
 def mirror():
     return json.dumps(request.json)
 
-@app.route('/receipts', methods=['GET', 'POST']) 
-def receipts():
-    if request.method == "GET":
-        query = Receipt.query.all()
+@app.route('/users/<int:user_id>')
+def user(user_id):
+    user = User.query.filter_by(id=user_id).first()
 
-        return json.dumps([r.serialize() for r in query])
-
+    if not user:
+        return make_response("User " + str(user_id) + " doesn't exist", 404)
     else:
-        if "store_name" in request.json and \
-            "tax_rate" in request.json and \
-            "total_transaction" in request.json:
+        return "User exists"
 
-            receipt = Receipt(request.json["store_name"],
-                    request.json["tax_rate"],
-                    request.json["total_transaction"])
+
+# GET - Gets all of the receipts for the given user
+# POST - Creates a new receipt for the given user.
+#      - Returns that receipt in JSON form
+@app.route('/users/<int:user_id>/receipts', methods=['GET','POST'])
+def receipts(user_id):
+    
+    user = User.query.filter_by(id=user_id).first()
+
+    if not user:
+            return make_response("User " + str(user_id) + " doesn't exist", 404)
+
+    # everything in this needs some mad error prevention
+    if request.method == "POST":
+        
+        if "storeName" in request.json and \
+            "taxRate" in request.json and \
+            "totalTransaction" in request.json and \
+            "items" in request.json and \
+            request.json["items"]:
+
+            receipt = Receipt(request.json["storeName"],
+                        request.json["taxRate"],
+                        request.json["totalTransaction"])
+
+            user.receipts.append(receipt)
+
+            # This for loop especially needs it
+            for item in request.json["items"]:
+                item = PurchasedItem(item["item"]["title"],
+                    item["item"]["price"],
+                    item["itemQuantity"])
+
+                receipt.purchased_items.append(item)
 
             db.add(receipt)
             db.commit()
@@ -91,5 +119,30 @@ def receipts():
             return json.dumps({"receipt": receipt.serialize()})
 
         else:
-            return "Bad request"
+            return make_response('Incorrect data in json', 400)
+
+    else: #request is a get and return all the receipts of the user
+        return json.dumps({"receipts" : [r.serialize() for r in user.receipts]})
+
+
+
+# GET - Gets the single receipt AND all its items as JSON
+# POST - Nothing (Route not used)
+# PUT (NOT YET IMPLEMENTED) - updates it (will be eventually used for sharing categorizing etc)        
+# DELETE (NOT YET IMPLEMENTED) - deletes it from the database
+@app.route('/users/<int:user_id>/receipts/<int:receipt_id>', methods=['GET'])
+def receipt(user_id, receipt_id):
+    user = User.query.filter_by(id=user_id).first()
+    receipt = Receipt.query.filter_by(id=receipt_id).first()
+
+    if not user or not receipt or not user == receipt.user:
+        return make_response("404 coming your way", 404)
+
+    return json.dumps({"receipt" : receipt.serialize_with_items()})
+    # Get the receipt
+    # Check the user of the receipt is the same as the user
+
+    # return the serialized with items 
+
+
 

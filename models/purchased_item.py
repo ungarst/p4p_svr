@@ -25,6 +25,7 @@ class PurchasedItem(Base):
     return {
       "purchased_item_id" : self.id,
       "item_name" : self.item_name,
+      "price_per_unit" : self.price_per_unit,
       "quantity" : self.quantity
     }
     
