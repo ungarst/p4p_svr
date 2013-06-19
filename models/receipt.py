@@ -27,6 +27,6 @@ class Receipt(Base):
       "receipt_id" : self.id,
       "store_name" : self.store_name,
       "tax_rate" : self.tax_rate,
-      "total_transaction" : self.total_transaction,
-      "purchased_items" : [pi.serialize() for pi in self.purchased_items]
+      "total_transaction" : self.total_transaction
+      #"purchased_items" : [pi.serialize() for pi in self.purchased_items]
     }

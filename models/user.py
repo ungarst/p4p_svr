@@ -47,6 +47,6 @@ class User(Base):
       "email_address" : self.email_address,
       "gravatar_url" : self.gravatar_url,
       "first_name" : self.first_name,
-      "last_name" : self.last_name,
-      "receipts" : [r.serialize() for r in self.receipts]
+      "last_name" : self.last_name
+      #"receipts" : [r.serialize() for r in self.receipts]
     }
