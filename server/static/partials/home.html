@@ -1,4 +1,11 @@
 <div ng-controller="HomeCtrl">
   <h1><[ user["first_name"] + " " + user["last_name"] ]></h1>
   <img ng-src="<[ user.gravatar_url ]>" />
+
+  <ul>
+    <li ng-repeat="receipt in user_receipts">
+      <p><[ receipt["store_name"] ]></p>
+      <p><[ receipt["total_transaction"] ]></p>
+    </li>
+  </ul>
 </div>
