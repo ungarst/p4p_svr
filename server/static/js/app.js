@@ -1,5 +1,5 @@
 // Declares the modules that our app is going to use
-var rppApp = angular.module('rppApp', ['ngCookies', 'ngResource', 'ui.utils']);
+var rppApp = angular.module('rppApp', ['ngCookies', 'ngResource', 'ui.utils', 'ui.bootstrap']);
 
 // Need to use different symbols as flask uses {{ and }}
 rppApp.config(function($interpolateProvider) {

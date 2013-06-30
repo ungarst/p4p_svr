@@ -1,12 +1,24 @@
+<style>
+  body {
+    
+  }
+</style>
+
 <div ng-controller="SignUpCtrl">
-  <input type="text" placeholder="First Name" ng-model="params.first_name"><br />
-  <input type="text" placeholder="Last Name" ng-model="params.last_name"><br />
-  <input type="text" placeholder="Email" ng-model="params.email_address"><br />
-  <input type="password" placeholder="Password" ng-model="params.password"><br />
-  <input type="password" placeholder="Confirm" ng-model="params.confirm"><br />
-  <button ng-click="signup()" class="btn">Sign up</button>
 
-
+    <div class="form-signin">
+      <h2 class="form-signin-heading">Register now:</h2>
+      <input name="firstName" type="text" placeholder="First Name" ng-model="params.first_name" /> <br />
+      <input name="lastName" type="text" placeholder="Last Name" ng-model="params.last_name" /><br />
+      <input name="email" type="email" placeholder="Email" ng-model="params.email_address"/><br />
+      <input name="password" type="password" placeholder="Password" ng-model="params.password" /><br />
+      <input name="confirmPassword" type="password" placeholder="Confirm" ng-model="params.confirm" popover="<[dave]>" 
+          popover-trigger="focus" /><br />
+      <button ng-click="signup()" class="btn btn-large btn-primary">Sign up</button>
+    </div>
+    
   <hr />
-  <[ params ]>
+  <div class="well">
+    <[ params ]>
+  </div>
 </div>

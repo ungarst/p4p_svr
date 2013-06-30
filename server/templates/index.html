@@ -14,32 +14,42 @@
     body {
       padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
     }
+    
+    @media (max-width: 980px) {
+      body {
+        padding-top: 0px;
+      }
+    }
   </style>
 
   <!-- vendor JS -->
   <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/toastr.min.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/angular.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/toastr.min.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/angular-cookies.min.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/angular-resource.min.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/angular-ui-utils.js') }}"></script>
-
+  <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/ui-bootstrap-tpls-0.3.0.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/bootstrap.min.js') }}"></script>
+  
   <title>Receipts++</title>
 
 </head>
 <body ng-controller="NavBarCtrl">
 
-  <div class="navbar navbar-fixed-top" >
+  <div class="navbar navbar-inverse navbar-fixed-top" >
     <div class="navbar-inner">
       <div class="container">
         <a class="brand" href="#">Receipts++</a>
         <ul ng-hide="logged_in" class="department-controls nav pull-right">
+          <li class="divider-vertical"></li>
           <li>
             <p class="navbar-text"><a href="#/login">Log In</a> or <a href="#/signup">Register now!</a></p>
           </li>
           <li class="divider-vertical"></li>
         </ul>
         <ul ng-show="logged_in" class="department-controls nav pull-right">
+          <li class="divider-vertical"></li>
           <li>
             <p class="navbar-text"><a ng-click="logOut()" href="#">Log out</a></p>
           </li>

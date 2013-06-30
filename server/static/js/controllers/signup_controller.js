@@ -5,13 +5,19 @@ function SignUpCtrl ($scope, $location, $http) {
     "last_name": "",
     "email_address": "",
     "password": "",
-	"confirm": ""
+    "confirm": ""
   };
 
   $scope.signup = function() {
-    $http.post('/signup', $scope.params).success(function(data, status, headers, config) {
-      $location.path('/home');
-    });
+    if($scope.params.confirm == $scope.params.password && $scope.params.password != ""){
+      $http.post('/signup', $scope.params).success(function(data, status, headers, config) {
+        $location.path('/home');
+      });
+    } else {
+      alert("Passwords do not match.");
+      $scope.params.password = "";
+      $scope.params.confirm = "";
+    }
   }
 
   console.log("In the sign up controller");
