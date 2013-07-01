@@ -19,8 +19,11 @@ from models.purchased_item import PurchasedItem
 
 
 def init_db():
+    from models.sample_data import populate_database
 
     Base.metadata.create_all(bind=engine)
+
+    populate_database(5,5,10)
 
 
 def drop_db():
