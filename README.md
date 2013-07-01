@@ -13,7 +13,7 @@ Suss your venv & source it
 Fire up python
 
     import models
-    models.init_db()
+    models.init_db([num_users[, min_receipts[, max_receipts]]])
     
 Kick start the app
 
