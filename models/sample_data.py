@@ -29,7 +29,7 @@ def rand_user():
 def rand_receipt():
   # create the receipt store name and tax rate
   store_name = choice(store_names)
-  tax_rate = randint(100, 150)/1000
+  tax_rate = randint(100, 150)/1000.0
 
   items = rand_items(store_name, randint(1, 7))
 
