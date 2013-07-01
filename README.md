@@ -9,10 +9,12 @@ Getting started:
 Clone the repo
 Suss your venv & source it
 Fire up python
+
     import models
     models.init_db()
     
 Kick start the app
+
     python app.py
 
 
