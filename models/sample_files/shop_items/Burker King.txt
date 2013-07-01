@@ -1,0 +1,10 @@
+Small Soft Drink 2.00
+Medium Soft Drink 3.00
+Large Soft Drink 3.60
+Small Fries 2.00
+Medium Fries 3.00
+Large Fries 3.60
+Whopper Burger 5.40
+Whopper Jr. Burger 4.10
+BK Chicken Grabba 3.00
+Apple Pie 2.10

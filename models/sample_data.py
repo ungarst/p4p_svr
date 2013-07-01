@@ -10,6 +10,10 @@ with open("models/sample_files/last_names.txt") as f:
   last_names = [last_name.strip()[0] + last_name.strip()[1:].lower() \
                for last_name in f.read().split("\n")]
 
+with open("models/sample_files/stores.txt") as f:
+  store_names = [store_name.strip() for store_name in f.read().split("\n")]
+
+
 def rand_user():
   f = open("./users.txt", "a")
 
@@ -24,14 +28,35 @@ def rand_user():
 
 def rand_receipt():
   # create the receipt store name and tax rate
-  store_name = "Countdown Birkenhead"
-  tax_rate = 0.125
-  total_transaction = 100.00
+  store_name = choice(store_names)
+  tax_rate = randint(100, 150)/1000
+
+  items = rand_items(store_name, randint(1, 7))
+
+  total_transaction = 0.0
+  for item in items:
+    total_transaction += item.price_per_unit * item.quantity
 
   receipt = Receipt(store_name, tax_rate, total_transaction)
-  # generate a random number of items, add them to the receipt and then update total
+  receipt.purchased_items = items
 
   return receipt
+
+def rand_items(store_name, num_items):
+  with open("models/sample_files/shop_items/" + store_name + ".txt") as f:
+    items = [item.strip() for item in f.read().split("\n")]
+
+  print len(items)
+  print store_name
+
+  purchased_items = []
+  for i in xrange(num_items):
+    item = items.pop(randint(0, len(items)-1))
+    print item
+    item_name, item_price = item.rsplit(" ", 1)
+    purchased_items.append(PurchasedItem(item_name, float(item_price), randint(1, 7)))
+
+  return purchased_items
 
 
 def populate_database(num_users, min_receipts, max_receipts):
