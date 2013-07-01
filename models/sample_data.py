@@ -37,6 +37,8 @@ def rand_receipt():
   for item in items:
     total_transaction += item.price_per_unit * item.quantity
 
+  total_transaction = round(total_transaction, 2)
+
   receipt = Receipt(store_name, tax_rate, total_transaction)
   receipt.purchased_items = items
 
