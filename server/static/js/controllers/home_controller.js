@@ -16,9 +16,13 @@ function HomeCtrl ($scope, $location, $http) {
     $http.get(receipts_url).success(function(data, status, headers, config) {
       $scope.user_receipts = data["receipts"];
     });  
-
-
   });
 
+  $scope.params = {"email_address": "", "password": ""};
 
+  $scope.login = function() {
+    $http.post('/login', $scope.params).success(function(data, status, headers, config) {
+      $location.path('/home');
+    });
+  }
 }

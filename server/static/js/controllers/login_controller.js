@@ -8,8 +8,6 @@ function LogInCtrl ($scope, $location, $http, $location) {
     });
   }
 
-
-
   console.log("In the login controller");
 
 }

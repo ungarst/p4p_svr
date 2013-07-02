@@ -1,3 +1,22 @@
-<div ng-controller="RootCtrl">
-  <h1>Home page</h1>
+<div class="container">
+  <div ng-controller="RootCtrl">
+    <div class="row-fluid">
+      <div class="span9">
+        <h1>Receipts++</h1>
+      </div>
+      <div class="span3">
+        <div class="form-signin">
+          <span class="lead"><p><strong>Sign in</strong> or <a href="#/signup">Register</a></p></span>
+          <input type="text" placeholder="Email" ng-model="params.email_address"><br />
+          <input type="password" placeholder="Password" ng-model="params.password"><br />
+          <button ng-click="login()" class="btn btn-primary pull-right">Log in</button>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+    <div class="well">
+      <[ params ]>
+    </div>
+  </div>
 </div>

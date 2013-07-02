@@ -12,10 +12,7 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/site.css') }}">
   <style>
     body {
-      padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      background-image: url("{{ url_for('static', filename='img/beach1080.png') }}");
-      background-position:center top;
-      background-attachment:fixed;
+      padding-top: 40px; /* 60px to make the container go all the way to the bottom of the topbar */
     }
     
     @media (max-width: 980px) {
@@ -45,11 +42,7 @@
       <div class="container">
         <a class="brand" href="#">Receipts++</a>
         <ul ng-hide="logged_in" class="department-controls nav pull-right">
-          <li class="divider-vertical"></li>
-          <li>
-            <p class="navbar-text"><a href="#/login">Log In</a> or <a href="#/signup">Register now!</a></p>
-          </li>
-          <li class="divider-vertical"></li>
+          <div class="root-image"></div>
         </ul>
         <ul ng-show="logged_in" class="department-controls nav pull-right">
           <li class="divider-vertical"></li>
@@ -62,9 +55,7 @@
       </div>
     </div>
   </div>
-  <div class="container">
-    <div ng-view ></div>
-  </div> <!-- /container -->
+  <div ng-view style="padding-top:20px;"></div>
   <!-- angular JS that we wrote -->
   <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/controllers/home_controller.js') }}"></script>
@@ -72,6 +63,5 @@
   <script type="text/javascript" src="{{ url_for('static', filename='js/controllers/login_controller.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/controllers/root_controller.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/controllers/navbar_controller.js') }}"></script>
-
-</body>
+  </body>
 </html>
