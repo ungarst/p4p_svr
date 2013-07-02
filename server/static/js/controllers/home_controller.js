@@ -32,4 +32,10 @@ function HomeCtrl ($scope, $location, $http) {
       $location.path('/home');
     });
   }
+
+  $scope.new_receipt = {"store_name":""};
+
+  $scope.clearReceipt = function(){
+    $scope.new_receipt = {"store_name":""};
+  }
 }
