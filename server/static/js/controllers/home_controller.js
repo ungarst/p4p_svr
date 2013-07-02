@@ -1,5 +1,12 @@
 function HomeCtrl ($scope, $location, $http) {
   
+  // unload the background image
+  $(document).ready(function(){
+    $("body").css({
+      "background-image":""
+    });
+  });
+
   // request to confirm login
   $http.get('/login').success(function(data, status, headers, config) {
     $scope.data = data;

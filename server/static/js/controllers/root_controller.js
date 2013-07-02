@@ -19,10 +19,11 @@ function RootCtrl ($scope, $location, $http) {
     }
   });
 
-  $scope.logOut = function() {
-    $http.get('/logout').success(function(data, status, headers, config) {
-      $scope.logged_in = false;
-      $location.path('/');
+  $scope.params = {"email_address": "", "password": ""};
+
+  $scope.login = function() {
+    $http.post('/login', $scope.params).success(function(data, status, headers, config) {
+      $location.path('/home');
     });
   }
 }
