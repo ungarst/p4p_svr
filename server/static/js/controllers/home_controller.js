@@ -5,6 +5,9 @@ function HomeCtrl ($scope, $location, $http) {
     $("body").css({
       "background-image":""
     });
+    $('#addreceiptdatetimepicker').datetimepicker({
+      language: 'en-US'
+    });
   });
 
   // request to confirm login
