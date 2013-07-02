@@ -1,23 +1,36 @@
 <div ng-controller="HomeCtrl" class="container">
   <div class="row-fluid">
-    <div class="span4">
+    <div class="span3">
       <div class="well sidebar-nav">
+        <div>
         <div id="gravatar"><img ng-src="<[ user.gravatar_url ]>" /></div>
-        <div id="name-heading" class="lead">
+        <div class="name-heading lead">
           <p>
             <strong><[user["first_name"]]></strong><br />
             <[user["last_name"]]>
           </p>
         </div>
+      </div>
+      <div>
+        <ul class="nav nav-list">
+          <li class="nav-header">Money Management</li>
+          <li><a href="#"><i class="icon-angle-right"></i> Spending History</a></li>
+          <li><a href="#"><i class="icon-angle-right"></i> Budgeting</a></li>
+        </ul>
+      </div>
       </div><!--/.well -->
     </div><!--/span-->
-    <div class="span8">
-      <ul>
-        <li ng-repeat="receipt in user_receipts">
-          <p><[ receipt["store_name"] ]></p>
-          <p><[ receipt["total_transaction"] ]></p>
-        </li>
-      </ul>
+    <div class="span9">
+      <table class="table table-bordered table-hover">
+        <tr>
+          <th>Store</th>
+          <th>Total Transaction</th>
+        </tr>
+        <tr ng-repeat="receipt in user_receipts">
+          <td><[ receipt["store_name"] ]></td>
+          <td>$<[ receipt["total_transaction"] ]></td>
+        </tr>
+      </table>
     </div><!--/span-->
   </div><!--/row-->
 </div>
