@@ -10,7 +10,7 @@ class SpendingCategory(Base):
   id = Column(Integer, primary_key=True)
   category_name = Column(String(100))
   monthly_allowance = Column(Float)
-  user.id = Column(Integer, ForeignKey('users.id'))
+  user_id = Column(Integer, ForeignKey('users.id'))
 
   def __init__(self, category_name):
     self.category_name = category_name
@@ -26,9 +26,19 @@ class SpendingCategory(Base):
 
 def __repr__(self):
   return "<SpendingCategory (id: {0}, name: {1})>".format(
-              self.id,
-              self.category_name
-            )
+            self.id,
+            self.category_name
+          )
 
+def amount_spent_day(self):
+  pass
 
+def amount_spent_week(self):
+  pass
+
+def amount_spent_month(self):
+  pass
+
+def amount_spent_year(self):
+  pass
 

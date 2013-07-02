@@ -56,7 +56,7 @@ class User(Base):
     }
 
   def __repr__(self):
-    return "<User (id: {0}, email: {2})>".format(
+    return "<User (id: {0}, email: {1})>".format(
               self.id,
               self.email_address,
             )
