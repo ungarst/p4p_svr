@@ -2,7 +2,7 @@ import os
 from random import choice, randint
 import datetime
 
-from models import db, User, Receipt, PurchasedItem
+from models import db, User, Receipt, PurchasedItem, SpendingCategory
 
 with open("models/sample_files/first_names.txt") as f:
   first_names = [first_name.strip() for first_name in f.read().split("\n")]
@@ -30,7 +30,7 @@ def rand_user():
 
 def rand_receipt():
   store = choice(store_names)
-  print store
+  # print store
   store_name = store.split("-")[0].strip()
   category = store.split("-")[1].strip()
 
@@ -53,13 +53,13 @@ def rand_items(store_name, category, num_items):
   with open("models/sample_files/shop_items/" + store_name + ".txt") as f:
     items = [item.strip() for item in f.read().split("\n")]
 
-  print len(items)
-  print store_name
+  # print len(items)
+  # print store_name
 
   purchased_items = []
   for i in xrange(num_items):
     item = items.pop(randint(0, len(items)-1))
-    print item
+    # print item
     item_name, item_price = item.rsplit(" ", 1)
     purchased_items.append(PurchasedItem(item_name, category, float(item_price), randint(1, 7)))
 
@@ -78,11 +78,20 @@ def populate_database(num_users, min_receipts, max_receipts):
     user = rand_user()
     num_receipts = randint(min_receipts, max_receipts)
 
-    for j in range(num_receipts):
-      user.receipts.append(rand_receipt())    
-
     db.add(user)
     db.commit()
+
+    for j in range(num_receipts):
+      user.receipts.append(rand_receipt())
+      # print "User: {}, Receipt number: {}, Receipt category: {}".format(user.id, j, user.receipts[j].category)
+
+      category = SpendingCategory.query.filter_by(user_id=user.id).filter_by(category_name=user.receipts[j].category).all()
+      # print category
+      if not category:
+        user.spending_categories.append(SpendingCategory(user.receipts[j].category))  
+
+      db.add(user)
+      db.commit()
   # rand generate a random number of receipts to create for them
   # create those receipts
   # get a number of items to aput in the receipt 

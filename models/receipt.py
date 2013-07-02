@@ -33,7 +33,7 @@ class Receipt(Base):
       "store_name" : self.store_name,
       "tax_rate" : self.tax_rate,
       "total_transaction" : self.total_transaction,
-      "date" : self.date
+      "date" : str(self.date)
       #"purchased_items" : [pi.serialize() for pi in self.purchased_items]
     }
 
@@ -44,7 +44,7 @@ class Receipt(Base):
       "store_name" : self.store_name,
       "tax_rate" : self.tax_rate,
       "total_transaction" : self.total_transaction,
-      "date" : self.date,
+      "date" : str(self.date),
       "purchased_items" : [pi.serialize() for pi in self.purchased_items]
     }
 
