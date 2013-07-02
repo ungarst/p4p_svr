@@ -78,12 +78,12 @@
 }
 
 #gravatar {
-  width: 25%;
-  height: 25%;
-  padding-right: 3px;
+  width: 33%;
+  height: 33%;
+  padding-right: 2%;
   float:left;
 }
 
 #name-heading {
-  margin-left: 25%;
+  margin-left: 33%;
 }
