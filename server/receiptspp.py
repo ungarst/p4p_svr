@@ -4,7 +4,7 @@ from flask import request, redirect, url_for, jsonify, render_template, make_res
 from sqlalchemy import desc
 
 from server import app
-from models import db, User, Receipt, PurchasedItem
+from models import db, User, Receipt, PurchasedItem, SpendingCategory
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
@@ -144,5 +144,34 @@ def receipt(user_id, receipt_id):
 
     # return the serialized with items 
 
+@app.route('/users/<int:user_id>/spending_categories', methods=["GET", "POST"])
+def spending_categories(user_id):
+    if request.method == "POST":
+        return spending_categories_post(user_id, request.json)
+    elif request.method == "GET":
+        return spending_categories_get(user_id)
+
+def spending_categories_post(user_id, data):
+    user = User.query.filter_by(id=user_id).first()
+    if user:
+        try:
+            category = SpendingCategory(data["category_name"])
+        except KeyError:
+            return make_response("404 coming your way", 404)
+
+        user.spending_categories.append(category)
+        db.add(user)
+        db.commit()
+
+        return json.dumps({"category" : category.serialize()})
+    
+    else: 
+        return make_response("404 coming your way", 404)
 
 
+def spending_categories_get(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    if user:
+        return json.dumps({ "categories" : [cat.serialize() for cat in user.spending_categories]})
+    else:
+         return make_response("404 coming your way", 404)
