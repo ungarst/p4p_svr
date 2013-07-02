@@ -76,3 +76,14 @@
 .faicon a:visited {
   text-decoration: none;
 }
+
+#gravatar {
+  width: 25%;
+  height: 25%;
+  padding-right: 3px;
+  float:left;
+}
+
+#name-heading {
+  margin-left: 25%;
+}
