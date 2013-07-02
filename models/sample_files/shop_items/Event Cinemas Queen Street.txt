@@ -1,0 +1,8 @@
+Adult Movie Ticket 18.00
+Student Movie Ticket 14.90
+Youth Movie Ticket 11.50
+Child Movie Ticket 8.60
+Large Popcorn 6.90
+Small Popcorn 3.90
+Large Soda 6.90
+Small Soda 3.90

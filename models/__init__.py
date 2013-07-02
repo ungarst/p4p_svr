@@ -18,9 +18,12 @@ from models.purchased_item import PurchasedItem
 
 
 
-def init_db():
+def init_db(num_users=10, min_receipts=5, max_receipts=10):
+    from models.sample_data import populate_database
 
     Base.metadata.create_all(bind=engine)
+
+    populate_database(num_users, min_receipts, max_receipts)
 
 
 def drop_db():

@@ -1,4 +1,6 @@
 venv
+users.txt
+
 *.json
 *.csv
 *.swp

@@ -1,0 +1,7 @@
+Adult Climb 25.60
+Student Climb 21.60
+Child Climb 15.60
+Shoe Hire 5.00
+Harness Hire 4.00
+1 Month Membership 105.00
+6 Month Membership 510.00
