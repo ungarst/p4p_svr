@@ -33,9 +33,19 @@ function HomeCtrl ($scope, $location, $http) {
     });
   }
 
-  $scope.new_receipt = {"store_name":""};
+  $scope.price_example = 20;
 
-  $scope.clearReceipt = function(){
-    $scope.new_receipt = {"store_name":""};
+  $scope.new_receipt = {
+    "store_name":"",
+    "tax_rate" : "",
+    "total_transaction" : ""
+  };
+
+  $scope.clearReceipt = function() {
+    $scope.new_receipt = {
+      "store_name":"",
+      "tax_rate" : "",
+      "total_transaction" : ""
+    };
   }
 }

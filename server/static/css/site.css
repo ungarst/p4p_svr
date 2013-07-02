@@ -97,3 +97,9 @@
 .table-hover th {
   background-color: #f5f5f5;
 }
+
+.add-receipt p.lead {
+  padding-top: 2px;
+  background-color: red;
+  margin-bottom: 10px;
+}

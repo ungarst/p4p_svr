@@ -20,22 +20,45 @@
     </div><!--/span-->
     <div class="span9">
       <h2>Receipts
-      <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#addReceiptModal" type="button"><i class="icon-plus"/> Add Receipt</button></h2>
+        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#addReceiptModal" type="button"><i class="icon-plus"/> Add Receipt</button>
+      </h2>
+      
       <!-- Add Receipt Modal -->
       <div id="addReceiptModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
           <h3 id="addReceiptModalLabel">Add Receipt</h3>
         </div>
-        <div class="modal-body">
+        <div class="modal-body add-receipt">
+
           <!-- Receipt Form -->
-          <input name="storeName" type="text" placeholder="Store" ng-model="new_receipt.store_name" /><br />
+          <table class=".add-receipt">
+            <tr>
+              <td><p><strong>Store Name</strong></p></td>
+              <td><input name="storeName" type="text" placeholder="e.g. Jimmy's Steakhouse" ng-model="new_receipt.store_name" /></td>
+            </tr>
+
+            <tr>
+              <td><p><strong>Tax Rate (%)</strong></p></td>
+              <td><input name="taxRate" type="text" placeholder="e.g. 15" ng-model="new_receipt.tax_rate" /></td>
+            </tr>
+
+            <tr>
+              <td><p><strong>Total Transaction</strong></p></td>
+              <td><input name="totalTransaction" type="text" placeholder="e.g. <[ price_example | currency ]>" ng-model="new_receipt.total_transaction" /></td>
+            </tr>
+            <tr>
+              <td><p><strong>Date & Time</strong></p></td>
+              <td><input name="dateTime" type="text" ng-model="new_receipt.date_time" /></td>
+            </tr>
+          </table>
         </div>
         <div class="modal-footer">
           <button ng-click="clearReceipt()" class="btn" aria-hidden="true">Clear</button>
           <button class="btn btn-primary">Save Receipt</button>
         </div>
       </div>
+
       <table class="table table-bordered table-hover">
         <tr>
           <th>Store</th>
