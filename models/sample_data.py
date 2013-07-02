@@ -11,6 +11,7 @@ with open("models/sample_files/last_names.txt") as f:
                for last_name in f.read().split("\n")]
 
 with open("models/sample_files/stores.txt") as f:
+  # print f.read()
   store_names = [store_name.strip() for store_name in f.read().split("\n")]
 
 
@@ -27,11 +28,14 @@ def rand_user():
   return User(email, first_name, first_name, last_name)
 
 def rand_receipt():
-  # create the receipt store name and tax rate
-  store_name = choice(store_names)
+  store = choice(store_names)
+  print store
+  store_name = store.split("-")[0].strip()
+  category = store.split("-")[1].strip()
+
   tax_rate = randint(100, 150)/1000.0
 
-  items = rand_items(store_name, randint(1, 7))
+  items = rand_items(store_name, category, randint(1, 7))
 
   total_transaction = 0.0
   for item in items:
@@ -39,12 +43,12 @@ def rand_receipt():
 
   total_transaction = round(total_transaction, 2)
 
-  receipt = Receipt(store_name, tax_rate, total_transaction)
+  receipt = Receipt(store_name, category, tax_rate, total_transaction)
   receipt.purchased_items = items
 
   return receipt
 
-def rand_items(store_name, num_items):
+def rand_items(store_name, category, num_items):
   with open("models/sample_files/shop_items/" + store_name + ".txt") as f:
     items = [item.strip() for item in f.read().split("\n")]
 
@@ -56,7 +60,7 @@ def rand_items(store_name, num_items):
     item = items.pop(randint(0, len(items)-1))
     print item
     item_name, item_price = item.rsplit(" ", 1)
-    purchased_items.append(PurchasedItem(item_name, float(item_price), randint(1, 7)))
+    purchased_items.append(PurchasedItem(item_name, category, float(item_price), randint(1, 7)))
 
   return purchased_items
 

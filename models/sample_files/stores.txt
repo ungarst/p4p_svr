@@ -1,13 +1,13 @@
-Relax Cafe
-Albert Park Espresso
-Cotton On
-Burker King
-PB Technologies Penrose
-Countdown Birkenhead
-Z Greenlane
-Placemakers Albany
-Shadows Bar
-The Gin Room
-Extreme Edge Rockclimbing
-Event Cinemas Queen Street
-PB Technologies Porana Rd
+Relax Cafe - Dining
+Albert Park Espresso - Dining 
+Cotton On - Clothing
+Burker King - Dining
+PB Technologies Penrose - Electronics
+Countdown Birkenhead - Groceries
+Z Greenlane - Fuel
+Placemakers Albany - Homeware
+Shadows Bar - Dining
+The Gin Room - Dining
+Extreme Edge Rockclimbing - Entertainment
+Event Cinemas Queen Street - Entertainment
+PB Technologies Porana Rd - Electronics

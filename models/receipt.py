@@ -11,20 +11,23 @@ class Receipt(Base):
   store_name = Column(String(100))
   tax_rate = Column(Float)
   total_transaction = Column(Float)
+  category = Column(String(100))
   user_id = Column(Integer, ForeignKey('users.id'))
 
   purchased_items = relationship("PurchasedItem", 
                       order_by="PurchasedItem.id", 
                       backref="receipt")
 
-  def __init__(self, store_name, tax_rate, total_transaction):
+  def __init__(self, store_name, category, tax_rate, total_transaction):
     self.store_name = store_name
+    self.category = category
     self.tax_rate = tax_rate
     self.total_transaction = total_transaction
 
   def serialize(self):
     return {
       "receipt_id" : self.id,
+      "category" : self.category,
       "store_name" : self.store_name,
       "tax_rate" : self.tax_rate,
       "total_transaction" : self.total_transaction
@@ -34,8 +37,16 @@ class Receipt(Base):
   def serialize_with_items(self):
     return {
       "receipt_id" : self.id,
+      "category" : self.category,
       "store_name" : self.store_name,
       "tax_rate" : self.tax_rate,
       "total_transaction" : self.total_transaction,
       "purchased_items" : [pi.serialize() for pi in self.purchased_items]
     }
+
+  def __repr__(self):
+    return "<Receipt (id: {0}, shop_name: {1}, amount: {2})>".format(
+              self.id,
+              self.store_name,
+              self.total_transaction
+            )
