@@ -5,10 +5,22 @@ function HomeCtrl ($scope, $location, $http) {
     $("body").css({
       "background-image":""
     });
+
     $('#addreceiptdatetimepicker').datetimepicker({
       language: 'en-US'
     });
   });
+
+  Date.prototype.today = function(){ 
+    return ((this.getDate() < 10)?"0":"") + this.getDate() +"/"+(((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+ this.getFullYear();
+  };
+
+  Date.prototype.timeNow = function(){
+    return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
+  };
+
+  var date = new Date();
+  var currentDateTime = String(date.today() + " " + date.timeNow());
 
   // request to confirm login
   $http.get('/login').success(function(data, status, headers, config) {
@@ -41,14 +53,16 @@ function HomeCtrl ($scope, $location, $http) {
   $scope.new_receipt = {
     "store_name":"",
     "tax_rate" : "",
-    "total_transaction" : ""
+    "total_transaction" : "",
+    "date_time": currentDateTime
   };
 
   $scope.clearReceipt = function() {
     $scope.new_receipt = {
       "store_name":"",
       "tax_rate" : "",
-      "total_transaction" : ""
+      "total_transaction" : "",
+      "date_time": currentDateTime
     };
   }
 }
