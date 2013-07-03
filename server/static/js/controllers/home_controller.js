@@ -29,13 +29,14 @@ function HomeCtrl ($scope, $location, $http) {
   var getReceipts = function() {
     $http.get($scope.receipts_url).success(function(data, status, headers, config) {
       $scope.user_receipts = data["receipts"];
+      console.log($scope.user_receipts)
     });
   }
 
   // request to confirm login
   $http.get('/login').success(function(data, status, headers, config) {
     $scope.data = data;
-    console.log(data);
+    // console.log(data);
     if (!("user" in $scope.data)) {
       $location.path('/');
     }
