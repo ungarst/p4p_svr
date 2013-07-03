@@ -24,7 +24,7 @@
       </h2>
       
       <!-- Add Receipt Modal -->
-      <div id="addReceiptModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div id="addReceiptModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addReceiptModal" aria-hidden="true">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
           <h3 id="addReceiptModalLabel">Add Receipt</h3>
@@ -35,23 +35,23 @@
           <table class=".add-receipt">
             <tr>
               <td><p><strong>Store Name</strong></p></td>
-              <td><input name="storeName" type="text" placeholder="e.g. Jimmy's Steakhouse" ng-model="new_receipt.store_name" /></td>
+              <td><input name="storeName" type="text" placeholder="e.g. Jimmy's Steakhouse" ng-model="new_receipt.storeName" /></td>
             </tr>
 
             <tr>
               <td><p><strong>Tax Rate (%)</strong></p></td>
-              <td><input name="taxRate" type="text" placeholder="e.g. 15" ng-model="new_receipt.tax_rate" /></td>
+              <td><input name="taxRate" type="text" placeholder="e.g. 15" ng-model="new_receipt.taxRate" /></td>
             </tr>
 
             <tr>
               <td><p><strong>Total Transaction</strong></p></td>
-              <td><input name="totalTransaction" type="text" placeholder="e.g. <[ price_example | currency ]>" ng-model="new_receipt.total_transaction" /></td>
+              <td><input name="totalTransaction" type="text" placeholder="e.g. <[ price_example | currency ]>" ng-model="new_receipt.totalTransaction" /></td>
             </tr>
             <tr>
               <td><p><strong>Date & Time</strong></p></td>
               <td>
                 <div id="addreceiptdatetimepicker" class="input-append date">
-                  <input data-format="dd/MM/yyyy hh:mm:ss" type="text" ng-model="new_receipt.date_time" />
+                  <input data-format="dd/MM/yyyy hh:mm:ss" type="text" ng-model="new_receipt.dateTime" />
                   <span class="add-on">
                     <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                     </i>
@@ -63,7 +63,7 @@
         </div>
         <div class="modal-footer">
           <button ng-click="clearReceipt()" class="btn" aria-hidden="true">Clear</button>
-          <button class="btn btn-primary">Save Receipt</button>
+          <button ng-click="saveReceipt()" class="btn btn-primary">Save Receipt</button>
         </div>
       </div>
 
