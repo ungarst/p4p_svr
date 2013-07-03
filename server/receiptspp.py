@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 from flask import request, redirect, url_for, jsonify, render_template, make_response, session
 from sqlalchemy import desc
@@ -76,7 +77,7 @@ def user(user_id):
     if not user:
         return make_response("User " + str(user_id) + " doesn't exist", 404)
     else:
-        return "User exists"
+        return json.dumps({"user" : user.serialize()})
 
 
 # GET - Gets all of the receipts for the given user
@@ -96,18 +97,32 @@ def receipts(user_id):
         if "storeName" in request.json and \
             "taxRate" in request.json and \
             "totalTransaction" in request.json and \
+            "category" in request.json and \
+            "date" in request.json and \
             "items" in request.json and \
             request.json["items"]:
 
+            date, time = request.json["date"].split(" ")
+            day, month, year = [int(x) for x in date.split("/")]
+            hour, minute, second = [int(x) for x in time.split(":")]
+
+            receipt_date = datetime(year, month, day, hour, minute, second)
+
             receipt = Receipt(request.json["storeName"],
+                        request.json["category"],
                         request.json["taxRate"],
-                        request.json["totalTransaction"])
+                        request.json["totalTransaction"],
+                        receipt_date)
 
             user.receipts.append(receipt)
+
+            if not SpendingCategory.query.filter_by(user_id=user.id).filter_by(category_name=receipt.category).first():
+                user.spending_categories.append(SpendingCategory(receipt.category))
 
             # This for loop especially needs it
             for item in request.json["items"]:
                 item = PurchasedItem(item["item"]["title"],
+                    request.json["category"],
                     item["item"]["price"],
                     item["itemQuantity"])
 
