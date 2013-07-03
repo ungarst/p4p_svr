@@ -1,8 +1,15 @@
-<div ng-controller="LogInCtrl">
-  <input type="text" placeholder="Email" ng-model="params.email_address"><br />
-  <input type="password" placeholder="Password" ng-model="params.password"><br />
-  <button ng-click="login()" class="btn">Log In!</button>
+<div class="container">
+  <div ng-controller="LogInCtrl">
 
-  <hr />
-  <[ params ]>
+    <div>
+      <input type="text" placeholder="Email" ng-model="params.email_address"><br />
+      <input type="password" placeholder="Password" ng-model="params.password"><br />
+      <button ng-click="login()" class="btn btn-large btn-primary">Log in</button>
+    </div>
+    
+    <hr />
+    <div class="well">
+      <[ params ]>
+    </div>
+  </div>
 </div>

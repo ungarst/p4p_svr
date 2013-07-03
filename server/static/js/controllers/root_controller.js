@@ -2,6 +2,14 @@
 // they aren't logged in.
 function RootCtrl ($scope, $location, $http) {
 
+  $(document).ready(function(){
+    $("body").css({
+      "background-image":"url(static/img/halfBeach1080.png)",
+      "background-position":"center",
+      "background-repeat":"no-repeat"
+    });
+  });
+
   // if logged in then redirect them to the home page
 
   $http.get('/login').success(function(data, status, headers, config) {
@@ -11,12 +19,11 @@ function RootCtrl ($scope, $location, $http) {
     }
   });
 
-  $scope.logOut = function() {
-    $http.get('/logout').success(function(data, status, headers, config) {
-      $scope.logged_in = false;
-      $location.path('/');
+  $scope.params = {"email_address": "", "password": ""};
 
+  $scope.login = function() {
+    $http.post('/login', $scope.params).success(function(data, status, headers, config) {
+      $location.path('/home');
     });
   }
-
 }

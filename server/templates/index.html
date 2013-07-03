@@ -1,18 +1,19 @@
-<!doctype html>
-<html ng-app="rppApp" id="ng-app">
+<!DOCTYPE html>
+<html ng-app="rppApp" id="ng-app" lang="en">
 <head>
 
   <!-- CSS from vendors -->
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/vendor/toastr.min.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/vendor/bootstrap.min.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/vendor/bootstrap-responsive.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/vendor/bootstrap-datetimepicker.min.css') }}">
   <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
 
   <!-- CSS we wrote -->
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/site.css') }}">
   <style>
     body {
-      padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      padding-top: 40px; /* 60px to make the container go all the way to the bottom of the topbar */
     }
     
     @media (max-width: 980px) {
@@ -31,6 +32,7 @@
   <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/angular-ui-utils.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/ui-bootstrap-tpls-0.3.0.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/bootstrap.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/bootstrap-datetimepicker.min.js') }}"></script>
   
   <title>Receipts++</title>
 
@@ -42,26 +44,23 @@
       <div class="container">
         <a class="brand" href="#">Receipts++</a>
         <ul ng-hide="logged_in" class="department-controls nav pull-right">
-          <li class="divider-vertical"></li>
-          <li>
-            <p class="navbar-text"><a href="#/login">Log In</a> or <a href="#/signup">Register now!</a></p>
-          </li>
-          <li class="divider-vertical"></li>
+          <div class="root-image"></div>
         </ul>
         <ul ng-show="logged_in" class="department-controls nav pull-right">
           <li class="divider-vertical"></li>
           <li>
-            <p class="navbar-text"><a ng-click="logOut()" href="#">Log out</a></p>
+            <p class="navbar-text faicon"><a ng-click="logOut()" href="#"><i class="icon-cog"></i></a></p>
           </li>
           <li class="divider-vertical"></li>
-          
+          <li>
+            <p class="navbar-text faicon"><a ng-click="logOut()" href="#"><i class="icon-signout"></i></a></p>
+          </li>
+          <li class="divider-vertical"></li>
         </ul>
       </div>
     </div>
   </div>
-  <div class="container">
-    <div ng-view ></div>
-  </div> <!-- /container -->
+  <div ng-view style="padding-top:20px;"></div>
   <!-- angular JS that we wrote -->
   <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/controllers/home_controller.js') }}"></script>
@@ -69,6 +68,5 @@
   <script type="text/javascript" src="{{ url_for('static', filename='js/controllers/login_controller.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/controllers/root_controller.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/controllers/navbar_controller.js') }}"></script>
-
-</body>
+  </body>
 </html>

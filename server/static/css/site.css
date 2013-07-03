@@ -1,10 +1,14 @@
-/* Sign Up */
-body {
-  padding-top: 40px;
-  padding-bottom: 40px;
+/* BG Images */
+
+/* */
+.navbar {
+  margin-bottom: 0px; 
 }
 
-.form-signin {
+
+/* Register */
+
+.form-register {
   max-width: 300px;
   padding: 19px 29px 29px;
   margin: 0 auto 20px;
@@ -17,15 +21,85 @@ body {
      -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
           box-shadow: 0 1px 2px rgba(0,0,0,.05);
 }
-.form-signin .form-signin-heading,
-.form-signin .checkbox {
+.form-register .form-register-heading,
+.form-register .checkbox {
   margin-bottom: 10px;
 }
-.form-signin input[type="text"],
-.form-signin input[type="password"], 
-.form-signin input[type="email"] {
+.form-register input[type="text"],
+.form-register input[type="password"], 
+.form-register input[type="email"] {
   font-size: 16px;
   height: auto;
   margin-bottom: 15px;
   padding: 7px 9px;
+}
+
+/* Sgin in */
+.form-signin {
+  padding: 9px 9px 39px 9px;
+  margin: 0 auto 20px;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+          box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+
+.form-signin input[type="text"], 
+.form-signin input[type="password"], 
+.form-signin input[type="email"] {
+  width:94%;
+}
+
+.form-signin .lead {
+  margin-bottom: 0px;
+}
+
+/* Font Awesome Icons */
+
+.faicon {
+  font-size: 20px;
+}
+
+.faicon a {
+  color: #999999;
+}
+
+.faicon a:hover {
+  color: #0088CC;
+  text-decoration: none;
+}
+
+.faicon a:visited {
+  text-decoration: none;
+}
+
+.gravatar {
+  width: 62px;
+  height: 62px;
+}
+
+.name-heading .lead {
+  margin-bottom: 0px;
+}
+
+@media (max-width: 980px){
+  .name-heading .lead {
+    padding-top: 70px;
+    padding-top: 5px;
+  }
+}
+
+/* Tables */
+.table-hover th {
+  background-color: #f5f5f5;
+}
+
+.add-receipt p.lead {
+  padding-top: 2px;
+  background-color: red;
+  margin-bottom: 10px;
 }
