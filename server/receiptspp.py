@@ -1,10 +1,11 @@
 import json
+from datetime import datetime
 
 from flask import request, redirect, url_for, jsonify, render_template, make_response, session
 from sqlalchemy import desc
 
 from server import app
-from models import db, User, Receipt, PurchasedItem
+from models import db, User, Receipt, PurchasedItem, SpendingCategory
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
@@ -76,7 +77,7 @@ def user(user_id):
     if not user:
         return make_response("User " + str(user_id) + " doesn't exist", 404)
     else:
-        return "User exists"
+        return json.dumps({"user" : user.serialize()})
 
 
 # GET - Gets all of the receipts for the given user
@@ -96,18 +97,32 @@ def receipts(user_id):
         if "storeName" in request.json and \
             "taxRate" in request.json and \
             "totalTransaction" in request.json and \
+            "category" in request.json and \
+            "date" in request.json and \
             "items" in request.json and \
             request.json["items"]:
 
+            date, time = request.json["date"].split(" ")
+            day, month, year = [int(x) for x in date.split("/")]
+            hour, minute, second = [int(x) for x in time.split(":")]
+
+            receipt_date = datetime(year, month, day, hour, minute, second)
+
             receipt = Receipt(request.json["storeName"],
+                        request.json["category"],
                         request.json["taxRate"],
-                        request.json["totalTransaction"])
+                        request.json["totalTransaction"],
+                        receipt_date)
 
             user.receipts.append(receipt)
+
+            if not SpendingCategory.query.filter_by(user_id=user.id).filter_by(category_name=receipt.category).first():
+                user.spending_categories.append(SpendingCategory(receipt.category))
 
             # This for loop especially needs it
             for item in request.json["items"]:
                 item = PurchasedItem(item["item"]["title"],
+                    request.json["category"],
                     item["item"]["price"],
                     item["itemQuantity"])
 
@@ -144,5 +159,63 @@ def receipt(user_id, receipt_id):
 
     # return the serialized with items 
 
+@app.route('/users/<int:user_id>/receipts/<int:receipt_id>/purchased_items/<int:item_id>', methods=['PUT'])
+def item(user_id, receipt_id, item_id):
+    # perform some sort of validation to ensure that the item belongs to that receipt and that user
+
+    item = PurchasedItem.query.filter_by(id=item_id).first()
+
+    if not item:
+        return make_response("This item doesn't exist", 404)
+
+    receipt = item.receipt
+    if receipt.id != receipt_id:
+        return make_response("This item doesn't belong to the receipt specified", 404)
+
+    user = receipt.user
+    if user.id != user_id:
+        return make_response("The item doesn't belong to the user specified", 404)
 
 
+    if "category" in request.json:
+        print "her"
+        item.category = request.json["category"]
+        db.add(item)
+        db.commit()
+        return json.dumps({'item': item.serialize()})
+    else:
+        return make_response("Need category in the JSON", 404)
+    return "hello world"
+
+
+@app.route('/users/<int:user_id>/spending_categories', methods=["GET", "POST"])
+def spending_categories(user_id):
+    if request.method == "POST":
+        return spending_categories_post(user_id, request.json)
+    elif request.method == "GET":
+        return spending_categories_get(user_id)
+
+def spending_categories_post(user_id, data):
+    user = User.query.filter_by(id=user_id).first()
+    if user:
+        try:
+            category = SpendingCategory(data["category_name"])
+        except KeyError:
+            return make_response("404 coming your way", 404)
+
+        user.spending_categories.append(category)
+        db.add(user)
+        db.commit()
+
+        return json.dumps({"category" : category.serialize()})
+    
+    else: 
+        return make_response("404 coming your way", 404)
+
+
+def spending_categories_get(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    if user:
+        return json.dumps({ "categories" : [cat.serialize() for cat in user.spending_categories]})
+    else:
+         return make_response("404 coming your way", 404)

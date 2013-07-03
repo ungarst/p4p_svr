@@ -15,6 +15,8 @@ Base.query = db.query_property()
 from models.user import User
 from models.receipt import Receipt
 from models.purchased_item import PurchasedItem
+from models.spending_category import SpendingCategory
+
 
 
 

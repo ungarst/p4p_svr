@@ -15,6 +15,10 @@ class User(Base):
   first_name = Column(String(50))
   last_name = Column(String(50))
 
+  spending_categories = relationship("SpendingCategory",
+              order_by="SpendingCategory.id",
+              backref="user")
+
   receipts = relationship("Receipt", 
               order_by="Receipt.id",
               backref="user")
@@ -50,3 +54,9 @@ class User(Base):
       "last_name" : self.last_name
       #"receipts" : [r.serialize() for r in self.receipts]
     }
+
+  def __repr__(self):
+    return "<User (id: {0}, email: {1})>".format(
+              self.id,
+              self.email_address,
+            )
