@@ -66,6 +66,7 @@ function HomeCtrl ($scope, $location, $http) {
     "taxRate": "",
     "totalTransaction": "",
     "dateTime": currentDateTime,
+    "category" : "",
     "items": [{"item":{"title":"Shirt","price":200},"itemQuantity":1}]
   };
 
@@ -74,7 +75,9 @@ function HomeCtrl ($scope, $location, $http) {
       "storeName":"",
       "taxRate" : "",
       "totalTransaction" : "",
-      "dateTime": currentDateTime
+      "category" : "",
+      "dateTime": currentDateTime,
+      "items": [{"item":{"title":"Shirt","price":200},"itemQuantity":1}]
     };
   }
 

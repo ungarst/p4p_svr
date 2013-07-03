@@ -98,11 +98,11 @@ def receipts(user_id):
             "taxRate" in request.json and \
             "totalTransaction" in request.json and \
             "category" in request.json and \
-            "date" in request.json and \
+            "dateTime" in request.json and \
             "items" in request.json and \
             request.json["items"]:
 
-            date, time = request.json["date"].split(" ")
+            date, time = request.json["dateTime"].split(" ")
             day, month, year = [int(x) for x in date.split("/")]
             hour, minute, second = [int(x) for x in time.split(":")]
 
@@ -134,6 +134,19 @@ def receipts(user_id):
             return json.dumps({"receipt": receipt.serialize()})
 
         else:
+            print request.json
+            if "storeName" in request.json:
+                print "storeName here"
+            if "taxRate" in request.json:
+                print "taxRate here"
+            if "totalTransaction" in request.json:
+                print "totalTransaction here"
+            if "category" in request.json:
+                print "category here" 
+            if "dateTime" in request.json:
+                print "date here"
+            if "items" in request.json:
+                print "items here"
             return make_response('Incorrect data in json', 400)
 
     else: #request is a get and return all the receipts of the user
