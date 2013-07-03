@@ -5,7 +5,7 @@ function RootCtrl ($scope, $location, $http) {
   $(document).ready(function(){
     $("body").css({
       "background-image":"url(static/img/halfBeach1080.png)",
-      "background-position":"center",
+      "background-position":"center top",
       "background-repeat":"no-repeat"
     });
   });

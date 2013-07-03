@@ -5,6 +5,36 @@
   margin-bottom: 0px; 
 }
 
+/* Index */
+
+/* Center align the text within the three columns below the header */
+.marketing .span4 {
+  text-align: center;
+  padding-top: 148px; 
+}
+
+@media (max-width: 980px){
+  .marketing .span4{
+    padding-top: 108px;
+  }
+}
+
+@media (max-width: 767px){
+  .marketing .span4{
+    padding-top: 78px;
+  }
+}
+
+
+
+.marketing h2 {
+  font-weight: normal;
+}
+
+.marketing .span4 p {
+  margin-left: 10px;
+  margin-right: 10px;
+}
 
 /* Register */
 
