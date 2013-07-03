@@ -149,8 +149,17 @@ def receipts(user_id):
                 print "items here"
             return make_response('Incorrect data in json', 400)
 
-    else: #request is a get and return all the receipts of the user
-        return json.dumps({"receipts" : [r.serialize() for r in user.receipts]})
+    else: #request is a get and return the receipts of the user
+
+        limit = int(request.args.get('limit', 10000))
+        offset = int(request.args.get('offset', 0))
+        return json.dumps({ "receipts" : \
+                    [r.serialize() for r in Receipt.query
+                    .filter_by(user_id = user.id)
+                    .order_by(desc(Receipt.date))
+                    .offset(offset)
+                    .limit(limit) ]})
+        # return json.dumps({"receipts" : [r.serialize() for r in user.receipts]})
 
 
 
