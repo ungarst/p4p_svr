@@ -20,12 +20,14 @@
 }
 
 @media (max-width: 767px){
-  .marketing .span4{
-    padding-top: 78px;
+  .marketing .span4 .first {
+    padding-top: 58px;
+  }
+
+  .marketing .span4 {
+    padding-top: 18px;
   }
 }
-
-
 
 .marketing h2 {
   font-weight: normal;
