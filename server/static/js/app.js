@@ -30,6 +30,11 @@ rppApp.config(function($routeProvider) {
         templateUrl: 'static/partials/login.html',
         controller: 'LogInCtrl'
       })
+      .when('/add_receipt',
+      {
+        templateUrl: 'static/partials/add_receipt.html',
+        controller: 'AddReceiptCtrl'
+      })
       .otherwise(
       {
         redirectTo: "/"

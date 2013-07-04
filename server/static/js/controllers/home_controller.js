@@ -12,6 +12,10 @@ function HomeCtrl ($scope, $location, $http) {
 
   });
 
+  $scope.create_receipt = function() {
+    $location.path('/add_receipt');
+  }
+
   // prototyping functions to get todays date as dd/MM/yyyy and time as hh:mm:ss
   Date.prototype.today = function(){ 
     return ((this.getDate() < 10)?"0":"") + this.getDate() +"/"+(((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+ this.getFullYear();

@@ -1,0 +1,16 @@
+<div ng-controller="SideBarCtrl" class="well sidebar-nav">
+  <div class="media">
+    <img class="pull-left media-object gravatar" ng-src="<[ user.gravatar_url ]>" />
+    <div class="name-heading">
+      <p class="lead">
+        <strong><[user["first_name"]]></strong><br />
+        <[user["last_name"]]>
+      </p>
+    </div>
+  </div>
+  <ul class="nav nav-list">
+    <li class="nav-header">Money Management</li>
+    <li><a href="#"><i class="icon-angle-right"></i> Spending History</a></li>
+    <li><a href="#"><i class="icon-angle-right"></i> Budgeting</a></li>
+  </ul>
+</div><!--/.well -->

@@ -1,0 +1,70 @@
+<div ng-controller="HomeCtrl" class="container">
+  <div class="row-fluid">
+    <div class="span3">
+      <div ng-include="'static/partials/sidebar.html'"></div>
+    </div><!--/span-->
+    <div class="span9">
+      <h2>Add a new receipt</h2>
+      <!-- <h2>Hello</h2> -->
+      
+      <!-- Add Receipt Modal -->
+      <!-- <div id="addReceiptModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addReceiptModal" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="addReceiptModalLabel">Add Receipt</h3>
+        </div>
+        <div class="modal-body add-receipt"> -->
+
+          <dl class=".add-receipt">
+            
+            <dt><p><strong>Store Name</strong></p></dt>
+            <dd><input name="storeName" type="text" placeholder="e.g. Jimmy's Steakhouse" ng-model="new_receipt.storeName" /></dd>
+            
+
+            
+            <dt><p><strong>Tax Rate (%)</strong></p></dt>
+            <dd><input name="taxRate" type="text" placeholder="e.g. 15" ng-model="new_receipt.taxRate" /></ds>
+            
+
+            
+            <dt><p><strong>Total Transaction</strong></p></dt>
+            <dd><input name="totalTransaction" type="text" placeholder="e.g. <[ price_example | currency ]>" ng-model="new_receipt.totalTransaction" /></dd>
+            
+            
+            <dt><p><strong>Date & Time</strong></p></dt>
+            <dd>
+              <div id="addreceiptdatetimepicker" class="input-append date">
+                <input data-format="dd/MM/yyyy hh:mm:ss" type="text" ng-model="new_receipt.dateTime" />
+                <span class="add-on">
+                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                  </i>
+                </span>
+              </div>
+            </dd>
+            
+            
+            <dt><p><strong>Category</strong></p></dt>
+            <dd><input name="category" type="text" placeholder="e.g. Clothing" ng-model="new_receipt.category"></dd>
+
+            <dt><p><strong>Items</strong></p></dt>
+            <dd>
+              <ul>
+                <input type="text" placeholder="Item Name" /> 
+                <select type="text" placeholder="Quantity" /> 
+                <input type="text" placeholder="Item Price" />
+              </ul>
+            </dd>
+          </dl>
+            
+          
+<!--         </div>
+        <div class="modal-footer">
+          <button ng-click="clearReceipt()" class="btn" aria-hidden="true">Clear</button>
+          <button ng-click="saveReceipt()" class="btn btn-primary">Save Receipt</button>
+        </div> -->
+      <!-- </div> -->
+    </div><!--/span-->
+
+  </div><!--/row-->
+  <hr />
+</div>
