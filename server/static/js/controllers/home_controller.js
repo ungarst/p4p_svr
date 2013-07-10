@@ -24,6 +24,19 @@ function HomeCtrl ($scope, $location, $http) {
     });
   }
 
+  var getSpendingReport = function() {
+    $http.get('/users/' + $scope.user.user_id + '/spending_report').success(function(data, status, headers, config) {
+      //console.log(data);
+      $scope.spending_categories = data.spending_categories;
+      $scope.daily_spends = data.daily_spends;
+      $scope.weeks_spending = 0.0
+      for (var i = 0 ; i < $scope.daily_spends.length ; i++) {
+        $scope.weeks_spending += $scope.daily_spends[i].total_spend;
+      }
+      $scope.weeks_spending = $scope.weeks_spending.toFixed(2);
+    });
+  };
+
   // request to confirm login
   $http.get('/login').success(function(data, status, headers, config) {
     $scope.data = data;
@@ -37,8 +50,11 @@ function HomeCtrl ($scope, $location, $http) {
     $scope.receipts_url = '/users/' + $scope.user.user_id + '/receipts';
 
     // request to get receipt data from the site
-    getReceipts(); 
+    getReceipts();
+    getSpendingReport(); 
   });
+
+
 
   $scope.params = {"email_address": "", "password": ""};
 
