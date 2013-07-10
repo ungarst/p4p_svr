@@ -48,51 +48,12 @@ function HomeCtrl ($scope, $location, $http) {
     });
   }
 
-<<<<<<< HEAD
   // this is just used so that the correct currency locale can be generated 
   // for a place holder
   $scope.price_example = 20;
-
-  //default receipt
-  $scope.new_receipt = {
-    "storeName": "",
-    "taxRate": "",
-    "totalTransaction": "",
-    "dateTime": currentDateTime,
-    "category" : "",
-    "items": [{"item":{"title":"Shirt","price":200},"itemQuantity":1}]
-  };
-
-  $scope.clearReceipt = function() {
-    $scope.new_receipt = {
-      "storeName":"",
-      "taxRate" : "",
-      "totalTransaction" : "",
-      "category" : "",
-      "dateTime": currentDateTime,
-      "items": [{"item":{"title":"Shirt","price":200},"itemQuantity":1}]
-    };
-  }
-
-  $scope.saveReceipt = function() {
-    $scope.new_receipt.totalTransaction = Number($scope.new_receipt.totalTransaction.
-      replace(/[^0-9\.]+/g,""));
-    $scope.new_receipt.taxRate = Number($scope.new_receipt.taxRate.
-      replace(/[^0-9\.]+/g,""));
-
-    $http.post($scope.receipts_url, $scope.new_receipt).success(function(data, status, headers, config) {
-      $('#addReceiptModal').modal('hide');
-      // request to get receipt data from the site
-      getReceipts(); 
-      $scope.clearReceipt(); 
-      $location.path('/home');
-    });
-  }
 
   $scope.goToReceipt = function(receipt) {
     $location.path("/receipt/"+receipt.receipt_id);
   }
 
-=======
->>>>>>> c9884ea8e6bd08e66826b5601b53c26262965abf
 }
