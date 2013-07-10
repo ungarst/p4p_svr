@@ -19,10 +19,10 @@ class Receipt(Base):
                       order_by="PurchasedItem.id", 
                       backref="receipt")
 
-  def __init__(self, store_name, category, tax_rate, total_transaction, date):
+  def __init__(self, store_name, category, total_transaction, date):
     self.store_name = store_name
     self.category = category
-    self.tax_rate = tax_rate
+    # self.tax_rate = tax_rate
     self.total_transaction = total_transaction
     self.date = date
 
@@ -31,7 +31,7 @@ class Receipt(Base):
       "receipt_id" : self.id,
       "category" : self.category,
       "store_name" : self.store_name,
-      "tax_rate" : self.tax_rate,
+      # "tax_rate" : self.tax_rate,
       "total_transaction" : self.total_transaction,
       "date" : str(self.date)
       #"purchased_items" : [pi.serialize() for pi in self.purchased_items]
@@ -42,7 +42,7 @@ class Receipt(Base):
       "receipt_id" : self.id,
       "category" : self.category,
       "store_name" : self.store_name,
-      "tax_rate" : self.tax_rate,
+      # "tax_rate" : self.tax_rate,
       "total_transaction" : self.total_transaction,
       "date" : str(self.date),
       "purchased_items" : [pi.serialize() for pi in self.purchased_items]

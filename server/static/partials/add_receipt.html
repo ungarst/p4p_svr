@@ -18,23 +18,23 @@
           <dl class=".add-receipt">
             
             <dt><p><strong>Store Name</strong></p></dt>
-            <dd><input name="storeName" type="text" placeholder="e.g. Jimmy's Steakhouse" ng-model="new_receipt.storeName" /></dd>
+            <dd><input name="storeName" type="text" placeholder="e.g. Jimmy's Steakhouse" ng-model="receipt.storeName" /></dd>
             
 
             
             <dt><p><strong>Tax Rate (%)</strong></p></dt>
-            <dd><input name="taxRate" type="text" placeholder="e.g. 15" ng-model="new_receipt.taxRate" /></ds>
+            <dd><input name="taxRate" type="text" placeholder="e.g. 15" ng-model="receipt.taxRate" /></ds>
             
 
             
             <dt><p><strong>Total Transaction</strong></p></dt>
-            <dd><input name="totalTransaction" type="text" placeholder="e.g. <[ price_example | currency ]>" ng-model="new_receipt.totalTransaction" /></dd>
+            <dd><input name="totalTransaction" type="text" placeholder="e.g. <[ price_example | currency ]>" ng-model="receipt.totalTransaction" /></dd>
             
             
             <dt><p><strong>Date & Time</strong></p></dt>
             <dd>
               <div id="addreceiptdatetimepicker" class="input-append date">
-                <input data-format="dd/MM/yyyy hh:mm:ss" type="text" ng-model="new_receipt.dateTime" />
+                <input data-format="dd/MM/yyyy hh:mm:ss" type="text" ng-model="receipt.dateTime" />
                 <span class="add-on">
                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                   </i>
@@ -44,17 +44,27 @@
             
             
             <dt><p><strong>Category</strong></p></dt>
-            <dd><input name="category" type="text" placeholder="e.g. Clothing" ng-model="new_receipt.category"></dd>
+            <dd><input name="category" type="text" placeholder="e.g. Clothing" ng-model="receipt.category"></dd>
 
             <dt><p><strong>Items</strong></p></dt>
             <dd>
               <ul>
-                <input type="text" placeholder="Item Name" /> 
-                <select type="text" placeholder="Quantity" /> 
-                <input type="text" placeholder="Item Price" />
+                <li ng-repeat="item in receipt.items">
+                  <input type="text" placeholder="Item Name" ng-model="item.name"/> 
+                  <input type="text" class="input-mini" placeholder="Quantity" ng-model="item.quantity"/> 
+                  <input type="text" class="input-small" placeholder="Item Price" ng-model="item.pricePerItem" />
+                  <i ng-click="removeItem(item)" class="icon-remove" ></i>
+                </li>
+                <li ng-click="addItem()">
+                  <i class="icon-plus"></i> Add a new item
+                </li> 
               </ul>
             </dd>
           </dl>
+
+          <button class="btn btn-waning" ng-click="clearData()" >Clear</button>
+          <button class="pull-right btn-success btn" style="margin-left: 10px">Confirm</button>
+          <button class="pull-right btn-wanring btn" ng-click="cancel()">Cancel</button>
             
           
 <!--         </div>
@@ -67,4 +77,6 @@
 
   </div><!--/row-->
   <hr />
+
+  <[ receipt ]>
 </div>

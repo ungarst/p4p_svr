@@ -34,7 +34,7 @@ def rand_receipt():
   store_name = store.split("-")[0].strip()
   category = store.split("-")[1].strip()
 
-  tax_rate = randint(100, 150)/1000.0
+  # tax_rate = randint(100, 150)/1000.0
 
   items = rand_items(store_name, category, randint(1, 7))
 
@@ -44,7 +44,7 @@ def rand_receipt():
 
   total_transaction = round(total_transaction, 2)
 
-  receipt = Receipt(store_name, category, tax_rate, total_transaction, datetime.datetime.now())
+  receipt = Receipt(store_name, category, total_transaction, datetime.datetime.now())
   receipt.purchased_items = items
 
   return receipt
