@@ -1,5 +1,5 @@
-import json
-from datetime import datetime, timedelta
+import json, itertools
+from datetime import datetime, timedelta, time, date
 
 from flask import request, redirect, url_for, jsonify, render_template, make_response, session
 from sqlalchemy import desc
@@ -204,8 +204,52 @@ def item(user_id, receipt_id, item_id):
         return json.dumps({'item': item.serialize()})
     else:
         return make_response("Need category in the JSON", 404)
-    
 
+
+@app.route('/users/<int:user_id>/spending_report')
+def spending_report(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    if not user:
+        return make_response("User doesnn't exist", 404)
+
+    # get the params from the url
+    range_higher = datetime.now()
+    one_week_ago_date = (range_higher - timedelta(days=6)).date()
+    one_week_ago = datetime.combine(one_week_ago_date, time())
+
+    #get the categories
+    spending_categories = {}
+    for category in user.spending_categories:
+        spending_categories[category.category_name] = 0
+
+    # get the amount spent for each category
+    weeks_receipts = Receipt.query.filter_by(user_id=user_id).filter(Receipt.date >= one_week_ago).all()
+    for receipt in weeks_receipts:
+        for item in receipt.purchased_items:
+            spending_categories[item.category] += item.quantity * item.price_per_unit
+
+    for key in spending_categories.keys():
+        if spending_categories[key] == 0:
+            del spending_categories[key]
+        else:
+         spending_categories[key] = round(spending_categories[key], 2)
+
+    #get the week spends
+    daily_spends = []
+    range_lower = datetime.combine(range_higher.date(), time())
+    while range_lower >= one_week_ago:
+        days_receipts = Receipt.query.filter_by(user_id=user_id).filter(Receipt.date < range_higher).filter(Receipt.date >= range_lower).all()
+
+        total = 0.0
+        for receipt in days_receipts:
+            total += receipt.total_transaction
+
+        daily_spends.append({ "date": str(range_lower.date()), "total_spend": total })
+
+        range_higher = range_lower
+        range_lower = range_lower - timedelta(days=1)
+
+    return json.dumps({"spending_categories": spending_categories, "daily_spends": daily_spends})
 
 @app.route('/users/<int:user_id>/spending_categories', methods=["GET", "POST"])
 def spending_categories(user_id):
@@ -239,9 +283,19 @@ def spending_categories_post(user_id, data):
         return make_response("404 coming your way", 404)
 
 # YOU ARE CURRENTLY WORKING HERE
-def spending_categories_get(user_id, start_time, end_time):
+def spending_categories_get(user_id):
     user = User.query.filter_by(id=user_id).first()
     if user:
+        date, time = start_time.split(" ")
+        day, month, year = [int(x) for x in date.split("/")]
+        hour, minute, second = [int(x) for x in time.split(":")]
+        start_time = datetime(year, month, day, hour, minute, second)
+
+        date, time = end_time.split(" ")
+        day, month, year = [int(x) for x in date.split("/")]
+        hour, minute, second = [int(x) for x in time.split(":")]
+        end_time = datetime(year, month, day, hour, minute, second)
+
         return json.dumps({ "categories" : [cat.serialize() for cat in user.spending_categories]})
     else:
          return make_response("404 coming your way", 404)

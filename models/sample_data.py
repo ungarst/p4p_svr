@@ -1,6 +1,6 @@
 import os 
 from random import choice, randint
-import datetime
+from datetime import datetime, timedelta
 
 from models import db, User, Receipt, PurchasedItem, SpendingCategory
 
@@ -44,7 +44,12 @@ def rand_receipt():
 
   total_transaction = round(total_transaction, 2)
 
-  receipt = Receipt(store_name, category, total_transaction, datetime.datetime.now())
+  days = randint(0, 21)
+  hours = randint(0,23)
+  minutes = randint(0, 59)
+  time_ago = timedelta(days=days, hours=hours, minutes=minutes)
+
+  receipt = Receipt(store_name, category, total_transaction, datetime.now()-time_ago)
   receipt.purchased_items = items
 
   return receipt
