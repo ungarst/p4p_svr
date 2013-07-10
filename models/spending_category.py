@@ -1,7 +1,7 @@
 from sqlalchemy import ForeignKey, Column, Integer, String, DateTime, Date, Float, Boolean
 from sqlalchemy.orm import relationship, backref
 
-from models import Base
+from models import Base, db
 
 class SpendingCategory(Base):
   """docstring for SpendingCategory"""

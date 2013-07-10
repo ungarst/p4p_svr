@@ -20,7 +20,7 @@ from models.spending_category import SpendingCategory
 
 
 
-def init_db(num_users=10, min_receipts=5, max_receipts=10):
+def init_db(num_users=10, min_receipts=20, max_receipts=40):
     from models.sample_data import populate_database
 
     Base.metadata.create_all(bind=engine)
