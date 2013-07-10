@@ -138,3 +138,7 @@
   background-color: red;
   margin-bottom: 10px;
 }
+
+.receipt h2 {
+  margin-bottom:0px;
+}

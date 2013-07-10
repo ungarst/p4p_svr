@@ -18,16 +18,6 @@ function ReceiptCtrl ($scope, $routeParams,$location, $http) {
     $scope.receipt_url = '/users/' + $scope.user.user_id + '/receipts/' + $routeParams.receiptId;
     $http.get($scope.receipt_url).success(function(data, status, headers, config) {
       $scope.receipt = data["receipt"];
-      console.log($scope.receipt)
     });
   }); 
-
-  
-
-  $scope.params = {
-    "receiptId": $routeParams.receiptId,
-    "fakey": "Joe Bananas",
-    "url": $scope.receipt_url
-  }
-
 }
