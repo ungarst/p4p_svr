@@ -33,7 +33,6 @@ function HomeCtrl ($scope, $location, $http) {
   var getReceipts = function() {
     $http.get($scope.receipts_url).success(function(data, status, headers, config) {
       $scope.user_receipts = data["receipts"];
-      console.log($scope.user_receipts)
     });
   }
 
@@ -100,4 +99,9 @@ function HomeCtrl ($scope, $location, $http) {
       $location.path('/home');
     });
   }
+
+  $scope.goToReceipt = function(receipt) {
+    $location.path("/receipt/"+receipt.receipt_id);
+  }
+
 }

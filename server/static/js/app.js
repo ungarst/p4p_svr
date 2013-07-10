@@ -15,6 +15,11 @@ rppApp.config(function($routeProvider) {
         templateUrl: 'static/partials/root.html',
         controller: 'RootCtrl'
       })
+      .when ('/receipt/:receiptId',
+      {
+        templateUrl: 'static/partials/receipt.html',
+        controller: 'ReceiptCtrl'
+      })
       .when('/home',
       {
         templateUrl: 'static/partials/home.html',

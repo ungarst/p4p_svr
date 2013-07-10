@@ -163,8 +163,6 @@ def receipts(user_id):
 
     else: #request is a get and return the receipts of the user
 
-        print "eere"
-
         limit = int(request.args.get('limit', 10000))
         offset = int(request.args.get('offset', 0))
         return json.dumps({ "receipts" : \
