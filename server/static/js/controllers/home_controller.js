@@ -16,18 +16,6 @@ function HomeCtrl ($scope, $location, $http) {
     $location.path('/add_receipt');
   }
 
-  // prototyping functions to get todays date as dd/MM/yyyy and time as hh:mm:ss
-  Date.prototype.today = function(){ 
-    return ((this.getDate() < 10)?"0":"") + this.getDate() +"/"+(((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+ this.getFullYear();
-  };
-
-  Date.prototype.timeNow = function(){
-    return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
-  };
-
-  var date = new Date();
-  var currentDateTime = String(date.today() + " " + date.timeNow());
-
   $scope.receipts_url = "";
 
   var getReceipts = function() {
@@ -60,6 +48,7 @@ function HomeCtrl ($scope, $location, $http) {
     });
   }
 
+<<<<<<< HEAD
   // this is just used so that the correct currency locale can be generated 
   // for a place holder
   $scope.price_example = 20;
@@ -104,4 +93,6 @@ function HomeCtrl ($scope, $location, $http) {
     $location.path("/receipt/"+receipt.receipt_id);
   }
 
+=======
+>>>>>>> c9884ea8e6bd08e66826b5601b53c26262965abf
 }

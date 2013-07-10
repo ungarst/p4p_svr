@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from flask import request, redirect, url_for, jsonify, render_template, make_response, session
 from sqlalchemy import desc
@@ -91,18 +91,9 @@ def receipts(user_id):
     if not user:
         return make_response("User " + str(user_id) + " doesn't exist", 404)
 
-    print request.json
-    print request.headers
-
     # everything in this needs some mad error prevention
     if request.method == "POST":
-        print 'here'
-        if request.json == None:
-            print "request.json is None"
-        else:
-            print "request.json isnt None"
-
-
+        
         if "storeName" in request.json and \
             "totalTransaction" in request.json and \
             "category" in request.json and \
@@ -110,9 +101,7 @@ def receipts(user_id):
             "items" in request.json and \
             request.json["items"]:
 
-            print "Here"
-
-
+        
             date, time = request.json["dateTime"].split(" ")
             day, month, year = [int(x) for x in date.split("/")]
             hour, minute, second = [int(x) for x in time.split(":")]
@@ -145,8 +134,6 @@ def receipts(user_id):
             return json.dumps({"receipt": receipt.serialize()})
 
         else:
-            # print request.
-            # print "Here"
             if "storeName" in request.json:
                 print "storeName here"
             if "taxRate" in request.json:
@@ -162,7 +149,6 @@ def receipts(user_id):
             return make_response('Incorrect data in json', 401)
 
     else: #request is a get and return the receipts of the user
-
         limit = int(request.args.get('limit', 10000))
         offset = int(request.args.get('offset', 0))
         return json.dumps({ "receipts" : \
@@ -212,20 +198,26 @@ def item(user_id, receipt_id, item_id):
 
 
     if "category" in request.json:
-        print "her"
         item.category = request.json["category"]
         db.add(item)
         db.commit()
         return json.dumps({'item': item.serialize()})
     else:
         return make_response("Need category in the JSON", 404)
-    return "hello world"
+    
 
 
 @app.route('/users/<int:user_id>/spending_categories', methods=["GET", "POST"])
 def spending_categories(user_id):
     if request.method == "POST":
-        return spending_categories_post(user_id, request.json)
+        time_now = datetime.now()
+        one_week_ago = time_now-timedelta(weeks=1)
+        time_now = time_now.strftime("%Y/%m/%d %H:%M:%S")
+        one_week_ago = one_week_ago.strftime("%Y/%m/%d %H:%M:%S")
+
+        return spending_categories_post(user_id, 
+            request.args.get('start', time_now), 
+            request.args.get('end', one_week_ago))
     elif request.method == "GET":
         return spending_categories_get(user_id)
 
@@ -246,8 +238,8 @@ def spending_categories_post(user_id, data):
     else: 
         return make_response("404 coming your way", 404)
 
-
-def spending_categories_get(user_id):
+# YOU ARE CURRENTLY WORKING HERE
+def spending_categories_get(user_id, start_time, end_time):
     user = User.query.filter_by(id=user_id).first()
     if user:
         return json.dumps({ "categories" : [cat.serialize() for cat in user.spending_categories]})

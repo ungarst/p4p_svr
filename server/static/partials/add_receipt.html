@@ -20,13 +20,6 @@
             <dt><p><strong>Store Name</strong></p></dt>
             <dd><input name="storeName" type="text" placeholder="e.g. Jimmy's Steakhouse" ng-model="receipt.storeName" /></dd>
             
-
-            
-            <dt><p><strong>Tax Rate (%)</strong></p></dt>
-            <dd><input name="taxRate" type="text" placeholder="e.g. 15" ng-model="receipt.taxRate" /></ds>
-            
-
-            
             <dt><p><strong>Total Transaction</strong></p></dt>
             <dd><input name="totalTransaction" type="text" placeholder="e.g. <[ price_example | currency ]>" ng-model="receipt.totalTransaction" /></dd>
             
@@ -49,14 +42,14 @@
             <dt><p><strong>Items</strong></p></dt>
             <dd>
               <ul>
-                <li ng-repeat="item in receipt.items">
+                <li ng-repeat="item in receipt.items" style="list-style-type: none">
                   <input type="text" placeholder="Item Name" ng-model="item.name"/> 
                   <input type="text" class="input-mini" placeholder="Quantity" ng-model="item.quantity"/> 
                   <input type="text" class="input-small" placeholder="Item Price" ng-model="item.pricePerItem" />
                   <i ng-click="removeItem(item)" class="icon-remove" ></i>
                 </li>
-                <li ng-click="addItem()">
-                  <i class="icon-plus"></i> Add a new item
+                <li ng-click="addItem()" style="list-style-type: none">
+                  <i class="icon-plus"></i> Add another item
                 </li> 
               </ul>
             </dd>

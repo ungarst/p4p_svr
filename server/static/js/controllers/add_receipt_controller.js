@@ -1,5 +1,19 @@
 function AddReceiptCtrl ($scope, $location, $http) {
 
+  $http.get('/login').success(function(data, status, headers, config) {
+    $scope.data = data;
+    // console.log(data);
+    if (!("user" in $scope.data)) {
+      $location.path('/');
+    }
+    $scope.user = $scope.data["user"];
+    $scope.$parent.logged_in = true;
+
+    $scope.receipts_url = '/users/' + $scope.user.user_id + '/receipts';
+
+    // request to get receipt data from the site
+  });
+
   // prototyping functions to get todays date as dd/MM/yyyy and time as hh:mm:ss
   Date.prototype.today = function(){ 
     return ((this.getDate() < 10)?"0":"") + this.getDate() +"/"+(((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+ this.getFullYear();
@@ -14,7 +28,6 @@ function AddReceiptCtrl ($scope, $location, $http) {
 
   $scope.receipt = {
     "storeName": "",
-    "taxRate": "",
     "totalTransaction": "",
     "dateTime": currentDateTime,
     "items": [
@@ -29,7 +42,6 @@ function AddReceiptCtrl ($scope, $location, $http) {
   $scope.clearData = function() {
     $scope.receipt = {
       "storeName": "",
-      "taxRate": "",
       "totalTransaction": "",
       "dateTime": currentDateTime,
       "items": [
@@ -51,6 +63,7 @@ function AddReceiptCtrl ($scope, $location, $http) {
       if ($scope.receipt.items[i].name === "" || 
                 $scope.receipt.items[i].quantity === "" || 
                 $scope.receipt.items[i].pricePerItem === "") {
+        toastr.error("Please finish editing your current item before adding another one!")
         console.log("Please finish and then add an item");
         return
       }
@@ -62,5 +75,19 @@ function AddReceiptCtrl ($scope, $location, $http) {
     var index = $scope.receipt.items.indexOf(item);
     $scope.receipt.items.splice(index, 1);
   };
+
+  $scope.submitReceipt = function() {
+    $scope.receipt.totalTransaction = Number($scope.receipt.totalTransaction.
+      replace(/[^0-9\.]+/g,""));
+    for (var i = 0 ; i < $scope.receipt.items.length ; i++) {
+      $scope.receipt.items[i].quantity = Number($scope.receipt.items[i].quantity.
+      replace(/[^0-9\.]+/g,""));
+      $scope.receipt.items[i].pricePerItem = Number($scope.receipt.items[i].pricePerItem.
+      replace(/[^0-9\.]+/g,""));
+    }
+    $http.post($scope.receipts_url, $scope.receipt).success(function(data, status, headers, config) {
+      $location.path('/home');
+    });
+  }  
 
 }
