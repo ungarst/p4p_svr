@@ -89,18 +89,29 @@ def receipts(user_id):
     user = User.query.filter_by(id=user_id).first()
 
     if not user:
-            return make_response("User " + str(user_id) + " doesn't exist", 404)
+        return make_response("User " + str(user_id) + " doesn't exist", 404)
+
+    print request.json
+    print request.headers
 
     # everything in this needs some mad error prevention
     if request.method == "POST":
-        
+        print 'here'
+        if request.json == None:
+            print "request.json is None"
+        else:
+            print "request.json isnt None"
+
+
         if "storeName" in request.json and \
-            "taxRate" in request.json and \
             "totalTransaction" in request.json and \
             "category" in request.json and \
             "dateTime" in request.json and \
             "items" in request.json and \
             request.json["items"]:
+
+            print "Here"
+
 
             date, time = request.json["dateTime"].split(" ")
             day, month, year = [int(x) for x in date.split("/")]
@@ -110,7 +121,7 @@ def receipts(user_id):
 
             receipt = Receipt(request.json["storeName"],
                         request.json["category"],
-                        request.json["taxRate"],
+                        # request.json["taxRate"],
                         request.json["totalTransaction"],
                         receipt_date)
 
@@ -121,10 +132,10 @@ def receipts(user_id):
 
             # This for loop especially needs it
             for item in request.json["items"]:
-                item = PurchasedItem(item["item"]["title"],
+                item = PurchasedItem(item["name"],
                     request.json["category"],
-                    item["item"]["price"],
-                    item["itemQuantity"])
+                    item["pricePerItem"],
+                    item["quantity"])
 
                 receipt.purchased_items.append(item)
 
@@ -134,7 +145,8 @@ def receipts(user_id):
             return json.dumps({"receipt": receipt.serialize()})
 
         else:
-            print request.json
+            # print request.
+            # print "Here"
             if "storeName" in request.json:
                 print "storeName here"
             if "taxRate" in request.json:
@@ -147,9 +159,11 @@ def receipts(user_id):
                 print "date here"
             if "items" in request.json:
                 print "items here"
-            return make_response('Incorrect data in json', 400)
+            return make_response('Incorrect data in json', 401)
 
     else: #request is a get and return the receipts of the user
+
+        print "eere"
 
         limit = int(request.args.get('limit', 10000))
         offset = int(request.args.get('offset', 0))
