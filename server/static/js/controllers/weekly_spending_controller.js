@@ -44,17 +44,14 @@ function WeeklySpendingCtrl ($scope, $location, $http) {
     return [kvDateTotal.date, kvDateTotal.total_spend];
   }
 
-  $scope.categoryChartTitle = "Spening by category";
+  $scope.categoryChartTitle = "Spending by category";
   $scope.categoryChartWidth = 300;
   $scope.categoryChartHeight = 250;
 
-  $scope.chartData = [
-    ['Work',     11],
-    ['Eat',      2],
-    ['Commute',  2],
-    ['Watch TV', 2],
-    ['Sleep',    7]
-  ];
+  $scope.dailyChartTitle = "Amount spent each day";
+  $scope.dailyChartWidth = 300;
+  $scope.dailyChartHeight = 250;
+
 
 
 
