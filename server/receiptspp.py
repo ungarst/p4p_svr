@@ -244,7 +244,7 @@ def spending_report(user_id):
         for receipt in days_receipts:
             total += receipt.total_transaction
 
-        daily_spends.append({ "date": str(range_lower.date()), "total_spend": total })
+        daily_spends.append({ "date": str(range_lower.date()), "total_spend": round(total,2) })
 
         range_higher = range_lower
         range_lower = range_lower - timedelta(days=1)

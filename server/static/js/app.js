@@ -55,7 +55,6 @@ rppApp.directive('pieChart', function ($timeout) {
   return {
     restrict: 'EA',
     scope: {
-      title:    '@title',
       width:    '@width',
       height:   '@height',
       data:     '=data',
@@ -66,7 +65,7 @@ rppApp.directive('pieChart', function ($timeout) {
       // Create the data table and instantiate the chart
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Label');
-      data.addColumn('number', 'Value');
+      data.addColumn('number', 'Amount Spent');
       var chart = new google.visualization.PieChart($elm[0]);
 
       draw();
@@ -109,9 +108,10 @@ rppApp.directive('pieChart', function ($timeout) {
                 data.addRow([row[0], value]);
               }
             });
-            var options = {'title': $scope.title,
-                           'width': $scope.width,
-                           'height': $scope.height};
+            var options = {'width': $scope.width,
+                           'height': $scope.height,
+                           'chartArea': {'width': '100%', 'height': '80%'}
+                          };
             chart.draw(data, options);
             // No raw selected
             $scope.selectFn({selectedRowIndex: undefined});
@@ -126,7 +126,6 @@ rppApp.directive('columnChart', function ($timeout) {
   return {
     restrict: 'EA',
     scope: {
-      title:    '@title',
       width:    '@width',
       height:   '@height',
       data:     '=data',
@@ -137,7 +136,7 @@ rppApp.directive('columnChart', function ($timeout) {
       // Create the data table and instantiate the chart
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Label');
-      data.addColumn('number', 'Value');
+      data.addColumn('number', 'Amount Spent');
       var chart = new google.visualization.ColumnChart($elm[0]);
 
       draw();
@@ -180,9 +179,11 @@ rppApp.directive('columnChart', function ($timeout) {
                 data.addRow([row[0], value]);
               }
             });
-            var options = {'title': $scope.title,
-                           'width': $scope.width,
-                           'height': $scope.height};
+            var options = {'width': $scope.width,
+                           'height': $scope.height,
+                           'chartArea': {'width': '100%', 'height': '80%'},
+                           'legend': {'position': 'none'},
+                          };
             chart.draw(data, options);
             // No raw selected
             $scope.selectFn({selectedRowIndex: undefined});
