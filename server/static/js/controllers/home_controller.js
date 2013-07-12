@@ -51,7 +51,7 @@ function HomeCtrl ($scope, $location, $http) {
 
     // request to get receipt data from the site
     getReceipts();
-    getSpendingReport(); 
+    // getSpendingReport(); 
   });
 
 

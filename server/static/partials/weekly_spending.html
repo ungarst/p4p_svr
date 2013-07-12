@@ -1,0 +1,14 @@
+<h2>This weeks spending</h2>
+<div class="row-fluid" ng-controller="WeeklySpendingCtrl">
+  <div class="span3">
+    <p>Total spent</p><br><[ weeks_spending ]>
+  </div>
+  <div class="span9">
+    <div class="row-fluid">
+      <div class="span6"><[ daily_spends ]></div>
+      <div class="span6"><pie-chart data="spending_categories" title="<[categoryChartTitle]>" width="<[categoryChartWidth]>" height="<[categoryChartHeight]>"></pie-chart></div>
+    </div>
+  </div>
+  <!-- <pie-chart data="chartData" title="<[chartTitle]>" width="<[chartWidth]>" height="<[chartHeight]>"></pie-chart> -->
+</div>
+<p>Hello</p>
