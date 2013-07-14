@@ -1,5 +1,21 @@
 function AddReceiptCtrl ($scope, $location, $http) {
 
+  // unload the background image
+  $(document).ready(function(){
+    $("body").css({
+      "background-image":""
+    });
+
+    $('#addreceiptdatetimepicker').datetimepicker({
+      language: 'en-US'
+    });
+
+  });
+
+  // this is just used so that the correct currency locale can be generated 
+  // for a place holder
+  $scope.price_example = 20;
+
   $http.get('/login').success(function(data, status, headers, config) {
     $scope.data = data;
     // console.log(data);
