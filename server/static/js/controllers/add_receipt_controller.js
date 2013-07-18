@@ -82,7 +82,7 @@ function AddReceiptCtrl ($scope, $location, $http) {
                 $scope.receipt.items[i].quantity === "" || 
                 $scope.receipt.items[i].price_per_item === "") {
         toastr.error("Please finish editing your current item before adding another one!")
-        console.log("Please finish and then add an item");
+        // console.log("Please finish and then add an item");
         return
       }
     }
@@ -114,7 +114,7 @@ function AddReceiptCtrl ($scope, $location, $http) {
   $scope.calculateTotal = function() {
     var total = 0.0
 
-    console.log("here");
+    // console.log("here");
     for (var i = 0; i < $scope.receipt.items.length ; i++) {
       item = $scope.receipt.items[i];
 
@@ -125,7 +125,7 @@ function AddReceiptCtrl ($scope, $location, $http) {
       // console.log(numQuantity + " " + numPricePerItem);
 
       if (isNaN(numQuantity) || isNaN(numPricePerItem)) {
-        console.log("One is nan");
+        // console.log("One is nan");
       } else {
         total += (numPricePerItem * numQuantity);
       }

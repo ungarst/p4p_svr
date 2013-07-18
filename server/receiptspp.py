@@ -226,7 +226,7 @@ def spending_report(user_id):
 
     # nasty pls fiz
     if not weeks_receipts:
-        return make_response("No data to return", 404)
+        return json.dumps({})
 
     for receipt in weeks_receipts:
         for item in receipt.purchased_items:

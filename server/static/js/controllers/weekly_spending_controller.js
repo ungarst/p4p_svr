@@ -14,7 +14,9 @@ function WeeklySpendingCtrl ($scope, $location, $http) {
 
   var getSpendingReport = function() {
     $http.get('/users/' + $scope.user.user_id + '/spending_report').success(function(data, status, headers, config) {      
-      //console.log(data);
+      if (Object.getOwnPropertyNames(data).length == 0){
+        return;
+      }
       $scope.spending_categories = objToPairs(data.spending_categories);
       $scope.daily_spends_maps = data.daily_spends;
       $scope.weeks_spending = 0.0
