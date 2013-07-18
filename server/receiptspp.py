@@ -16,18 +16,17 @@ def root():
 
 @app.route('/signup', methods=['POST'])
 def signup():
-    if request.method == "POST":
-        user = User(request.json['email_address'],
-                request.json['password'],
-                request.json['first_name'],
-                request.json['last_name'])
+    user = User(request.json['email_address'],
+            request.json['password'],
+            request.json['first_name'],
+            request.json['last_name'])
 
-        db.add(user)
-        db.commit()
+    db.add(user)
+    db.commit()
 
-        session['user_id'] = user.id
+    session['user_id'] = user.id
 
-        return json.dumps({"user": user.serialize()})
+    return json.dumps({"user": user.serialize()})
 
 @app.route('/logout')
 def logout():
@@ -94,24 +93,24 @@ def receipts(user_id):
     # everything in this needs some mad error prevention
     if request.method == "POST":
         
-        if "storeName" in request.json and \
-            "totalTransaction" in request.json and \
+        if "store_name" in request.json and \
+            "total_transaction" in request.json and \
             "category" in request.json and \
-            "dateTime" in request.json and \
+            "date_time" in request.json and \
             "items" in request.json and \
             request.json["items"]:
 
         
-            date, time = request.json["dateTime"].split(" ")
+            date, time = request.json["date_time"].split(" ")
             day, month, year = [int(x) for x in date.split("/")]
             hour, minute, second = [int(x) for x in time.split(":")]
 
             receipt_date = datetime(year, month, day, hour, minute, second)
 
-            receipt = Receipt(request.json["storeName"],
+            receipt = Receipt(request.json["store_name"],
                         request.json["category"],
                         # request.json["taxRate"],
-                        request.json["totalTransaction"],
+                        request.json["total_transaction"],
                         receipt_date)
 
             user.receipts.append(receipt)
@@ -123,7 +122,7 @@ def receipts(user_id):
             for item in request.json["items"]:
                 item = PurchasedItem(item["name"],
                     request.json["category"],
-                    item["pricePerItem"],
+                    item["price_per_item"],
                     item["quantity"])
 
                 receipt.purchased_items.append(item)
@@ -134,15 +133,15 @@ def receipts(user_id):
             return json.dumps({"receipt": receipt.serialize()})
 
         else:
-            if "storeName" in request.json:
+            if "store_name" in request.json:
                 print "storeName here"
-            if "taxRate" in request.json:
+            if "tax_rate" in request.json:
                 print "taxRate here"
-            if "totalTransaction" in request.json:
+            if "total_transaction" in request.json:
                 print "totalTransaction here"
             if "category" in request.json:
                 print "category here" 
-            if "dateTime" in request.json:
+            if "date_time" in request.json:
                 print "date here"
             if "items" in request.json:
                 print "items here"
