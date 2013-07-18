@@ -46,7 +46,7 @@ function AddReceiptCtrl ($scope, $location, $http) {
 
   $scope.receipt = {
     "storeName": "",
-    "totalTransaction": "",
+    //"totalTransaction": "",
     "dateTime": currentDateTime,
     "items": [
       {
@@ -60,7 +60,7 @@ function AddReceiptCtrl ($scope, $location, $http) {
   $scope.clearData = function() {
     $scope.receipt = {
       "storeName": "",
-      "totalTransaction": "",
+      //"totalTransaction": "",
       "dateTime": currentDateTime,
       "items": [
         {
@@ -96,14 +96,16 @@ function AddReceiptCtrl ($scope, $location, $http) {
   };
 
   $scope.submitReceipt = function() {
-    $scope.receipt.totalTransaction = Number($scope.receipt.totalTransaction.
-      replace(/[^0-9\.]+/g,""));
+    $scope.receipt.totalTransaction = $scope.receiptTotal;
+    console.log($scope.receipt);
+      // replace(/[^0-9\.]+/g,""));
     for (var i = 0 ; i < $scope.receipt.items.length ; i++) {
       $scope.receipt.items[i].quantity = Number($scope.receipt.items[i].quantity.
       replace(/[^0-9\.]+/g,""));
       $scope.receipt.items[i].pricePerItem = Number($scope.receipt.items[i].pricePerItem.
       replace(/[^0-9\.]+/g,""));
     }
+
     $http.post($scope.receipts_url, $scope.receipt).success(function(data, status, headers, config) {
       $location.path('/home');
     });
