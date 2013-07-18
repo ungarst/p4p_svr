@@ -1,5 +1,7 @@
 function AddReceiptCtrl ($scope, $location, $http) {
 
+  $scope.receiptTotal = 0.0;
+
   // unload the background image
   $(document).ready(function(){
     $("body").css({
@@ -90,6 +92,7 @@ function AddReceiptCtrl ($scope, $location, $http) {
   $scope.removeItem = function(item) {
     var index = $scope.receipt.items.indexOf(item);
     $scope.receipt.items.splice(index, 1);
+    $scope.calculateTotal();
   };
 
   $scope.submitReceipt = function() {
@@ -105,5 +108,46 @@ function AddReceiptCtrl ($scope, $location, $http) {
       $location.path('/home');
     });
   }  
+
+  $scope.calculateTotal = function() {
+    var total = 0.0
+
+    console.log("here");
+    for (var i = 0; i < $scope.receipt.items.length ; i++) {
+      item = $scope.receipt.items[i];
+
+      console.log(item.quantity + " " + item.pricePerItem);
+      var numQuantity = parseInt(item.quantity);
+      var numPricePerItem = parseFloat(item.pricePerItem);
+
+      console.log(numQuantity + " " + numPricePerItem);
+
+      if (isNaN(numQuantity) || isNaN(numPricePerItem)) {
+        console.log("One is nan");
+      } else {
+        total += (numPricePerItem * numQuantity);
+      }
+
+      
+    }
+
+    // for (item in $scope.receipt.items) {
+    //   console.log(item);
+    //   console.log(item.quantity + " " + item.pricePerItem);
+    //   var numQuantity = parseInt(item.quantity);
+    //   var numPricePerItem = parseInt(item.pricePerItem);
+
+    //   console.log(numQuantity + " " + numPricePerItem);
+
+    //   if (isNaN(numQuantity) || isNaN(numPricePerItem)) {
+    //     console.log("One is nan");
+    //   } else {
+    //     total += (numPricePerItem * numQuantity);
+    //   }
+
+    // }
+    console.log("setting total to " + total);
+    $scope.receiptTotal = total;
+  };
 
 }
