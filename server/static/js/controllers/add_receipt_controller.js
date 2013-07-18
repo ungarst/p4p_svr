@@ -45,28 +45,28 @@ function AddReceiptCtrl ($scope, $location, $http) {
   var currentDateTime = String(date.today() + " " + date.timeNow());
 
   $scope.receipt = {
-    "storeName": "",
+    "store_name": "",
     //"totalTransaction": "",
-    "dateTime": currentDateTime,
+    "date_time": currentDateTime,
     "items": [
       {
         "name": "",
         "quantity": "",
-        "pricePerItem": ""
+        "price_per_item": ""
       }
     ]
   }
 
   $scope.clearData = function() {
     $scope.receipt = {
-      "storeName": "",
+      "store_name": "",
       //"totalTransaction": "",
-      "dateTime": currentDateTime,
+      "date_time": currentDateTime,
       "items": [
         {
           "name": "",
           "quantity": "",
-          "pricePerItem": ""
+          "price_per_item": ""
         }
       ]
     }
@@ -80,13 +80,13 @@ function AddReceiptCtrl ($scope, $location, $http) {
     for (var i = 0 ; i < $scope.receipt.items.length ; i++) {
       if ($scope.receipt.items[i].name === "" || 
                 $scope.receipt.items[i].quantity === "" || 
-                $scope.receipt.items[i].pricePerItem === "") {
+                $scope.receipt.items[i].price_per_item === "") {
         toastr.error("Please finish editing your current item before adding another one!")
         console.log("Please finish and then add an item");
         return
       }
     }
-    $scope.receipt.items.push({"name": "", "quantity": "", "pricePerItem": ""});
+    $scope.receipt.items.push({"name": "", "quantity": "", "price_per_item": ""});
   };
 
   $scope.removeItem = function(item) {
@@ -96,13 +96,13 @@ function AddReceiptCtrl ($scope, $location, $http) {
   };
 
   $scope.submitReceipt = function() {
-    $scope.receipt.totalTransaction = $scope.receiptTotal;
+    $scope.receipt.total_transaction = $scope.receiptTotal;
     console.log($scope.receipt);
       // replace(/[^0-9\.]+/g,""));
     for (var i = 0 ; i < $scope.receipt.items.length ; i++) {
       $scope.receipt.items[i].quantity = Number($scope.receipt.items[i].quantity.
       replace(/[^0-9\.]+/g,""));
-      $scope.receipt.items[i].pricePerItem = Number($scope.receipt.items[i].pricePerItem.
+      $scope.receipt.items[i].price_per_item = Number($scope.receipt.items[i].price_per_item.
       replace(/[^0-9\.]+/g,""));
     }
 
@@ -118,11 +118,11 @@ function AddReceiptCtrl ($scope, $location, $http) {
     for (var i = 0; i < $scope.receipt.items.length ; i++) {
       item = $scope.receipt.items[i];
 
-      console.log(item.quantity + " " + item.pricePerItem);
+      // console.log(item.quantity + " " + item.pricePerItem);
       var numQuantity = parseInt(item.quantity);
-      var numPricePerItem = parseFloat(item.pricePerItem);
+      var numPricePerItem = parseFloat(item.price_per_item);
 
-      console.log(numQuantity + " " + numPricePerItem);
+      // console.log(numQuantity + " " + numPricePerItem);
 
       if (isNaN(numQuantity) || isNaN(numPricePerItem)) {
         console.log("One is nan");
@@ -148,7 +148,7 @@ function AddReceiptCtrl ($scope, $location, $http) {
     //   }
 
     // }
-    console.log("setting total to " + total);
+    // console.log("setting total to " + total);
     $scope.receiptTotal = total;
   };
 

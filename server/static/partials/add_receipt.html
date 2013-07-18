@@ -18,7 +18,7 @@
           <dl class=".add-receipt">
             
             <dt><p><strong>Store Name</strong></p></dt>
-            <dd><input name="storeName" type="text" placeholder="e.g. Jimmy's Steakhouse" ng-model="receipt.storeName" /></dd>
+            <dd><input name="storeName" type="text" placeholder="e.g. Jimmy's Steakhouse" ng-model="receipt.store_name" /></dd>
             
             <!-- <dt><p><strong>Total Transaction</strong></p></dt>
             <dd><input name="totalTransaction" type="text" placeholder="e.g. <[ price_example | currency ]>" ng-model="receipt.totalTransaction" /></dd> -->
@@ -27,7 +27,7 @@
             <dt><p><strong>Date & Time</strong></p></dt>
             <dd>
               <div id="addreceiptdatetimepicker" class="input-append date">
-                <input data-format="dd/MM/yyyy hh:mm:ss" type="text" ng-model="receipt.dateTime" />
+                <input data-format="dd/MM/yyyy hh:mm:ss" type="text" ng-model="receipt.date_time" />
                 <span class="add-on">
                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                   </i>
@@ -45,7 +45,7 @@
                 <li ng-repeat="item in receipt.items" style="list-style-type: none">
                   <input type="text" placeholder="Item Name" ng-model="item.name"/> 
                   <input type="text" class="input-mini" placeholder="Quantity" ng-change="calculateTotal()" ng-model="item.quantity"/> 
-                  <input type="text" class="input-small" placeholder="Item Price" ng-change="calculateTotal()" ng-model="item.pricePerItem" />
+                  <input type="text" class="input-small" placeholder="Item Price" ng-change="calculateTotal()" ng-model="item.price_per_item" />
                   <i ng-click="removeItem(item)" class="icon-remove" ></i>
                 </li>
                 <li ng-click="addItem()" style="list-style-type: none">

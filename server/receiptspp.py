@@ -279,22 +279,12 @@ def spending_categories_post(user_id, data):
         return json.dumps({"category" : category.serialize()})
     
     else: 
-        return make_response("404 coming your way", 404)
+        return make_response("Hey that's not a real guy, sorry", 404)
 
 # YOU ARE CURRENTLY WORKING HERE
 def spending_categories_get(user_id):
     user = User.query.filter_by(id=user_id).first()
     if user:
-        # date, time = start_time.split(" ")
-        # day, month, year = [int(x) for x in date.split("/")]
-        # hour, minute, second = [int(x) for x in time.split(":")]
-        # start_time = datetime(year, month, day, hour, minute, second)
-
-        # date, time = end_time.split(" ")
-        # day, month, year = [int(x) for x in date.split("/")]
-        # hour, minute, second = [int(x) for x in time.split(":")]
-        # end_time = datetime(year, month, day, hour, minute, second)
-
         return json.dumps({ "categories" : [cat.serialize() for cat in user.spending_categories]})
     else:
          return make_response("404 coming your way", 404)
