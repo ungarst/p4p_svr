@@ -1,12 +1,15 @@
-<h2>This weeks spending</h2>
-<div class="row-fluid" ng-controller="WeeklySpendingCtrl">
-  <div class="span3">
-    <h3>Total spent<br><span class="unemphasis"><[ weeks_spending | currency ]></span></h3>
-  </div>
-  <div class="span9">
-    <div class="row-fluid">
-      <div class="span6"><div><h3>Daily spending</h3></div><column-chart data="daily_spends" width="<[dailyChartWidth]>" height="<[dailyChartHeight]>"></column-chart></div>
-      <div class="span6"><div><h3>Spending by category</h3></div><pie-chart data="spending_categories" width="<[categoryChartWidth]>" height="<[categoryChartHeight]>"></pie-chart></div>
+<div ng-controller="WeeklySpendingCtrl" ng-show="hasReport">
+  <h2>This weeks spending</h2>
+  <div class="row-fluid" >
+    <div class="span3">
+      <h3>Total spent<br><span class="unemphasis"><[ weeks_spending | currency ]></span></h3>
+    </div>
+    <div class="span9">
+      <div class="row-fluid">
+        <div class="span6"><div><h3>Daily spending</h3></div><column-chart data="daily_spends" width="<[dailyChartWidth]>" height="<[dailyChartHeight]>"></column-chart></div>
+        <div class="span6"><div><h3>Spending by category</h3></div><pie-chart data="spending_categories" width="<[categoryChartWidth]>" height="<[categoryChartHeight]>"></pie-chart></div>
+      </div>
     </div>
   </div>
+  <hr />
 </div>

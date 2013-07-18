@@ -212,8 +212,8 @@ def spending_report(user_id):
         return make_response("User doesnn't exist", 404)
 
     # get the params from the url
-    range_higher = datetime.now()
-    one_week_ago_date = (range_higher - timedelta(days=6)).date()
+    today = datetime.combine(date.today(), time(23,59,59))
+    one_week_ago_date = (today - timedelta(days=6)).date()
     one_week_ago = datetime.combine(one_week_ago_date, time())
 
     #get the categories
@@ -222,7 +222,12 @@ def spending_report(user_id):
         spending_categories[category.category_name] = 0
 
     # get the amount spent for each category
-    weeks_receipts = Receipt.query.filter_by(user_id=user_id).filter(Receipt.date >= one_week_ago).all()
+    weeks_receipts = Receipt.query.filter_by(user_id=user_id).filter(Receipt.date <= today).filter(Receipt.date >= one_week_ago).all()
+
+    # nasty pls fiz
+    if not weeks_receipts:
+        return make_response("No data to return", 404)
+
     for receipt in weeks_receipts:
         for item in receipt.purchased_items:
             spending_categories[item.category] += item.quantity * item.price_per_unit
@@ -235,6 +240,7 @@ def spending_report(user_id):
 
     #get the week spends
     daily_spends = []
+    range_higher = today
     range_lower = datetime.combine(range_higher.date(), time())
     while range_lower >= one_week_ago:
         days_receipts = Receipt.query.filter_by(user_id=user_id).filter(Receipt.date < range_higher).filter(Receipt.date >= range_lower).all()

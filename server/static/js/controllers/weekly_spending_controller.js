@@ -1,4 +1,6 @@
 function WeeklySpendingCtrl ($scope, $location, $http) {
+
+  $scope.hasReport = false;
   
   $http.get('/login').success(function(data, status, headers, config) {
     $scope.data = data;
@@ -11,7 +13,7 @@ function WeeklySpendingCtrl ($scope, $location, $http) {
   });
 
   var getSpendingReport = function() {
-    $http.get('/users/' + $scope.user.user_id + '/spending_report').success(function(data, status, headers, config) {
+    $http.get('/users/' + $scope.user.user_id + '/spending_report').success(function(data, status, headers, config) {      
       //console.log(data);
       $scope.spending_categories = objToPairs(data.spending_categories);
       $scope.daily_spends_maps = data.daily_spends;
@@ -21,6 +23,7 @@ function WeeklySpendingCtrl ($scope, $location, $http) {
       }
       $scope.daily_spends = dailySpendsTransform($scope.daily_spends_maps);
       $scope.weeks_spending = $scope.weeks_spending.toFixed(2);
+      $scope.hasReport = true;
     });
   }
 
