@@ -65,10 +65,6 @@ def users():
     return json.dumps({"users" : [user.serialize() for user in User.query.all()]})
 
 
-@app.route('/jsonmirror', methods=['GET', 'POST'])
-def mirror():
-    return json.dumps(request.json)
-
 @app.route('/users/<int:user_id>')
 def user(user_id):
     user = User.query.filter_by(id=user_id).first()
