@@ -60,19 +60,7 @@ def login():
             return json.dumps({})
 
 
-@app.route('/users')
-def users():
-    return json.dumps({"users" : [user.serialize() for user in User.query.all()]})
 
-
-@app.route('/users/<int:user_id>')
-def user(user_id):
-    user = User.query.filter_by(id=user_id).first()
-
-    if not user:
-        return make_response("User " + str(user_id) + " doesn't exist", 404)
-    else:
-        return json.dumps({"user" : user.serialize()})
 
 
 # GET - Gets all of the receipts for the given user
