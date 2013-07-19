@@ -10,17 +10,17 @@ class PurchasedItem(Base):
   id = Column(Integer, primary_key=True)
   item_name = Column(String(200))
   quantity = Column(Integer)
-  price_per_unit = Column(Float)
+  price_per_item = Column(Float)
   category = Column(String(100))
   receipt_id = Column(Integer, ForeignKey('receipts.id'))
 
   #receipt = relationship("Receipt", 
   #          backref=backref('purchased_items', order_by=id))
 
-  def __init__(self, item_name, category, price_per_unit, quantity):
+  def __init__(self, item_name, category, price_per_item, quantity):
     self.item_name = item_name
     self.category = category
-    self.price_per_unit = price_per_unit
+    self.price_per_item = price_per_item
     self.quantity = quantity
 
   def serialize(self):
@@ -28,7 +28,7 @@ class PurchasedItem(Base):
       "purchased_item_id" : self.id,
       "item_name" : self.item_name,
       "category" : self.category,
-      "price_per_unit" : self.price_per_unit,
+      "price_per_item" : self.price_per_unit,
       "quantity" : self.quantity
     }
 

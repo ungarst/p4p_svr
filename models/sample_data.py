@@ -40,7 +40,7 @@ def rand_receipt():
 
   total_transaction = 0.0
   for item in items:
-    total_transaction += item.price_per_unit * item.quantity
+    total_transaction += item.price_per_item * item.quantity
 
   total_transaction = round(total_transaction, 2)
 
