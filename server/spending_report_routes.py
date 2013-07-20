@@ -1,9 +1,11 @@
 import json
-from datetime import datetime, date, time, combine
+from datetime import datetime, date, time, timedelta
 
-from flask import Blueprint
+from flask import Blueprint, request, redirect, url_for, jsonify, render_template, make_response, session
 
 from models import db, User, Receipt
+
+spending_report_routes = Blueprint('spending_report_routes', __name__)
 
 @spending_report_routes.route('/users/<int:user_id>/spending_report')
 def spending_report(user_id):
@@ -12,7 +14,7 @@ def spending_report(user_id):
         return make_response("User doesnn't exist", 404)
 
     today = datetime.combine(date.today(), time(23,59,59))
-    one_week_ago = one_week_ago
+    one_week_ago = one_week_before(today)
     
     weeks_receipts = Receipt.query.filter_by(user_id=user_id).filter(Receipt.date <= today).filter(Receipt.date >= one_week_ago).all()
 
@@ -20,7 +22,7 @@ def spending_report(user_id):
     if not weeks_receipts:
         return json.dumps({})
 
-    spending_categories = spending_categories(user, weeks_receipts)
+    spending_categories = get_spending_categories(user, weeks_receipts)
 
     #get the week spends
     daily_spends = []
@@ -40,16 +42,16 @@ def spending_report(user_id):
 
     return json.dumps({"spending_categories": spending_categories, "daily_spends": daily_spends})
 
-def one_week_ago():
-    one_week_ago_date = (today - timedelta(days=6)).date()
-    return combine(one_week_ago_date, time())
+def one_week_before(date):
+    one_week_ago_date = (date - timedelta(days=6)).date()
+    return datetime.combine(one_week_ago_date, time())
 
-def spending_categories(user, weeks_receipts):
+def get_spending_categories(user, weeks_receipts):
     spending_categories = zeroed_spending_categories(user)
 
     for receipt in weeks_receipts:
         for item in receipt.purchased_items:
-            spending_categories[item.category] += item.quantity * item.price_per_unit
+            spending_categories[item.category] += item.quantity * item.price_per_item
 
     return delete_zeroes_and_round(spending_categories)
 

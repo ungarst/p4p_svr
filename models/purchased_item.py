@@ -28,7 +28,7 @@ class PurchasedItem(Base):
       "purchased_item_id" : self.id,
       "item_name" : self.item_name,
       "category" : self.category,
-      "price_per_item" : self.price_per_unit,
+      "price_per_item" : self.price_per_item,
       "quantity" : self.quantity
     }
 
