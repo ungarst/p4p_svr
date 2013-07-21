@@ -42,7 +42,8 @@ def receipts(user_id):
 
                     receipt.purchased_items.append(item)
 
-            db.add(receipt)
+
+            db.add(user)
             db.commit()
 
             return json.dumps({"receipt": receipt.serialize()})
@@ -60,7 +61,7 @@ def date_string_to_datetime(date_string):
     day, month, year = [int(x) for x in date.split("/")]
     hour, minute, second = [int(x) for x in time.split(":")]
 
-    receipt_date = datetime(year, month, day, hour, minute, second)
+    return datetime(year, month, day, hour, minute, second)
 
 def validate_request_receipt():
     return "store_name" in request.json and \
