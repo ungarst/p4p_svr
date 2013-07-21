@@ -181,7 +181,11 @@ rppApp.directive('columnChart', function ($timeout) {
             });
             var options = {'width': $scope.width,
                            'height': $scope.height,
-                           'chartArea': {'width': '100%', 'height': '80%'},
+                           // 'backgroundColor' : 'red',
+                           'chartArea': {'width': '100%', 'height': '70%'},
+                           'hAxis.textStyle': {'color': 'red'},
+                           'hAxis' : {'slantedText': true,
+                                      'slantedTextAngle': 60 },
                            'legend': {'position': 'none'},
                           };
             chart.draw(data, options);

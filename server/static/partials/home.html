@@ -21,7 +21,7 @@
         </tr>
         <tr ng-repeat="receipt in user_receipts" ng-click="goToReceipt(receipt)">
           <td><[ receipt["store_name"] ]></td>
-          <td><[ receipt["date"].substring(0,16) ]></td>
+          <td><[ receipt["date_time"].substring(0,16) ]></td>
           <td><[ receipt["category"] ]></td>
           <td><[ receipt["total_transaction"] | currency ]></td>
         </tr>

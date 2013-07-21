@@ -51,7 +51,7 @@ function WeeklySpendingCtrl ($scope, $location, $http) {
 
   $scope.categoryChartTitle = "Spending by category";
   $scope.categoryChartWidth = 300;
-  $scope.categoryChartHeight = 250;
+  $scope.categoryChartHeight = 300;
 
   $scope.dailyChartTitle = "Amount spent each day";
   $scope.dailyChartWidth = 300;
