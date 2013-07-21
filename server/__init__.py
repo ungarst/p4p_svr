@@ -38,5 +38,3 @@ app.config.update(
 @app.teardown_request
 def shutdown_session(exception=None):
     db.remove()
-
-import server.receiptspp
