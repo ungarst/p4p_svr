@@ -110,7 +110,7 @@ rppApp.directive('pieChart', function ($timeout) {
             });
             var options = {'width': $scope.width,
                            'height': $scope.height,
-                           'chartArea': {'width': '100%', 'height': '80%'}
+                           'chartArea': {'width': '100%', 'height': '100%'}
                           };
             chart.draw(data, options);
             // No raw selected
@@ -182,7 +182,7 @@ rppApp.directive('columnChart', function ($timeout) {
             var options = {'width': $scope.width,
                            'height': $scope.height,
                            // 'backgroundColor' : 'red',
-                           'chartArea': {'width': '100%', 'height': '70%'},
+                           'chartArea': {'width': '100%', 'height': '68%'},
                            'hAxis.textStyle': {'color': 'red'},
                            'hAxis' : {'slantedText': true,
                                       'slantedTextAngle': 60 },
