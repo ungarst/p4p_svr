@@ -15,6 +15,8 @@ class User(Base):
   first_name = Column(String(50))
   last_name = Column(String(50))
 
+  smartcard = relationship("Smartcard", uselist=False, backref="user")
+
   spending_categories = relationship("SpendingCategory",
               order_by="SpendingCategory.id",
               backref="user")
