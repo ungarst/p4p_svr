@@ -53,9 +53,16 @@ class User(Base):
       "email_address" : self.email_address,
       "gravatar_url" : self.gravatar_url,
       "first_name" : self.first_name,
-      "last_name" : self.last_name
+      "last_name" : self.last_name,
+      "smartcard_enabled": self.card_is_enabled()
       #"receipts" : [r.serialize() for r in self.receipts]
     }
+
+  def card_is_enabled(self):
+    if not self.smartcard:
+      return False
+    else:
+      return self.smartcard.enabled
 
   def __repr__(self):
     return "<User (id: {0}, email: {1})>".format(
