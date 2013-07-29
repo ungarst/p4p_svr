@@ -11,14 +11,17 @@ smartcard_routes = Blueprint('smartcard_routes', __name__)
 # PUT - {enabled: true/false}
 # GET - return their card 
 # DELETE - remove their card
-@smartcard.route("/users/<int:user_id>/smartcard", methods=["GET", "POST", "PUT", "DELETE"])
+@smartcard_routes.route('/users/<int:user_id>/smartcard', methods=["GET", "POST", "PUT", "DELETE"])
 def smartcard(user_id):
 	user = User.query.filter_by(id=user_id).first()
 	if not user:
 		return make_response("USER " + str(user_id) + " DOESN'T EXIST", 404)
 
 	if request.method == "GET":
-		return json.dumps(user.smartcard.serialize())
+		if user.smartcard:
+			return json.dumps(user.smartcard.serialize())
+		else:
+			return make_response("User " + str(user_id) + " has no smartcard", 404)
 
 	elif request.method == "POST":
 		return new_smartcard(user)
@@ -62,7 +65,7 @@ def update_smartcard_status(smartcard):
 def get_user_from_smartcard(smartcard_number):
 	card_owner = Smartcard.query.filter_by(smartcard_number=smartcard_number).first().user
 	if card_owner:
-		return json.dumps(user.serialize())
+		return json.dumps(card_owner.serialize())
 	else:
 		return make_response("CARD DOENSN'T EXIST", 400)
 
