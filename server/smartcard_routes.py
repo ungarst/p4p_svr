@@ -21,7 +21,7 @@ def smartcard(user_id):
 		if user.smartcard:
 			return json.dumps(user.smartcard.serialize())
 		else:
-			return make_response("User " + str(user_id) + " has no smartcard", 404)
+			return json.dumps({})
 
 	elif request.method == "POST":
 		return new_smartcard(user)
