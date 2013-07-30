@@ -69,3 +69,13 @@ def get_user_from_smartcard(smartcard_number):
 	else:
 		return make_response("CARD DOENSN'T EXIST", 400)
 
+#DELETE - removes all cards
+@smartcard_routes.route('/delete_all_smartcards', methods=["DELETE"])
+def delete_all_smartcards():
+	for sc in Smartcard.query.all():
+		db.delete(sc)
+
+	db.commit()
+	return ""
+	
+
