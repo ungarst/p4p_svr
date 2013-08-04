@@ -1,0 +1,17 @@
+<div ng-controller="BudgetingCtrl" class="container">
+  <div class="row-fluid">
+    <div class="span3">
+      <div ng-include="'static/partials/sidebar.html'"></div>
+    </div><!--/span-->
+    <div class="span9">
+      <h1>Budgetting</h1>
+      <ul>
+        <li ng-repeat="spending_category in spending_categories">
+          <h3><[ spending_category.category_name ]></h3>
+          <h5><span class="unemphasis"><[ spending_category.monthly_spend | currency ]></span> of budgeted <span class="unemphasis"><[ spending_category.monthly_allowance |currency ]></span> spent this month</h5>
+          <p style="color: #428bca;" ng-click="changeBudgetedAmount(spending_category)">Change budgeted amount</p>
+        </li>
+      </ul>
+    </div>
+  <hr />
+</div>

@@ -50,6 +50,11 @@ rppApp.config(function($routeProvider) {
         templateUrl: 'static/partials/smartcard_settings.html',
         controller: 'SmartcardCtrl'
       })
+      .when('/budgeting',
+      {
+        templateUrl: 'static/partials/budgeting.html',
+        controller: 'BudgetingCtrl'
+      })
       .otherwise(
       {
         redirectTo: "/"
