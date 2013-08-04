@@ -10,6 +10,7 @@ from server.spending_report_routes import spending_report_routes
 from server.purchased_item_routes import purchased_item_routes
 from server.authentication_routes import authentication_routes
 from server.smartcard_routes import smartcard_routes
+from server.spending_category_routes import spending_category_routes
 
 
 from models import db
@@ -30,6 +31,7 @@ app.register_blueprint(spending_report_routes)
 app.register_blueprint(purchased_item_routes)
 app.register_blueprint(authentication_routes)
 app.register_blueprint(smartcard_routes)
+app.register_blueprint(spending_category_routes)
 
 
 
