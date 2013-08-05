@@ -23,12 +23,14 @@ def spending_categories(user_id):
 			return make_response("Need the category_name n monthly_allowance", 400)
 
 		else:
-			sc = SpendingCategory(request.json["spending_category"], request.json["monthly_allowance"])
+			sc = SpendingCategory(request.json["category_name"], request.json["monthly_allowance"])
 
-			users.spending_categories.append(sc)
+			user.spending_categories.append(sc)
 
 			db.add(sc)
 			db.commit()
+
+			return json.dumps(sc.serialize())
 
 @spending_category_routes.route('/users/<int:user_id>/spending_categories/<int:sc_id>', methods=["GET", "PUT", "DELETE"])
 def spending_category(user_id, sc_id):
@@ -64,6 +66,15 @@ def spending_category_put(sc):
 	db.commit()
 
 	return json.dumps(sc.serialize())
+
+@spending_categories.route('/users/<int:user_id>/budgeting_report')
+def budgeting_report(user_id):
+	user = User.query.filter_by(id=user_id).first()
+
+	##########
+	# DO ALL THE STUFF IN THE METHOD BELOW BUT TIDY
+	##########
+	
 
 def spending_categories_get(user):
 	# get applicable receipts
