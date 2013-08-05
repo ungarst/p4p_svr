@@ -26,6 +26,7 @@ function BudgetingCtrl ($scope, $location, $http) {
   var getSpendingCategories = function() {
   	$http.get($scope.spending_categories_route).success(function(data, status, headers, config) {
   		$scope.spending_categories = data.spending_categories;
+      $scope.other = data.other;
   		console.log($scope.spending_categories);
       for (spending_category in $scope.spending_categories) {
         spending_category.editing = false;

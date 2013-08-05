@@ -82,6 +82,12 @@ def spending_categories_get(user):
 	spending_categories = user.spending_categories
 	for spending_category in spending_categories:
 		spending_category.monthly_spend = cats.get(spending_category.category_name, 0.0)
+		if spending_category.category_name in cats:
+			del cats[spending_category.category_name]
 
-	return json.dumps({"spending_categories": [sc.serialize() for sc in spending_categories]})
+	remainder = 0.0
+	for key in cats.keys():
+		remainder += cats[key]
+
+	return json.dumps({"spending_categories": [sc.serialize() for sc in spending_categories], "other": remainder})
 

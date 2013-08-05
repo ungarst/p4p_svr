@@ -8,6 +8,7 @@
       <h3 ng-show="catch_all_not_set">You haven't set a monthly allowance for all other spending. <span style="color: #428bca;" ng-click="editCatchAll()">Set it now?</span> </h3>
       <h3 ng-show="not_editing_catch_all">You have set <[ user.other_monthly_allowance | currency ]> for all other categories. <span style="color: #428bca;" ng-click="editCatchAll()">Change this?</span></h3>
       <h3 ng-show="editing_catch_all">Allow <input type="text" ng-model="user.other_monthly_allowance" /> for all other categories. <button ng-click="saveCatchAll()">Save</button></h3>
+      <h3 class="unemphaisis"><[ other ]></h3>
       <ul>
         <li ng-repeat="spending_category in spending_categories">
           <h3><[ spending_category.category_name ]></h3>
