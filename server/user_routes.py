@@ -11,11 +11,28 @@ def users():
     return json.dumps({"users" : [user.serialize() for user in User.query.all()]})
 
 
-@user_routes.route('/users/<int:user_id>')
+@user_routes.route('/users/<int:user_id>', methods=["GET", "PUT"])
 def user(user_id):
     user = User.query.filter_by(id=user_id).first()
 
     if not user:
         return make_response("User " + str(user_id) + " doesn't exist", 404)
-    else:
+    
+    if request.method == "GET":
         return json.dumps({"user" : user.serialize()})
+    elif request.method == "PUT":
+    	return user_put(user)
+
+def user_put(user):
+	for key in request.json.keys():
+		if key == "id":
+			pass
+		elif hasattr(user, key):
+			setattr(user, key, request.json[key])
+
+	user.generate_gravatar_url()
+
+	db.add(user)
+	db.commit()
+
+	return json.dumps({"user": user.serialize()})

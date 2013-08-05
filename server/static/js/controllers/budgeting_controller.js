@@ -10,6 +10,14 @@ function BudgetingCtrl ($scope, $location, $http) {
     $scope.user = $scope.data["user"];
     $scope.$parent.logged_in = true;
 
+    if ($scope.user.other_monthly_allowance == null) {
+      console.log("here");
+      $scope.catch_all_not_set = true;
+    } else {
+      $scope.not_editing_catch_all = true;
+      console.log("here2");
+    }
+
     $scope.spending_categories_route = '/users/' + $scope.user.user_id + '/spending_categories';
 
     getSpendingCategories();
@@ -17,7 +25,7 @@ function BudgetingCtrl ($scope, $location, $http) {
 
   var getSpendingCategories = function() {
   	$http.get($scope.spending_categories_route).success(function(data, status, headers, config) {
-  		$scope.spending_categories = data;
+  		$scope.spending_categories = data.spending_categories;
   		console.log($scope.spending_categories);
       for (spending_category in $scope.spending_categories) {
         spending_category.editing = false;
@@ -45,6 +53,21 @@ function BudgetingCtrl ($scope, $location, $http) {
       spending_category.editing = false;  
     });
     
+  }
+
+  $scope.editCatchAll = function() {
+    $scope.catch_all_not_set = false;
+    $scope.not_editing_catch_all = false;
+    $scope.editing_catch_all = true;
+  }
+
+  $scope.saveCatchAll = function() {
+    var url = "/users/" + $scope.user.user_id;
+    var data = {"other_monthly_allowance": $scope.user.other_monthly_allowance }
+    $http.put(url, data).success(function(data, status, headers, config) {
+      $scope.not_editing_catch_all = true;
+      $scope.editing_catch_all = false;
+    });
   }
 
 }

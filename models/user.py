@@ -14,6 +14,7 @@ class User(Base):
   pwdhash = Column(String())
   first_name = Column(String(50))
   last_name = Column(String(50))
+  other_monthly_allowance = Column(Float)
 
   smartcard = relationship("Smartcard", uselist=False, backref="user")
 
@@ -54,7 +55,8 @@ class User(Base):
       "gravatar_url" : self.gravatar_url,
       "first_name" : self.first_name,
       "last_name" : self.last_name,
-      "smartcard_enabled": self.card_is_enabled()
+      "smartcard_enabled": self.card_is_enabled(),
+      "other_monthly_allowance" : self.other_monthly_allowance
       #"receipts" : [r.serialize() for r in self.receipts]
     }
 
