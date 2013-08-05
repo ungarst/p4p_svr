@@ -2,7 +2,7 @@ import json
 
 from flask import Blueprint, request, redirect, url_for, jsonify, render_template, make_response, session
 
-from models import db, User, Receipt, SpendingCategory, PurchasedItem, Smartcard
+from models import db, User, Receipt, PurchasedItem, Smartcard
 
 smartcard_routes = Blueprint('smartcard_routes', __name__)
 

@@ -16,16 +16,14 @@ def spending_categories(user_id):
 		return make_response("User doesn't exist", 404)
 
 	if request.method == "GET":
-		return spending_categories_get(user)
+		return json.dumps([sc.serialize() for sc in user.spending_categories])
 
 	else:
-		if "category_name" not in request.json:
-			return make_response("Need the category_name", 400)
+		if "category_name" not in request.json or "monthly_allowance" not in request.json:
+			return make_response("Need the category_name n monthly_allowance", 400)
 
 		else:
-			sc = SpendingCategory(request.json["spending_category"])
-			if "monthly_allowance" in request.json:
-				sc.monthly_allowance = request.json["monthly_allowance"]
+			sc = SpendingCategory(request.json["spending_category"], request.json["monthly_allowance"])
 
 			users.spending_categories.append(sc)
 

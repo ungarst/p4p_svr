@@ -4,7 +4,7 @@ from flask import Blueprint, request, redirect, url_for, jsonify, render_templat
 from datetime import datetime, date, time
 from sqlalchemy import desc
 
-from models import db, User, Receipt, SpendingCategory, PurchasedItem
+from models import db, User, Receipt, PurchasedItem
 
 receipt_routes = Blueprint('receipt_routes', __name__)
 
@@ -29,9 +29,6 @@ def receipts(user_id):
                         receipt_date)
 
             user.receipts.append(receipt)
-
-            if not SpendingCategory.query.filter_by(user_id=user.id).filter_by(category_name=receipt.category).first():
-                user.spending_categories.append(SpendingCategory(receipt.category))
 
             for item in request.json["items"]:
                 if validate_item(item):
