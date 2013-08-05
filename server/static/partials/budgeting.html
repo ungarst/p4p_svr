@@ -4,12 +4,14 @@
       <div ng-include="'static/partials/sidebar.html'"></div>
     </div><!--/span-->
     <div class="span9">
-      <h1>Budgetting</h1>
+      <h1>Budgeting</h1>
       <ul>
         <li ng-repeat="spending_category in spending_categories">
           <h3><[ spending_category.category_name ]></h3>
           <h5><span class="unemphasis"><[ spending_category.monthly_spend | currency ]></span> of budgeted <span class="unemphasis"><[ spending_category.monthly_allowance |currency ]></span> spent this month</h5>
-          <p style="color: #428bca;" ng-click="changeBudgetedAmount(spending_category)">Change budgeted amount</p>
+          <p ng-hide="spending_category.editing" style="color: #428bca;" ng-click="enableEditing(spending_category)">Change budgeted amount</p>
+          <div ng-show="spending_category.editing">
+            <p>Allow <input type="text" ng-model="spending_category.monthly_allowance"/> per month for this category.<button ng-click="updateAllowance(spending_category)">Save</button></p></div>
         </li>
       </ul>
     </div>

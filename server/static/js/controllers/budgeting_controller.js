@@ -19,11 +19,32 @@ function BudgetingCtrl ($scope, $location, $http) {
   	$http.get($scope.spending_categories_route).success(function(data, status, headers, config) {
   		$scope.spending_categories = data;
   		console.log($scope.spending_categories);
+      for (spending_category in $scope.spending_categories) {
+        spending_category.editing = false;
+      }
   	});
   }
 
   $scope.changeBudgetedAmount = function(spending_category) {
   	alert(spending_category.category_name)
+  }
+
+  $scope.enableEditing = function(spending_category) {
+    spending_category.editing = true;
+    // alert("going to edit " + spending_category.category_name);
+  }
+
+  $scope.updateAllowance = function(spending_category) {
+    console.log(spending_category.monthly_allowance);
+    var url = "/users/" + $scope.user.user_id + "/spending_categories/" + spending_category.spending_category_id;
+    var data = {"monthly_allowance": parseFloat(spending_category.monthly_allowance)};
+    console.log(url);
+    
+    $http.put(url, data).success(function(data, status, headers, config) {
+      console.log(data);    
+      spending_category.editing = false;  
+    });
+    
   }
 
 }

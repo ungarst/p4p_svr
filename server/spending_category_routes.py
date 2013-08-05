@@ -54,6 +54,8 @@ def spending_category(user_id, sc_id):
 		return json.dumps({})
 
 def spending_category_put(sc):
+	print request.json
+
 	if "category_name" in request.json:
 		sc.category_name = request.json["category_name"]
 
