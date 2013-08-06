@@ -68,13 +68,29 @@ function BudgetingCtrl ($scope, $location, $http) {
   $scope.refreshData = function() {
     var url = $scope.spending_categories_route + "?month=" + $scope.month + "&year=" + $scope.year;
     $http.get(url).success(function(data, status, headers, config) {
-      $scope.spending_categories = data.spending_categories;
       $scope.other = data.other;
-      console.log($scope.spending_categories);
-      for (spending_category in $scope.spending_categories) {
-        spending_category.editing = false;
+      $scope.spending_categories = [];
+      for (var i = 0 ; i < data.spending_categories.length ; i++) {
+        if (!$scope.spending_categories[Math.floor(i/3)]) {
+          $scope.spending_categories[Math.floor(i/3)] = [];
+        }
+        data.spending_categories[i].editing = false;
+        data.spending_categories[i].ratio = (100 * data.spending_categories[i].monthly_spend / data.spending_categories[i].monthly_allowance).toFixed(2);
+        $scope.spending_categories[Math.floor(i/3)].push(data.spending_categories[i])
+        // $scope.spending_categories[Math.floor(i/3)][i%3].editing = false;
       }
-   });
+      console.log($scope.spending_categories);
+    });    
+  };
+
+  $scope.seriousness = function(ratio) {
+    if (ratio < 80) {
+      return "seriousness-okay";
+    } else if (ratio < 100) {
+      return "seriousness-warning";
+    } else {
+      return "seriousness-danger";
+    }
   };
 
 }

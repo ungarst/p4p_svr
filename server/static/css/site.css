@@ -142,3 +142,15 @@
 .receipt h2 {
   margin-bottom:0px;
 }
+
+.seriousness-okay {
+  color: green;
+}
+
+.seriousness-warning {
+  color: orange;
+}
+
+.seriousness-danger {
+  color: red;
+}

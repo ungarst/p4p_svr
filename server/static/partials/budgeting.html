@@ -31,6 +31,15 @@
       <h3 ng-show="not_editing_catch_all">You have set <[ user.other_monthly_allowance | currency ]> for all other categories. <span style="color: #428bca;" ng-click="editCatchAll()">Change this?</span></h3>
       <h3 ng-show="editing_catch_all">Allow <input type="text" ng-model="user.other_monthly_allowance" /> for all other categories. <button ng-click="saveCatchAll()">Save</button></h3>
       <h3 class="unemphaisis"><[ other ]></h3>
+
+      <div class="row-fluid" ng-repeat="categoryList in spending_categories">
+        <div class="span4" ng-repeat="category in categoryList">
+          <h2><[ category.category_name ]></h2>
+          <h3 class="<[ seriousness(category.ratio) ]>" ><[ category.ratio ]>%</h3>
+          <h4>of budgeted <[ category.monthly_allowance | currency]> spent</h4>
+        </div>
+      </div>
+<!-- 
       <ul>
         <li ng-repeat="spending_category in spending_categories">
           <h3><[ spending_category.category_name ]></h3>
@@ -39,7 +48,7 @@
           <div ng-show="spending_category.editing">
             <p>Allow <input type="text" ng-model="spending_category.monthly_allowance"/> per month for this category.<button ng-click="updateAllowance(spending_category)">Save</button></p></div>
         </li>
-      </ul>
+      </ul> -->
     </div>
   <hr />
 </div>
