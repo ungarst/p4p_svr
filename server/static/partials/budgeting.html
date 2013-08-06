@@ -5,6 +5,28 @@
     </div><!--/span-->
     <div class="span9">
       <h1>Budgeting</h1>
+      <select ng-model="month" class="input-medium" ng-change="refreshData()">
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3">March</option>
+        <option value="4">April</option>
+        <option value="5">May</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+      <select ng-model="year" class="input-small" ng-change="refreshData()">
+        <option value="2010">2010</option>
+        <option value="2011">2011</option>
+        <option value="2012">2012</option>
+        <option value="2013">2013</option>
+        <option value="2014">2014</option>
+      </select>
+
       <h3 ng-show="catch_all_not_set">You haven't set a monthly allowance for all other spending. <span style="color: #428bca;" ng-click="editCatchAll()">Set it now?</span> </h3>
       <h3 ng-show="not_editing_catch_all">You have set <[ user.other_monthly_allowance | currency ]> for all other categories. <span style="color: #428bca;" ng-click="editCatchAll()">Change this?</span></h3>
       <h3 ng-show="editing_catch_all">Allow <input type="text" ng-model="user.other_monthly_allowance" /> for all other categories. <button ng-click="saveCatchAll()">Save</button></h3>

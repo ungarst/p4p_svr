@@ -1,5 +1,10 @@
 function BudgetingCtrl ($scope, $location, $http) {
 
+  var currDate = new Date();
+
+  $scope.month = (currDate.getMonth()+1).toString();
+  $scope.year = currDate.getFullYear().toString();
+
   // request to confirm login
   $http.get('/login').success(function(data, status, headers, config) {
     $scope.data = data;
@@ -70,5 +75,17 @@ function BudgetingCtrl ($scope, $location, $http) {
       $scope.editing_catch_all = false;
     });
   }
+
+  $scope.refreshData = function() {
+    var url = $scope.spending_categories_route + "?month=" + $scope.month + "&year=" + $scope.year;
+    $http.get(url).success(function(data, status, headers, config) {
+      $scope.spending_categories = data.spending_categories;
+      $scope.other = data.other;
+      console.log($scope.spending_categories);
+      for (spending_category in $scope.spending_categories) {
+        spending_category.editing = false;
+      }
+   });
+  };
 
 }

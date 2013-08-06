@@ -79,6 +79,7 @@ def budgeting_report(user_id):
   # By default take this month this year as it is the one the user 
   #   is most likely interested in
   month, year = get_budgeting_time_frame()
+  print "month: " + str(month) + " year: "+ str(year)
 
   receipts = get_receipts_for_month(user, month, year)
 
@@ -89,7 +90,7 @@ def budgeting_report(user_id):
       string_cats[item.category] = string_cats.get(item.category, 0) + (item.price_per_item * item.quantity)
 
   print string_cats
-  
+
   spending_categories = user.spending_categories
   for spending_category in spending_categories:
     spending_category.monthly_spend = string_cats.get(spending_category.category_name, 0.0)
