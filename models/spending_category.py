@@ -13,16 +13,16 @@ class SpendingCategory(Base):
   monthly_spend = Column(Float)
   user_id = Column(Integer, ForeignKey('users.id'))
 
-  def __init__(self, category_name):
+  def __init__(self, category_name, monthly_allowance):
     self.category_name = category_name
-    self.monthly_allowance = 0.00
+    self.monthly_allowance = monthly_allowance
 
   def serialize(self):
     return {
       "spending_category_id" : self.id,
       "category_name" : self.category_name,
       "monthly_allowance" : self.monthly_allowance,
-      "monthly_spend" : self.monthly_spend
+      "monthly_spend": self.monthly_spend
     }
 
 
@@ -31,16 +31,4 @@ def __repr__(self):
             self.id,
             self.category_name
           )
-
-def amount_spent_day(self):
-  pass
-
-def amount_spent_week(self):
-  pass
-
-def amount_spent_month(self):
-  pass
-
-def amount_spent_year(self):
-  pass
 

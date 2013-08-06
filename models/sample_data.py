@@ -90,11 +90,6 @@ def populate_database(num_users, min_receipts, max_receipts):
       user.receipts.append(rand_receipt())
       # print "User: {}, Receipt number: {}, Receipt category: {}".format(user.id, j, user.receipts[j].category)
 
-      category = SpendingCategory.query.filter_by(user_id=user.id).filter_by(category_name=user.receipts[j].category).all()
-      # print category
-      if not category:
-        user.spending_categories.append(SpendingCategory(user.receipts[j].category))  
-
       db.add(user)
       db.commit()
   # rand generate a random number of receipts to create for them

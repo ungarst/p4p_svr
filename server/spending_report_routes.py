@@ -51,11 +51,11 @@ def one_week_before(date):
     return datetime.combine(one_week_ago_date, time())
 
 def get_spending_categories(user, weeks_receipts):
-    spending_categories = zeroed_spending_categories(user)
+    spending_categories = {}
 
     for receipt in weeks_receipts:
         for item in receipt.purchased_items:
-            spending_categories[item.category] += item.quantity * item.price_per_item
+            spending_categories[item.category] = spending_categories.get(item.category,0.0) + item.quantity * item.price_per_item
 
     return delete_zeroes_and_round(spending_categories)
 
@@ -67,10 +67,3 @@ def delete_zeroes_and_round(spending_categories):
             spending_categories[key] = round(spending_categories[key], 2)
 
     return spending_categories    
-
-def zeroed_spending_categories(user):
-    spending_categories = {}
-    for category in user.spending_categories:
-        spending_categories[category.category_name] = 0
-
-    return spending_categories
