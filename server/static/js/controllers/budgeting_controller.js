@@ -25,19 +25,8 @@ function BudgetingCtrl ($scope, $location, $http) {
 
     $scope.spending_categories_route = '/users/' + $scope.user.user_id + '/budgeting_report';
 
-    getSpendingCategories();
+    $scope.refreshData();
   });
-
-  var getSpendingCategories = function() {
-  	$http.get($scope.spending_categories_route).success(function(data, status, headers, config) {
-  		$scope.spending_categories = data.spending_categories;
-      $scope.other = data.other;
-  		console.log($scope.spending_categories);
-      for (spending_category in $scope.spending_categories) {
-        spending_category.editing = false;
-      }
-  	});
-  }
 
   $scope.changeBudgetedAmount = function(spending_category) {
   	alert(spending_category.category_name)
