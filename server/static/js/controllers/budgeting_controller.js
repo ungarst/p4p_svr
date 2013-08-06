@@ -18,7 +18,7 @@ function BudgetingCtrl ($scope, $location, $http) {
       console.log("here2");
     }
 
-    $scope.spending_categories_route = '/users/' + $scope.user.user_id + '/spending_categories';
+    $scope.spending_categories_route = '/users/' + $scope.user.user_id + '/budgeting_report';
 
     getSpendingCategories();
   });

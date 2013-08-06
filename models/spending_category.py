@@ -22,6 +22,7 @@ class SpendingCategory(Base):
       "spending_category_id" : self.id,
       "category_name" : self.category_name,
       "monthly_allowance" : self.monthly_allowance,
+      "monthly_spend": self.monthly_spend
     }
 
 
