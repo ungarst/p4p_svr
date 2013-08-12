@@ -48,7 +48,7 @@ def spending_category(user_id, sc_id):
     return spending_category_put(sc)
 
   if request.method == "DELETE":
-    sb.delete(sc)
+    db.delete(sc)
     db.commit()
 
     return json.dumps({})

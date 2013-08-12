@@ -4,7 +4,7 @@ google.setOnLoadCallback(function() {
 google.load('visualization', '1', {packages: ['corechart']});
 
 // Declares the modules that our app is going to use
-var rppApp = angular.module('rppApp', ['ngCookies', 'ngResource', 'ui.utils', 'ui.bootstrap']);
+var rppApp = angular.module('rppApp', ['ngCookies', 'ngResource', 'ui.utils', '$strap.directives']); // , 'ui.bootstrap' 
 
 // Need to use different symbols as flask uses {{ and }}
 rppApp.config(function($interpolateProvider) {

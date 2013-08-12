@@ -27,7 +27,12 @@
         <option value="2014">2014</option>
       </select>
 
-      <h3 ng-show="catch_all_not_set">You haven't set a monthly allowance for all other spending. <span class="psuedo-link" ng-click="editCatchAll()">Set it now?</span> </h3>
+      <div data-fade="1" ng-model="tabs.activeTab" bs-tabs>
+        <div ng-repeat="tab in tabs" data-title="<[tab.title]>"></div>        
+      </div>
+      <div ng-include src="tabs[tabs.activeTab].page"></div>
+
+      <!-- <h3 ng-show="catch_all_not_set">You haven't set a monthly allowance for all other spending. <span class="pseudo-link" ng-click="editCatchAll()">Set it now?</span> </h3>
       <h3 ng-show="not_editing_catch_all">You have set <[ user.other_monthly_allowance | currency ]> for all other categories. <span style="color: #428bca;" ng-click="editCatchAll()">Change this?</span></h3>
       <h3 ng-show="editing_catch_all">Allow <input type="text" ng-model="user.other_monthly_allowance" /> for all other categories. <button ng-click="saveCatchAll()">Save</button></h3>
       <h3 class="unemphaisis"><[ other ]></h3>
@@ -38,7 +43,7 @@
           <h3 class="<[ seriousness(category.ratio) ]>" ><[ category.ratio ]>%</h3>
           <h4>of budgeted <[ category.monthly_allowance | currency]> spent</h4>
         </div>
-      </div>
+      </div> -->
 <!-- 
       <ul>
         <li ng-repeat="spending_category in spending_categories">

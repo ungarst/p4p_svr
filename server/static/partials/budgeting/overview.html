@@ -1,0 +1,9 @@
+<div ng-controller="BudgetingOverviewCtrl">
+  <div class="row-fluid" ng-repeat="categoryList in spending_categories_matrix">
+    <div class="span4" ng-repeat="category in categoryList">
+      <h2><[ category.category_name ]></h2>
+      <h3 class="<[ seriousness(category.ratio) ]>" ><[ category.ratio ]>%</h3>
+      <h4>of budgeted <[ category.monthly_allowance | currency]> spent</h4>
+    </div>
+  </div> 
+</div>

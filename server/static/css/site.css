@@ -5,7 +5,7 @@
 
 /* */
 .navbar {
-  margin-bottom: 0px; 
+  margin-bottom: 0; 
 }
 
 /* Index */
@@ -90,7 +90,7 @@
 }
 
 .form-signin .lead {
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 /* Font Awesome Icons */
@@ -118,7 +118,7 @@
 }
 
 .name-heading .lead {
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 @media (max-width: 980px){
@@ -140,7 +140,7 @@
 }
 
 .receipt h2 {
-  margin-bottom:0px;
+  margin-bottom: 0;
 }
 
 .seriousness-okay {
