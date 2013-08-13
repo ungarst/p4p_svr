@@ -11,7 +11,7 @@ function BudgetingOverviewCtrl ($scope) {
       $scope.spending_categories_matrix[Math.floor(i/3)].push($scope.spending_categories[i]);
     }
 
-    $scope.user_other_ratio = ($scope.other / $scope.user.other_monthly_allowance).toFixed(2);
+    $scope.user_other_ratio = (100 * $scope.other / $scope.user.other_monthly_allowance).toFixed(2);
 
   };
 
@@ -78,10 +78,38 @@ function BudgetingEditCtrl ($scope, $http) {
     // Save changes to backend
     var url = "/users/" + $scope.user.user_id.toString();
     var data = {"other_monthly_allowance": $scope.user.other_monthly_allowance};
-    $http.put(url, data).success(function(data, success, headers, config) {
+    $http.put(url, data).success(function(data, status, headers, config) {
       $scope.refreshData();
     });
 
+  };
+
+  $scope.openModal = function () {
+    $scope.modalOpen = true;
+    $scope.newCategory = {
+      "category_name": "",
+      "monthly_allowance": 0
+    };
+  };
+
+  $scope.closeModal = function () {
+    $scope.modalOpen = false;
+  };
+
+  $scope.saveNewCategory = function() {
+    var url = "/users/" + $scope.user.user_id.toString() + "/spending_categories";
+    var data = $scope.newCategory;
+    $http.post(url, data).success(function(data, success, headers, config) {
+      $scope.closeModal();
+      $scope.refreshData();
+    });
+  };
+
+  // $scope.items = ['item1', 'item2'];
+
+  $scope.opts = {
+    backdropFade: true,
+    dialogFade:true
   };
 
   $scope.$on('SpendingCategoriesLoaded', $scope.onDataLoad);
