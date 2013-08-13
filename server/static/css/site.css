@@ -158,3 +158,19 @@
 .pseudo-link {
   color: #428bca;
 }
+
+.categories-table th {
+  text-align: center;
+}
+
+.categories-table td {
+  text-align: center;
+}
+
+.everything-else td {
+  text-decoration: bold;
+}
+
+.icon-ok {
+  color: green;
+}

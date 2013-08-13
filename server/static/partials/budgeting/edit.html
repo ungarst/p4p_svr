@@ -1,16 +1,34 @@
 <div ng-controller="BudgetingEditCtrl">
-  <table class="table table-hover">
-  	<tr>
-  		<th>Category Name</th>
-  		<th>Budgeted Amount</th>
-  		<th></th>
-  		<th></th>
-  	</tr>
-  	<tr ng-repeat="category in spending_categories">
-  		<td><[ category.category_name ]></td>
-  		<td><[ category.monthly_allowance ]></td>
-  		<td ng-click="editCategory(category)"><i class="icon-pencil"></i></td>
-  		<td ng-click="deleteCategory(category)"><i class="icon-remove"></i></td>
-  	</tr>
-  </table>
+  <div class="row-fluid">
+    <div class="span8">
+      <h2>
+        Your categories
+        <button class="btn btn-primary pull-right">Add Category</button>
+      </h2>
+      <table class="table table-hover categories-table">
+        <tr>
+          <th>Category Name</th>
+          <th>Budgeted Amount</th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr ng-repeat="category in spending_categories">
+          <td><[ category.category_name ]></td>
+          <td ng-show="category.editing"><input class="input-small" type="text" ng-model="category.monthly_allowance"/></td>
+          <td ng-hide="category.editing"><[ category.monthly_allowance | currency ]></td>
+          <td ng-show="category.editing" ng-click="saveEdit(category)"><i class="icon-ok"></i></td>
+          <td ng-hide="category.editing" ng-click="editCategory(category)" style="width: 1%"><i class="icon-pencil"></i></td>
+          <td ng-click="deleteCategory(category)" style="width: 1%"><i class="icon-remove"></i></td>
+        </tr>
+        <tr class="everything-else">
+          <td>Everthing Else</td>
+          <td ng-show="editingCatchAll"><input type="text" class="input-small" ng-model="user.other_monthly_allowance"></td>
+          <td ng-hide="editingCatchAll"><[ user.other_monthly_allowance | currency ]></td>
+          <td ng-show="editingCatchAll" ng-click="saveUserCatchAll()"><i class="icon-ok"></i></td>
+          <td ng-hide="editingCatchAll" ng-click="editUserCatchAll()"><i class="icon-pencil"></i></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+  </div>
 </div>

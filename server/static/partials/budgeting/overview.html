@@ -9,7 +9,7 @@
   <hr />
   <div ng-show="user.other_monthly_allowance">
     <h3>
-      <[ other / user.other_monthly_allowance ]>% of budgeted <[user.other_monthly_allowance | currency ]> spent on all other categories
+      <span class="<[ seriousness(user_other_ratio) ]>"><[ user_other_ratio ]>%</span> of budgeted <[user.other_monthly_allowance | currency ]> spent on all other categories
     </h3>
     <h4>Create new categories in the Add/Edit Categories tab</h4>
   </div>
