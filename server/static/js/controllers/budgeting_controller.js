@@ -33,12 +33,6 @@ function BudgetingCtrl ($scope, $location, $http) {
     $scope.user = data["user"];
     $scope.$parent.logged_in = true;
 
-    // if ($scope.user.other_monthly_allowance === null) {
-    //   $scope.catch_all_not_set = true;
-    // } else {
-    //   $scope.not_editing_catch_all = true;
-    // }
-
     $scope.spending_categories_route = '/users/' + $scope.user.user_id + '/budgeting_report';
     $scope.refreshData();
   });

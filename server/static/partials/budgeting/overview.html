@@ -5,5 +5,17 @@
       <h3 class="<[ seriousness(category.ratio) ]>" ><[ category.ratio ]>%</h3>
       <h4>of budgeted <[ category.monthly_allowance | currency]> spent</h4>
     </div>
-  </div> 
+  </div>
+  <hr />
+  <div ng-show="user.other_monthly_allowance">
+    <h3>
+      <[ other / user.other_monthly_allowance ]>% of budgeted <[user.other_monthly_allowance | currency ]> spent on all other categories
+    </h3>
+    <h4>Create new categories in the Add/Edit Categories tab</h4>
+  </div>
+  <div ng-hide="user.other_monthly_allowance">
+    <h3>
+      Set a limit for all unspecified categories in the Edit Categories tab
+    </h3>
+  </div>
 </div>

@@ -1,4 +1,16 @@
 <div ng-controller="BudgetingEditCtrl">
-	<h1>Editing</h1>
-	<[ count ]>
+  <table class="table table-hover">
+  	<tr>
+  		<th>Category Name</th>
+  		<th>Budgeted Amount</th>
+  		<th></th>
+  		<th></th>
+  	</tr>
+  	<tr ng-repeat="category in spending_categories">
+  		<td><[ category.category_name ]></td>
+  		<td><[ category.monthly_allowance ]></td>
+  		<td ng-click="editCategory(category)"><i class="icon-pencil"></i></td>
+  		<td ng-click="deleteCategory(category)"><i class="icon-remove"></i></td>
+  	</tr>
+  </table>
 </div>
