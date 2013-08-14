@@ -1,5 +1,5 @@
 p4p_svr
-=======
+-----------------------------
 
 The backend server and frontend of Receipts++ written in Flask and AngularJS
 
