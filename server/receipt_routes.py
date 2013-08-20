@@ -9,6 +9,7 @@ from models import db, User, Receipt, PurchasedItem
 receipt_routes = Blueprint('receipt_routes', __name__)
 
 # GET - Gets all of the receipts for the given user
+#          - If you want only the receipts after a given date then you may provide after_day, after_month and after_year as params
 # POST - Creates a new receipt for the given user.
 #      - Returns that receipt in JSON form
 @receipt_routes.route('/users/<int:user_id>/receipts', methods=['GET','POST'])
@@ -69,14 +70,34 @@ def validate_request_receipt():
     request.json["items"]
 
 def get_user_receipts(user):
-    limit = int(request.args.get('limit', 10000))
-    offset = int(request.args.get('offset', 0))
+    query = Receipt.query.filter_by(user_id = user.id).order_by(desc(Receipt.date))
+
+    after_date = get_after_date()
+    if after_date:
+        print after_date
+        query = query.filter(Receipt.date >= after_date)
+
     return json.dumps({ "receipts" : \
-            [r.serialize() for r in Receipt.query
-            .filter_by(user_id = user.id)
-            .order_by(desc(Receipt.date))
-            .offset(offset)
-            .limit(limit) ]})
+            [r.serialize() for r in query.all()]})
+
+def get_after_date():
+    if date_provided():
+        after_day = int(request.args["after_day"])
+        after_month = int(request.args["after_month"])
+        after_year = int(request.args["after_year"])
+        try:
+            return datetime(day=after_day, month=after_month,year=after_year)
+        except ValueError:
+            return None
+        
+    else:
+        return None
+
+
+def date_provided():
+    return "after_day" in request.args and \
+        "after_month" in request.args and \
+        "after_year" in request.args
 
 
 # GET - Gets the single receipt AND all its items as JSON
