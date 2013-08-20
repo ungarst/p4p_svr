@@ -1,7 +1,7 @@
 import json
 
-from flask import Blueprint, request, redirect, url_for, jsonify, render_template, make_response, session
-from datetime import datetime, date, time
+from flask import Blueprint, request, make_response
+from datetime import datetime
 from sqlalchemy import desc
 
 from models import db, User, Receipt, PurchasedItem
@@ -81,7 +81,7 @@ def get_user_receipts(user):
             [r.serialize() for r in query.all()]})
 
 def get_after_date():
-    if date_provided():
+    if date_provided_in_query_params():
         after_day = int(request.args["after_day"])
         after_month = int(request.args["after_month"])
         after_year = int(request.args["after_year"])
@@ -94,7 +94,7 @@ def get_after_date():
         return None
 
 
-def date_provided():
+def date_provided_in_query_params():
     return "after_day" in request.args and \
         "after_month" in request.args and \
         "after_year" in request.args
