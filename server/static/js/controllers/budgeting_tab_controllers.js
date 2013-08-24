@@ -51,7 +51,7 @@ function BudgetingEditCtrl ($scope, $http) {
     category.editing = true;
   };
 
-  // Fuck confirmations for now
+  // No confirmations for now
   $scope.deleteCategory = function(category) {
     // Pull out the id now for deleting from the API
     var categoryId = category.spending_category_id;
