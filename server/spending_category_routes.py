@@ -136,7 +136,7 @@ def daily_spends_in_month(user_id):
     lower_bound_of_current_day = lower_bound_of_current_day - timedelta(days=1)
 
   print days_in_month  
-  return json.dumps([days_in_month[::-1]])
+  return json.dumps(days_in_month[::-1])
 
 
 def get_budgeting_time_frame():
