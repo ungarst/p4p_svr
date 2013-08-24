@@ -23,7 +23,29 @@ function BudgetingOverviewCtrl ($scope) {
 }
 
 function BudgetingGraphsCtrl ($scope) {
-  $scope.count = 0;
+
+  var createGTableSpendingCategorySpends = function() {
+    var dataList = [];
+
+    for (var i = 0; i < $scope.spending_categories.length; i++) {
+      var spendingCategory = $scope.spending_categories[i];
+      var spendingCategoryAsList = [spendingCategory.category_name, spendingCategory.monthly_spend];
+      dataList.push(spendingCategoryAsList);
+    }
+    dataList.push(["Other", $scope.other]);
+
+    return dataList;
+  };
+
+  $scope.onDataLoad = function() {
+    $scope.gTableSpendingCategorySpends = createGTableSpendingCategorySpends();
+  };
+
+  $scope.$on('SpendingCategoriesLoaded', $scope.onDataLoad);
+
+  if ($scope.dataIsLoaded) {
+    $scope.onDataLoad();
+  }
 }
 
 function BudgetingEditCtrl ($scope, $http) {
