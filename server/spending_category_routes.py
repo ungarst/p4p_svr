@@ -101,6 +101,8 @@ def budgeting_report(user_id):
   for key in string_cats.keys():
     remainder += string_cats[key]
 
+  remainder = round(remainder, 2)
+
   return json.dumps({"spending_categories": [sc.serialize() for sc in spending_categories], "other": remainder})
 
 def get_budgeting_time_frame():
