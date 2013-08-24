@@ -1,5 +1,5 @@
 import json
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date, time
 
 from flask import Blueprint, request, redirect, url_for, jsonify, render_template, make_response, session
 
@@ -78,7 +78,7 @@ def budgeting_report(user_id):
   # Get the params for the budgeting report.
   # By default take this month this year as it is the one the user 
   #   is most likely interested in
-  month, year = get_budgeting_time_frame()
+  month, year, _ = get_budgeting_time_frame()
   print "month: " + str(month) + " year: "+ str(year)
 
   receipts = get_receipts_for_month(user, month, year)
@@ -105,6 +105,41 @@ def budgeting_report(user_id):
 
   return json.dumps({"spending_categories": [sc.serialize() for sc in spending_categories], "other": remainder})
 
+
+@spending_category_routes.route('/users/<int:user_id>/daily_spends_in_month')
+def daily_spends_in_month(user_id):
+  month, year, is_current_month = get_budgeting_time_frame()
+
+  # start at top of last day in the month then work backwards
+  if is_current_month:
+    lower_bound_of_current_day = datetime.combine(date.today(), time())
+    upper_bound_of_current_day = lower_bound_of_current_day + timedelta(days=1)
+  else:
+    upper_bound_of_current_day = datetime(year=year, month=month+1, day=1)
+    lower_bound_of_current_day = upper_bound_of_current_day - timedelta(days=1)
+
+  days_in_month = []
+
+  while lower_bound_of_current_day.month == month:
+    daily_total = 0.0
+    days_receipts = Receipt.query \
+                           .filter_by(user_id=user_id) \
+                           .filter(Receipt.date >= lower_bound_of_current_day) \
+                           .filter(Receipt.date < upper_bound_of_current_day) \
+                           .all()
+    for receipt in days_receipts:
+      daily_total += receipt.total_transaction
+
+    days_in_month.append([str(lower_bound_of_current_day.date()), round(daily_total, 2)])
+
+    upper_bound_of_current_day = lower_bound_of_current_day
+    lower_bound_of_current_day = lower_bound_of_current_day - timedelta(days=1)
+
+    
+
+  return json.dumps(days_in_month)
+
+
 def get_budgeting_time_frame():
   now = datetime.now()
   default_month = now.month
@@ -113,7 +148,11 @@ def get_budgeting_time_frame():
   budgeting_month = int(request.args.get('month', default_month))
   budgeting_year = int(request.args.get('year', default_year))
 
-  return (budgeting_month, budgeting_year)
+  if budgeting_month == default_month and budgeting_year == default_year:
+    return (budgeting_month, budgeting_year, True)    
+  else:
+    return (budgeting_month, budgeting_year, False)
+  
 
 def get_receipts_for_month(user, month, year):
   start_of_month = datetime(year=year, month=month, day=1)
