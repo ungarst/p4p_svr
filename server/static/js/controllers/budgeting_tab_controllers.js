@@ -22,7 +22,7 @@ function BudgetingOverviewCtrl ($scope) {
   }
 }
 
-function BudgetingGraphsCtrl ($scope) {
+function BudgetingGraphsCtrl ($scope, $http) {
 
   var createGTableSpendingCategorySpends = function() {
     var dataList = [];
@@ -37,8 +37,17 @@ function BudgetingGraphsCtrl ($scope) {
     return dataList;
   };
 
+  var getDailySpendTotals = function() {
+    var url = '/users/' + $scope.user.user_id + "/daily_spends_in_month" + "?month=" + $scope.month + "&year=" + $scope.year;
+    $http.get(url).success(function(data, status, headers, config) {
+      $scope.gTableDailySpendTotals = data;
+      console.log($scope.gTableDailySpendTotals);
+    });
+  };
+
   $scope.onDataLoad = function() {
     $scope.gTableSpendingCategorySpends = createGTableSpendingCategorySpends();
+    getDailySpendTotals();
   };
 
   $scope.$on('SpendingCategoriesLoaded', $scope.onDataLoad);
