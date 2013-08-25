@@ -41,7 +41,7 @@ function BudgetingGraphsCtrl ($scope, $http) {
     var url = '/users/' + $scope.user.user_id + "/daily_spends_in_month" + "?month=" + $scope.month + "&year=" + $scope.year;
     $http.get(url).success(function(data, status, headers, config) {
       $scope.gTableDailySpendTotals = data;
-      console.log($scope.gTableDailySpendTotals);
+      // console.log($scope.gTableDailySpendTotals);
     });
   };
 
