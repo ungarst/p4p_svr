@@ -1,6 +1,10 @@
 <div ng-controller="BudgetingGraphsCtrl">
-	<h1>Graphing</h1>
-	<pie-chart data="gTableSpendingCategorySpends" width="<[ 500 ]>" height="<[ 500 ]>"></pie-chart>
-	<line-chart data="gTableDailySpendTotals" width="<[ 500 ]>" height="<[ 500 ]>"></line-chart>
-
+	<div>
+		<h2>Amount Spent in Each Category</h2>
+		<pie-chart data="gTableSpendingCategorySpends" width="<[ 700 ]>" height="<[ 500 ]>"></pie-chart>
+	</div>
+	<div>
+		<h2>Amount Spent Each Day</h2>
+		<line-chart data="gTableDailySpendTotals" width="<[ 700 ]>" height="<[ 500 ]>"></line-chart>
+	</div>
 </div>

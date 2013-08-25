@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!-- saved from url=(0033)http://localhost:5000/#/budgeting -->
+<html ng-app="rppApp" id="ng-app" lang="en" class="ng-scope"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <!-- CSS from vendors -->
+  <link rel="stylesheet" type="text/css" href="./Receipts++_files/toastr.min.css">
+  <link rel="stylesheet" type="text/css" href="./Receipts++_files/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="./Receipts++_files/bootstrap-responsive.min.css">
+  <link rel="stylesheet" type="text/css" href="./Receipts++_files/bootstrap-datetimepicker.min.css">
+  <link href="http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+
+  <!-- CSS we wrote -->
+  <link rel="stylesheet" type="text/css" href="./Receipts++_files/site.css">
+  <style>
+    body {
+      padding-top: 40px; /* 60px to make the container go all the way to the bottom of the topbar */
+    }
+    
+    @media (max-width: 980px) {
+      body {
+        padding-top: 0px;
+      }
+    }
+  </style>
+
+  <!-- vendor JS -->
+  <script type="text/javascript" src="./Receipts++_files/jquery-2.0.0.min.js"></script>
+  <script type="text/javascript" src="./Receipts++_files/angular.min.js"></script><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak{display:none;}ng\:form{display:block;}</style>
+  <script type="text/javascript" src="./Receipts++_files/toastr.min.js"></script>
+  <script type="text/javascript" src="./Receipts++_files/angular-cookies.min.js"></script>
+  <script type="text/javascript" src="./Receipts++_files/angular-resource.min.js"></script>
+  <script type="text/javascript" src="./Receipts++_files/angular-ui-utils.js"></script>
+  <script src="./Receipts++_files/angular-strap.js"></script>
+  <script type="text/javascript" src="./Receipts++_files/ui-bootstrap-tpls-0.3.0.js"></script>
+  <script type="text/javascript" src="./Receipts++_files/bootstrap.min.js"></script>
+  <script type="text/javascript" src="./Receipts++_files/bootstrap-datetimepicker.min.js"></script>
+  <script type="text/javascript" src="./Receipts++_files/jsapi"></script>
+  
+  <title>Receipts++</title>
+
+<link href="./Receipts++_files/tooltip.css" rel="stylesheet" type="text/css"></head>
+<body ng-controller="NavBarCtrl" style="" class="ng-scope" cz-shortcut-listen="true">
+
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="http://localhost:5000/#">Receipts++</a>
+        <ul ng-hide="logged_in" class="department-controls nav pull-right" style="display: none;">
+          <div class="root-image"></div>
+        </ul>
+        <ul ng-show="logged_in" class="department-controls nav pull-right" style="">
+          <li class="divider-vertical"></li>
+          <li>
+            <p class="navbar-text faicon"><a ng-click="logOut()" href="http://localhost:5000/#"><i class="icon-cog"></i></a></p>
+          </li>
+          <li class="divider-vertical"></li>
+          <li>
+            <p class="navbar-text faicon"><a ng-click="logOut()" href="http://localhost:5000/#"><i class="icon-signout"></i></a></p>
+          </li>
+          <li class="divider-vertical"></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div ng-view="" style="padding-top:20px;"><div ng-controller="BudgetingCtrl" class="container ng-scope">
+  <div class="row-fluid">
+    <div class="span3">
+      <div ng-include="&#39;static/partials/sidebar.html&#39;"><div ng-controller="SideBarCtrl" class="well sidebar-nav ng-scope">
+  <div class="media">
+    <img class="pull-left media-object gravatar" ng-src="http://www.gravatar.com/avatar/de635c5448dbe80f21f3c48f835937e3?s=300&amp;d=mm" src="./Receipts++_files/de635c5448dbe80f21f3c48f835937e3">
+    <div class="name-heading">
+      <p class="lead ng-binding">
+        <strong class="ng-binding">Ryan</strong><br>
+        Martinez
+      </p>
+    </div>
+  </div>
+  <ul class="nav nav-list">
+    <li class="nav-header">Money Management</li>
+    <li><a href="http://localhost:5000/#"><i class="icon-angle-right"></i> Spending History</a></li>
+    <li><a href="./Receipts++_files/Receipts++.html"><i class="icon-angle-right"></i> Budgeting</a></li>
+    <li><a href="http://localhost:5000/#/smartcard"><i class="icon-angle-right"></i> Smartcard Settings</a></li>
+  </ul>
+</div><!--/.well --></div>
+    </div><!--/span-->
+    <div class="span9">
+      <h1>Budgeting</h1>
+      <select ng-model="month" class="input-medium ng-pristine ng-valid" ng-change="refreshData()">
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3">March</option>
+        <option value="4">April</option>
+        <option value="5">May</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+      <select ng-model="year" class="input-small ng-pristine ng-valid" ng-change="refreshData()">
+        <option value="2010">2010</option>
+        <option value="2011">2011</option>
+        <option value="2012">2012</option>
+        <option value="2013">2013</option>
+        <option value="2014">2014</option>
+      </select>
+
+      <div class="tabs ng-valid ng-dirty" data-fade="1" ng-model="tabs.activeTab" bs-tabs=""><ul class="nav nav-tabs"><!-- ngRepeat: pane in panes --><li ng-repeat="pane in panes" ng-class="{active:pane.active}" class="ng-scope"><a data-target="#tab-010-0" data-index="0" data-toggle="tab" class="ng-binding">Overview</a></li><li ng-repeat="pane in panes" ng-class="{active:pane.active}" class="ng-scope active"><a data-target="#tab-010-1" data-index="1" data-toggle="tab" class="ng-binding">Graphs</a></li><li ng-repeat="pane in panes" ng-class="{active:pane.active}" class="ng-scope"><a data-target="#tab-010-2" data-index="2" data-toggle="tab" class="ng-binding">Add/Edit Categories</a></li></ul><div class="tab-content" ng-transclude="">
+        <!-- ngRepeat: tab in tabs --><div ng-repeat="tab in tabs" data-title="Overview" class="ng-scope tab-pane fade" id="tab-010-0"></div><div ng-repeat="tab in tabs" data-title="Graphs" class="ng-scope tab-pane fade active in" id="tab-010-1"></div><div ng-repeat="tab in tabs" data-title="Add/Edit Categories" class="ng-scope tab-pane fade" id="tab-010-2"></div>        
+      </div></div>
+      <div ng-include="" src="tabs[tabs.activeTab].page"><div ng-controller="BudgetingGraphsCtrl" class="ng-scope">
+	<div>
+		<h2>Amount Spent in Each Category</h2>
+		<pie-chart data="gTableSpendingCategorySpends" width="700" height="500" class="ng-isolate-scope ng-scope" style="position: relative;"><div dir="ltr" style="position: relative; width: 700px; height: 500px;"><div style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%;"><svg width="700" height="500" style="overflow: hidden;"><defs id="defs"></defs><rect x="0" y="0" width="700" height="500" stroke="none" stroke-width="0" fill="#ffffff"></rect><g><rect x="454" y="0" width="246" height="34" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><rect x="454" y="0" width="246" height="13" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="start" x="472" y="11.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#222222">Clothing</text></g><rect x="454" y="0" width="13" height="13" stroke="none" stroke-width="0" fill="#3366cc"></rect></g><g><rect x="454" y="21" width="246" height="13" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="start" x="472" y="32.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#222222">Other</text></g><rect x="454" y="21" width="13" height="13" stroke="none" stroke-width="0" fill="#dc3912"></rect></g></g><g><path d="M217,250L217,34A216,216,0,0,1,272.1703675888456,41.16458504336086L217,250A0,0,0,0,0,217,250" stroke="#ffffff" stroke-width="1" fill="#3366cc"></path><text text-anchor="start" x="227.0011912238439" y="62.03013993404208" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#ffffff">4.1%</text></g><g><path d="M217,250L272.1703675888456,41.16458504336086A216,216,0,1,1,217,34L217,250A0,0,0,1,0,217,250" stroke="#ffffff" stroke-width="1" fill="#dc3912"></path><path d="M273.12818647059635,37.53897020036365A219.75,219.75,0,1,1,217,30.25" stroke="#dc3912" stroke-width="6.5" stroke-opacity="0.3" fill-opacity="1" fill="none"></path><text text-anchor="start" x="173.59169306110422" y="446.35461136518893" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#ffffff">95.9%</text></g><g><g><path d="M122.5,451.7043956242135A1,1,0,0,1,121.5,450.7043956242135L121.5,406.7043956242135A1,1,0,0,1,122.5,405.7043956242135L231.5,405.7043956242135A1,1,0,0,1,232.5,406.7043956242135L232.5,450.7043956242135A1,1,0,0,1,231.5,451.7043956242135L176.5,451.7043956242135L189.68318521679782,464.50303051344434L163.5,451.7043956242135Z" stroke="none" stroke-width="0" fill-opacity="0.4" fill="#cccccc" transform="translate(2, 2)"></path><path d="M122.5,451.7043956242135A1,1,0,0,1,121.5,450.7043956242135L121.5,406.7043956242135A1,1,0,0,1,122.5,405.7043956242135L231.5,405.7043956242135A1,1,0,0,1,232.5,406.7043956242135L232.5,450.7043956242135A1,1,0,0,1,231.5,451.7043956242135L176.5,451.7043956242135L189.68318521679782,464.50303051344434L163.5,451.7043956242135Z" stroke="none" stroke-width="0" fill-opacity="0.6" fill="#cccccc" transform="translate(1, 1)"></path><path d="M122.5,451.7043956242135A1,1,0,0,1,121.5,450.7043956242135L121.5,406.7043956242135A1,1,0,0,1,122.5,405.7043956242135L231.5,405.7043956242135A1,1,0,0,1,232.5,406.7043956242135L232.5,450.7043956242135A1,1,0,0,1,231.5,451.7043956242135L176.5,451.7043956242135L189.68318521679782,464.50303051344434L163.5,451.7043956242135Z" stroke="#cccccc" stroke-width="1" fill="#ffffff" transform="translate(0, 0)"></path><g><text text-anchor="start" x="129" y="424.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#000000">Other</text></g><g><text text-anchor="start" x="129" y="441.05" font-family="Arial" font-size="13" font-weight="bold" stroke="none" stroke-width="0" fill="#000000">18271.1 (95.9%)</text></g></g></g></svg></div></div><div style="display: none; position: absolute; top: 510px; left: 710px; white-space: nowrap; font-family: Arial; font-size: 13px; font-weight: bold;">783.26 (4.1%)</div><div></div></pie-chart>
+	</div>
+	<div>
+		<h2>Amount Spent Each Day</h2>
+		<line-chart data="gTableDailySpendTotals" width="700" height="500" class="ng-isolate-scope ng-scope" style="position: relative;"><div dir="ltr" style="position: relative; width: 700px; height: 500px;"><div style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%;"><svg width="700" height="500" style="overflow: hidden;"><defs id="defs"><clippath id="_ABSTRACT_RENDERER_ID_1"><rect x="88" y="88" width="525" height="325"></rect></clippath></defs><rect x="0" y="0" width="700" height="500" stroke="none" stroke-width="0" fill="#ffffff"></rect><g><rect x="88" y="88" width="525" height="325" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g clip-path="url(#_ABSTRACT_RENDERER_ID_1)"><g><rect x="88" y="412" width="525" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="88" y="331" width="525" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="88" y="250" width="525" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="88" y="169" width="525" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="88" y="88" width="525" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect></g><g><rect x="88" y="412" width="525" height="1" stroke="none" stroke-width="0" fill="#333333"></rect></g><g><path d="M98.98,412.5L119.94,412.5L140.9,400.3068L161.86,409.4544L182.82,395.6655L203.78,404.3298L224.74,412.5L245.70000000000002,396.3702L266.65999999999997,412.5L287.62,407.1486L308.58000000000004,370.20396L329.54,403.24548L350.5,238.1988L371.46000000000004,404.36220000000003L392.42,351.03342L413.38,205.788L434.34000000000003,412.5L455.3,412.0788L476.26,292.3932L497.22,399.1836L518.1800000000001,403.3362L539.1400000000001,372.6318L560.1,405.0588L581.06,137.77499999999998L602.02,412.5" stroke="#3366cc" stroke-width="2" fill-opacity="1" fill="none"></path></g></g><g></g><g><g><text text-anchor="end" x="108.54958071181805" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 108.54958071181805 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-01</text></g><g><text text-anchor="end" x="129.50958071181805" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 129.50958071181805 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-02</text></g><g><text text-anchor="end" x="150.46958071181805" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 150.46958071181805 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-03</text></g><g><text text-anchor="end" x="171.42958071181806" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 171.42958071181806 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-04</text></g><g><text text-anchor="end" x="192.38958071181804" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 192.38958071181804 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-05</text></g><g><text text-anchor="end" x="213.34958071181805" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 213.34958071181805 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-06</text></g><g><text text-anchor="end" x="234.30958071181806" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 234.30958071181806 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-07</text></g><g><text text-anchor="end" x="255.26958071181807" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 255.26958071181807 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-08</text></g><g><text text-anchor="end" x="276.229580711818" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 276.229580711818 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-09</text></g><g><text text-anchor="end" x="297.18958071181805" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 297.18958071181805 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-10</text></g><g><text text-anchor="end" x="318.1495807118181" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 318.1495807118181 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-11</text></g><g><text text-anchor="end" x="339.10958071181807" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 339.10958071181807 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-12</text></g><g><text text-anchor="end" x="360.06958071181805" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 360.06958071181805 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-13</text></g><g><text text-anchor="end" x="381.0295807118181" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 381.0295807118181 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-14</text></g><g><text text-anchor="end" x="401.98958071181806" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 401.98958071181806 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-15</text></g><g><text text-anchor="end" x="422.94958071181804" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 422.94958071181804 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-16</text></g><g><text text-anchor="end" x="443.9095807118181" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 443.9095807118181 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-17</text></g><g><text text-anchor="end" x="464.86958071181806" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 464.86958071181806 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-18</text></g><g><text text-anchor="end" x="485.82958071181804" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 485.82958071181804 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-19</text></g><g><text text-anchor="end" x="506.7895807118181" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 506.7895807118181 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-20</text></g><g><text text-anchor="end" x="527.7495807118181" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 527.7495807118181 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-21</text></g><g><text text-anchor="end" x="548.7095807118181" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 548.7095807118181 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-22</text></g><g><text text-anchor="end" x="569.6695807118181" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 569.6695807118181 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-23</text></g><g><text text-anchor="end" x="590.629580711818" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 590.629580711818 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-24</text></g><g><text text-anchor="end" x="611.589580711818" y="422.525" font-family="Arial" font-size="13" transform="rotate(-60 611.589580711818 422.525)" stroke="none" stroke-width="0" fill="#222222">2013-08-25</text></g><g><text text-anchor="end" x="75" y="417.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">0</text></g><g><text text-anchor="end" x="75" y="336.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">1,500</text></g><g><text text-anchor="end" x="75" y="255.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">3,000</text></g><g><text text-anchor="end" x="75" y="174.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">4,500</text></g><g><text text-anchor="end" x="75" y="93.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">6,000</text></g></g></g><g><g><text text-anchor="middle" x="350.5" y="494.05" font-family="Arial" font-size="13" font-style="italic" stroke="none" stroke-width="0" fill="#222222">Date</text></g><g><text text-anchor="middle" x="26.05" y="250.5" font-family="Arial" font-size="13" font-style="italic" transform="rotate(-90 26.05 250.5)" stroke="none" stroke-width="0" fill="#222222">Amount Spent</text></g></g><g></g></svg></div></div><div style="display: none; position: absolute; top: 510px; left: 710px; white-space: nowrap; font-family: Arial; font-size: 13px;">6,000</div><div></div></line-chart>
+	</div>
+</div></div>
+
+    </div>
+  <hr>
+
+</div>
+<hr>    </div></div>
+  <!-- angular JS that we wrote -->
+  <script type="text/javascript" src="./Receipts++_files/app.js"></script><script src="./Receipts++_files/saved_resource" type="text/javascript"></script><script src="./Receipts++_files/format+en,default,corechart.I.js" type="text/javascript"></script>
+  <script type="text/javascript" src="./Receipts++_files/home_controller.js"></script>
+  <script type="text/javascript" src="./Receipts++_files/signup_controller.js"></script>
+  <script type="text/javascript" src="./Receipts++_files/login_controller.js"></script>
+  <script type="text/javascript" src="./Receipts++_files/root_controller.js"></script>
+  <script type="text/javascript" src="./Receipts++_files/navbar_controller.js"></script> 
+  <script type="text/javascript" src="./Receipts++_files/sidebar_controller.js"></script> 
+  <script type="text/javascript" src="./Receipts++_files/add_receipt_controller.js"></script> 
+  <script type="text/javascript" src="./Receipts++_files/receipt_controller.js"></script> 
+  <script type="text/javascript" src="./Receipts++_files/weekly_spending_controller.js"></script> 
+  <script type="text/javascript" src="./Receipts++_files/smartcard_controller.js"></script> 
+  <script type="text/javascript" src="./Receipts++_files/budgeting_controller.js"></script>
+  <script type="text/javascript" src="./Receipts++_files/budgeting_controller.js"></script> 
+  <script type="text/javascript" src="./Receipts++_files/budgeting_tab_controllers.js"></script> 
+   
+
+  
+</body></html>
