@@ -24,6 +24,10 @@ function BudgetingOverviewCtrl ($scope) {
 
 function BudgetingGraphsCtrl ($scope, $http) {
 
+  $scope.shouldShowPieChart = function() {
+    return $scope.spending_categories.length !== 0;
+  };
+
   var createGTableSpendingCategorySpends = function() {
     var dataList = [];
 

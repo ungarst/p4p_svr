@@ -1,6 +1,6 @@
 <div ng-controller="BudgetingGraphsCtrl">
-	<div>
-		<h2>Amount Spent in Each Category</h2>
+	<div ng-show="shouldShowPieChart()">
+		<h2>Amount Spent on each Category</h2>
 		<pie-chart data="gTableSpendingCategorySpends" width="<[ 700 ]>" height="<[ 500 ]>"></pie-chart>
 	</div>
 	<div>
