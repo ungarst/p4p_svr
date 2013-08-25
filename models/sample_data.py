@@ -2,7 +2,7 @@ import os
 from random import choice, randint
 from datetime import datetime, timedelta
 
-from models import db, User, Receipt, PurchasedItem, SpendingCategory
+from models import db, User, Receipt, PurchasedItem
 
 with open("models/sample_files/first_names.txt") as f:
   first_names = [first_name.strip() for first_name in f.read().split("\n")]
