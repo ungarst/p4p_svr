@@ -19,6 +19,16 @@ from models.spending_category import SpendingCategory
 from models.smartcard import Smartcard
 
 
+def create_test_db():
+    from models.standard_sample_data import create_database
+    Base.metadata.create_all(bind=engine)
+    create_database()
+
+def add_receipt_to_test_db(num_receipts=1):
+    from models.standard_sample_data import add_receipt
+    add_receipt(num_receipts)
+
+
 
 
 def init_db(num_users=10, min_receipts=20, max_receipts=40):
