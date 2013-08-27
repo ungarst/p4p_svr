@@ -77,6 +77,12 @@ def get_user_receipts(user):
         print after_date
         query = query.filter(Receipt.date >= after_date)
 
+    if 'offset' in request.args:
+        query = query.offset(int(request.args['offset']))
+
+    if 'limit' in request.args:      
+        query = query.limit(int(request.args['limit']))
+
     return json.dumps({ "receipts" : \
             [r.serialize() for r in query.all()]})
 
