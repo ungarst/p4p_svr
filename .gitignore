@@ -1,5 +1,6 @@
 venv
 users.txt
+*.DS_STORE
 
 *.json
 *.csv
