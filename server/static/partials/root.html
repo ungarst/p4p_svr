@@ -5,7 +5,8 @@
         <h1>Receipts++</h1>
       </div>
       <div class="span3">
-        <div class="form-signin">
+        <div class="form-signin"
+          ui-keypress="{13:'login()'}">
           <span class="lead"><p><strong>Sign in</strong> or <a href="#/signup">Register</a></p></span>
           <input type="text" placeholder="Email" ng-model="params.email_address"><br />
           <input type="password" placeholder="Password" ng-model="params.password"><br />
