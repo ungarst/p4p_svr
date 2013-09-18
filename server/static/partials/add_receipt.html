@@ -48,13 +48,13 @@
                   <input type="text" class="input-small" placeholder="Item Price" ng-change="calculateTotal()" ng-model="item.price_per_item" />
                   <i ng-click="removeItem(item)" class="icon-remove" ></i>
                 </li>
-                <li ng-click="addItem()" style="list-style-type: none">
+                <li ng-click="addItem()" style="list-style-type: none" class="addItem">
                   <i class="icon-plus"></i> Add another item
                 </li> 
               </ul>
             </dd>
           </dl>
-          <h4>Total amount </h4><h4 class="unemphasis"><[ receiptTotal | currency]></h4>
+          <h4>Total amount </h4><h4 class="moneyText"><[ receiptTotal | currency]></h4>
 
           <button class="btn btn-waning" ng-click="clearData()" >Clear</button>
           <button class="pull-right btn-success btn" ng-click="submitReceipt()" style="margin-left: 10px">Confirm</button>

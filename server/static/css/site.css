@@ -182,3 +182,11 @@
 .icon-pencil:hover {
   color: blue;
 }
+
+.addItem:hover {
+  color: green;
+}
+
+.moneyText {
+  color: green;
+}
