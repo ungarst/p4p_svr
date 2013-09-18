@@ -120,4 +120,14 @@ def receipt(user_id, receipt_id):
 
     return json.dumps({"receipt" : receipt.serialize_with_items()})
 
+@receipt_routes.route('/receipt_size')
+def receipt_size():
+    return json.dumps({
+        "category": "Groceries",
+        "store_name": "Countdown Birkenhead",
+        "total_transaction": 123.81,
+        "receipt_id": 99,
+        "date_time": "2013-08-26 15:56:19.770508"
+    })
+
 
