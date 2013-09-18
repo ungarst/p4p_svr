@@ -174,3 +174,11 @@
 .icon-ok {
   color: green;
 }
+
+.icon-remove:hover {
+  color: red;
+}
+
+.icon-pencil:hover {
+  color: blue;
+}
