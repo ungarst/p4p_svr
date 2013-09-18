@@ -1,7 +1,8 @@
 <div class="container">
   <div ng-controller="SignUpCtrl">
 
-    <div class="form-register">
+    <div class="form-register"
+      ui-keypress="{13:'signup()'}">
       <h2 class="form-register-heading">Register now:</h2>
       <input name="firstName" type="text" placeholder="First Name" ng-model="params.first_name" /> <br />
       <input name="lastName" type="text" placeholder="Last Name" ng-model="params.last_name" /><br />
