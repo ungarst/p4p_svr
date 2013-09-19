@@ -23,11 +23,15 @@
           <td><[ item["item_name"] ]></td>
           <td><[ item["quantity"] ]></td>
           <td>
-            <p ng-hide="item.editing"><[ item["category"] ]></p>
-            <input ng-show="item.editing" ng-model="item.category"/>
-            <i ng-show="item.editing" ng-click="saveItemCategory(item)" class="icon-ok pull-right"></i><!-- ng-show="item.editing" -->
-            <i ng-hide="item.editing" ng-click="editItemCategory(item)" class="icon-pencil pull-right"></i></td>
-            
+            <div ng-hide="item.editing">
+              <[ item["category"] ]>
+              <i ng-click="editItemCategory(item)" class="icon-pencil pull-right"></i>
+            </div>
+            <div ng-show="item.editing">
+              <input type="text" placeholder="Type category…" class="span8" ng-model="item.category"/>
+              <i ng-click="saveItemCategory(item)" class="span1 icon-ok pull-right"></i>
+            </div>
+          </td>  
           <td><[ item["price_per_item"] | currency ]></td>
           <td><[ item["price_per_item"] * item["quantity"] | currency ]></td>
         </tr>
