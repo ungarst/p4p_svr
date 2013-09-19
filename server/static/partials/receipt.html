@@ -4,15 +4,13 @@
       <div ng-include="'static/partials/sidebar.html'"></div>
     </div><!--/span-->
     <div class="span9">
-      <h2><strong>Purchase at </strong><span class="unemphasis"><[receipt.store_name]></span> for <span class="unemphasis"><[receipt.total_transaction | currency]></span></h2>
+      <h2><strong>Purchase at </strong><span class="moneyText"><[receipt.store_name]></span> for <span class="moneyText"><[receipt.total_transaction | currency]></span></h2>
       <div class="row-fluid">
-        <div class="span3">
-          <h3>Category: <span class="unemphasis"><[ receipt["category"] ]></span></h3>
+        <div class="span9">
+          <h3>Category: <[ receipt["category"] ]></h3>
+          <h3>Date: <[ receipt["date_time"].substring(0,16) ]></h3>
         </div>
-        <div class="span6">
-          <h3>Date: <span class="unemphasis"><[ receipt["date_time"].substring(0,16) ]></span></h3>
-        </div>
-      </div>
+      </div>  
       <table class="table table-bordered table-hover">
         <tr>
           <th>Item</th>
