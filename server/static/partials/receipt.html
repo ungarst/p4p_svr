@@ -28,7 +28,7 @@
               <i ng-click="editItemCategory(item)" class="icon-pencil pull-right"></i>
             </div>
             <div ng-show="item.editing">
-              <input class="span6" ng-model="item.category"/>
+              <input type="text" placeholder="Type category…" class="span8" ng-model="item.category"/>
               <i ng-click="saveItemCategory(item)" class="span1 icon-ok pull-right"></i>
             </div>
           </td>  
