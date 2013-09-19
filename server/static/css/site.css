@@ -183,6 +183,11 @@
   color: blue;
 }
 
+.icon-chevron-right {
+  color: green;
+  padding-top: 0.2em;
+}
+
 .addItem:hover {
   color: green;
 }
