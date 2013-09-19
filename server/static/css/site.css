@@ -173,6 +173,7 @@
 
 .icon-ok {
   color: green;
+  padding-top: 0.2em;
 }
 
 .icon-remove:hover {
@@ -195,3 +196,4 @@
 .moneyText {
   color: green;
 }
+
