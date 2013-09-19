@@ -31,7 +31,7 @@ def login():
 
     if request.method == "POST" and "email_address" in request.json and "password" in request.json:
         
-        query = User.query.filter_by(email_address=request.json["email_address"]).all()
+        query = User.query.filter_by(email_address=request.json["email_address"].lower()).all()
 
         if not query:
             return json.dumps({})

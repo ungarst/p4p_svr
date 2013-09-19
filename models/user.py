@@ -27,7 +27,7 @@ class User(Base):
               backref="user")
 
   def __init__(self, email_address, password, first_name, last_name):
-    self.email_address = email_address
+    self.email_address = email_address.lower()
     self.pwdhash = generate_password_hash(password)
     self.generate_gravatar_url()
     self.first_name = first_name
