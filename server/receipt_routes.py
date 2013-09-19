@@ -110,7 +110,7 @@ def date_provided_in_query_params():
 # POST - Nothing (Route not used)
 # PUT (NOT YET IMPLEMENTED) - updates it (will be eventually used for sharing categorizing etc)        
 # DELETE (NOT YET IMPLEMENTED) - deletes it from the database
-@receipt_routes.route('/users/<int:user_id>/receipts/<int:receipt_id>', methods=['GET'])
+@receipt_routes.route('/users/<int:user_id>/receipts/<int:receipt_id>', methods=['GET', 'DELETE'])
 def receipt(user_id, receipt_id):
     user = User.query.filter_by(id=user_id).first()
     receipt = Receipt.query.filter_by(id=receipt_id).first()
@@ -118,7 +118,13 @@ def receipt(user_id, receipt_id):
     if not user or not receipt or not user == receipt.user:
         return make_response("404 coming your way", 404)
 
-    return json.dumps({"receipt" : receipt.serialize_with_items()})
+    if request.method == "GET":
+        return json.dumps({"receipt" : receipt.serialize_with_items()})
+    elif request.method == "DELETE":
+        db.delete(receipt)
+        db.commit()
+
+        return json.dumps({})
 
 @receipt_routes.route('/receipt_size')
 def receipt_size():
