@@ -22,7 +22,12 @@
         <tr ng-repeat="item in receipt.items">
           <td><[ item["item_name"] ]></td>
           <td><[ item["quantity"] ]></td>
-          <td><[ item["category"] ]></td>
+          <td>
+            <p ng-hide="item.editing"><[ item["category"] ]></p>
+            <input ng-show="item.editing" ng-model="item.category"/>
+            <i ng-show="item.editing" ng-click="saveItemCategory(item)" class="icon-ok pull-right"></i><!-- ng-show="item.editing" -->
+            <i ng-hide="item.editing" ng-click="editItemCategory(item)" class="icon-pencil pull-right"></i></td>
+            
           <td><[ item["price_per_item"] | currency ]></td>
           <td><[ item["price_per_item"] * item["quantity"] | currency ]></td>
         </tr>
