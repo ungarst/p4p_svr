@@ -23,7 +23,11 @@ function RootCtrl ($scope, $location, $http) {
 
   $scope.login = function() {
     $http.post('/login', $scope.params).success(function(data, status, headers, config) {
-      $location.path('/home');
+      if(Object.keys(data).length === 0){
+        toastr.error("Invalid email or password");
+      } else {
+        $location.path('/home');
+      }
     });
   }
 }

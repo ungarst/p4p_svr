@@ -9,17 +9,21 @@ authentication_routes = Blueprint('authentication_routes',
 
 @authentication_routes.route('/signup', methods=['POST'])
 def signup():
-    user = User(request.json['email_address'],
-            request.json['password'],
-            request.json['first_name'],
-            request.json['last_name'])
+    user_query = User.query.filter_by(email_address=request.json["email_address"]).all()
+    if user_query:
+        return json.dumps({"error": "Email address taken"})
+    else:
+        user = User(request.json['email_address'],
+                request.json['password'],
+                request.json['first_name'],
+                request.json['last_name'])
 
-    db.add(user)
-    db.commit()
+        db.add(user)
+        db.commit()
 
-    session['user_id'] = user.id
+        session['user_id'] = user.id
 
-    return json.dumps({"user": user.serialize()})
+        return json.dumps({"user": user.serialize()})
 
 @authentication_routes.route('/logout')
 def logout():
